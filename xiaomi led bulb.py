@@ -1,10 +1,7 @@
-from random import Random, randrange
-
 from yeelight import Bulb
-import time
 import tkinter as tk
 
-bulb = Bulb("myIp")
+bulb = Bulb("192.168.0.108")
 bulb.turn_on()
 bulb.set_rgb(255, 255, 255)
 
@@ -25,39 +22,46 @@ class App:
         self.window.title("Xiaomi led Bulb control")
         self.window.geometry("500x500")
 
-        self.frame = tk.Frame(master=self.window, relief=tk.GROOVE, borderwidth=5)
-        self.frame.pack(fill=tk.X)
-        self.label = tk.Label(master=self.frame, text="RED")
-        self.label.pack(fill=tk.X)
+        self.frameWithText("Choose Color", 18)
+        self.blackFrame()
 
-        self.redSlider = tk.Scale(master=self.window, from_=0, to=255, tickinterval=50, orient=tk.HORIZONTAL)
+        self.frameWithText("Red", 13)
+        self.redSlider = tk.Scale(master=self.window, from_=1, to=255, tickinterval=50, orient=tk.HORIZONTAL)
         self.redSlider.pack(fill=tk.X)
 
-        self.frame = tk.Frame(master=self.window, relief=tk.GROOVE, borderwidth=5)
-        self.frame.pack(fill=tk.X)
-        self.label = tk.Label(master=self.frame, text="GREEN")
-        self.label.pack(fill=tk.X)
+        self.blackFrame()
 
-        self.greenSlider = tk.Scale(master=self.window, from_=0, to=255, tickinterval=50, orient=tk.HORIZONTAL)
+        self.frameWithText("Green", 13)
+        self.greenSlider = tk.Scale(master=self.window, from_=1, to=255, tickinterval=50, orient=tk.HORIZONTAL)
         self.greenSlider.pack(fill=tk.X)
 
-        self.frame = tk.Frame(master=self.window, relief=tk.GROOVE, borderwidth=5)
-        self.frame.pack(fill=tk.X)
-        self.label = tk.Label(master=self.frame, text="BLUE")
-        self.label.pack(fill=tk.X)
+        self.blackFrame()
 
-        self.blueSlider = tk.Scale(master=self.window, from_=0, to=255, tickinterval=50, orient=tk.HORIZONTAL)
+        self.frameWithText("Blue", 13)
+        self.blueSlider = tk.Scale(master=self.window, from_=1, to=255, tickinterval=50, orient=tk.HORIZONTAL)
         self.blueSlider.pack(fill=tk.X)
 
-        self.frame = tk.Frame(master=self.window, relief=tk.GROOVE, borderwidth=0, height=40,bg='black')
-        self.frame.pack(fill=tk.X)
+        self.blackFrame()
 
         self.applyButton = tk.Button(master=self.window, command=self.setColors, text="Apply Colors")
+        self.applyButton.config(font=("SegoeUI", 10))
         self.applyButton.pack()
+
         self.window.mainloop()
 
     def setColors(self):
         bulb.set_rgb(self.redSlider.get(), self.greenSlider.get(), self.blueSlider.get())
+
+    def blackFrame(self):
+        self.frame = tk.Frame(master=self.window, relief=tk.GROOVE, borderwidth=0, height=20, bg='black')
+        self.frame.pack(fill=tk.X)
+
+    def frameWithText(self, text, textSize):
+        self.frame = tk.Frame(master=self.window, relief=tk.GROOVE, borderwidth=2)
+        self.frame.pack(fill=tk.X)
+        self.label = tk.Label(master=self.frame, text=text)
+        self.label.config(font=("SegoeUI", textSize))
+        self.label.pack(fill=tk.X)
 
 
 app = App()
