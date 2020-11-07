@@ -6,14 +6,6 @@ bulb.turn_on()
 bulb.set_rgb(255, 255, 255)
 
 
-# frame1 = tk.Frame(master=window, width=200, height=100, bg="red")
-# frame1.pack(fill=tk.BOTH, side=tk.LEFT, expand=True)
-
-# frame2 = tk.Frame(master=window, width=100, bg="yellow")
-# rame2.pack(fill=tk.BOTH, side=tk.LEFT, expand=True)
-
-# frame3 = tk.Frame(master=window, width=50, bg="blue")
-# frame3.pack(fill=tk.BOTH, side=tk.LEFT, expand=True)
 class App:
 
     def __init__(self):
@@ -47,7 +39,27 @@ class App:
         self.applyButton.config(font=("SegoeUI", 10))
         self.applyButton.pack()
 
+        self.switch_frame = tk.Frame(master=self.window, relief=tk.GROOVE, borderwidth=3)
+        self.switch_frame.pack(side="left", fill=tk.X, expand=True)
+
+        self.switch_variable = tk.StringVar(value="Off")
+        self.turnOnButton = tk.Radiobutton(self.switch_frame, text="On", variable=self.switch_variable, indicatoron=False, value="On", width=8, command=self.turnOnBulb)
+        self.turnOffButton = tk.Radiobutton(self.switch_frame, text="Off", variable=self.switch_variable, indicatoron=False, value="Off", width=8, command=self.turnOffBulb)
+        self.turnOnButton.config(font=("SegoeUI", 12))
+        self.turnOffButton.config(font=("SegoeUI", 12))
+
+        self.turnOnButton.pack(side="left", fill=tk.X, expand=True)
+        self.turnOffButton.pack(side="left", fill=tk.X,  expand=True)
+
         self.window.mainloop()
+
+    @staticmethod
+    def turnOnBulb():
+        bulb.turn_on()
+
+    @staticmethod
+    def turnOffBulb():
+        bulb.turn_off()
 
     def setColors(self):
         bulb.set_rgb(self.redSlider.get(), self.greenSlider.get(), self.blueSlider.get())
