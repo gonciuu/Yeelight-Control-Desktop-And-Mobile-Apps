@@ -1,8 +1,7 @@
 from yeelight import Bulb
 import tkinter as tk
 
-bulb = Bulb("192.168.0.108")
-bulb.turn_on()
+bulb = Bulb("192.168.0.108", effect="smooth", duration=1000)
 
 
 class App:
@@ -12,6 +11,9 @@ class App:
         self.window.configure(bg='black')
         self.window.title("Xiaomi led Bulb control")
         self.window.geometry("900x500")
+
+        # -------------------------------------| RGB FRAME |---------------------------------------------
+
         self.rgb_handler = tk.Frame(master=self.window, bg='black')
         self.rgb_handler.grid(row=0, column=0, sticky=tk.S)
 
@@ -50,10 +52,15 @@ class App:
         self.applyButton = tk.Button(master=self.rgb_handler, command=self.setColors, text="Apply Color")
         self.applyButton.grid(row=4, column=1, sticky=tk.S)
 
+        # ======================================= | END RGB FRAME | ============================================
+
+        # ---------------------------------| POWER FRAME |----------------------------------------
+
         self.power_handler = tk.Frame(master=self.window, bg='black')
         self.power_handler.grid(row=0, column=1, sticky=tk.N, padx=70, pady=20)
 
-        self.title = tk.Label(master=self.power_handler, text='Xiaomi led Bulb remote control', fg='white', bg='black', font=('Helvetica', 14, 'bold'))
+        self.title = tk.Label(master=self.power_handler, text='Xiaomi led Bulb remote control', fg='white', bg='black',
+                              font=('Helvetica', 14, 'bold'))
         self.title.grid(row=0, column=1, sticky=tk.N)
 
         self.buttonsHandler = tk.Frame(master=self.power_handler, bg='black')
@@ -65,6 +72,19 @@ class App:
         self.turnOffButton = tk.Button(master=self.buttonsHandler, text="OFF", width=15, command=self.turnOffBulb)
         self.turnOffButton.grid(row=0, column=1, sticky=tk.N, padx=5)
 
+        self.title = tk.Label(master=self.power_handler, text='Brightness', fg='white', bg='black',
+                              font=('Helvetica', 12, 'bold'))
+        self.title.grid(row=2, column=1, sticky=tk.N, pady=(20, 5))
+
+        self.brightnessSlider = tk.Scale(master=self.power_handler, from_=0, to=100, tickinterval=20, orient=tk.HORIZONTAL, bg="#FFFFFF", fg='#000000', length=200)
+        self.brightnessSlider.set(80)
+        self.brightnessSlider.grid(row=3, column=1, sticky=tk.N, pady=10)
+
+        self.applyBrightnessButton = tk.Button(master=self.power_handler, text="Apply Brightness", width=15, command=self.setBrightness)
+        self.applyBrightnessButton.grid(row=4, column=1, sticky=tk.N, pady=10)
+
+        # ===============================| END POWER FRAME |=======================================
+
         self.window.mainloop()
 
     @staticmethod
@@ -74,6 +94,9 @@ class App:
     @staticmethod
     def turnOffBulb():
         bulb.turn_off()
+
+    def setBrightness(self):
+        bulb.set_brightness(int(self.brightnessSlider.get()))
 
     def setColors(self):
         bulb.set_rgb(int(self.redInput.get()), int(self.greenInput.get()), int(self.blueInput.get()))
