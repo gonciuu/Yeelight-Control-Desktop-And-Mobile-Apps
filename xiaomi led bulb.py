@@ -1,4 +1,4 @@
-from yeelight import Bulb
+from yeelight import Bulb, TemperatureTransition, SleepTransition, Flow, RGBTransition
 import tkinter as tk
 
 bulb = Bulb("192.168.0.108", effect="smooth", duration=1000)
@@ -76,14 +76,41 @@ class App:
                               font=('Helvetica', 12, 'bold'))
         self.title.grid(row=2, column=1, sticky=tk.N, pady=(20, 5))
 
-        self.brightnessSlider = tk.Scale(master=self.power_handler, from_=0, to=100, tickinterval=20, orient=tk.HORIZONTAL, bg="#FFFFFF", fg='#000000', length=200)
+        self.brightnessSlider = tk.Scale(master=self.power_handler, from_=0, to=100, tickinterval=20,
+                                         orient=tk.HORIZONTAL, bg="#FFFFFF", fg='#000000', length=200)
         self.brightnessSlider.set(80)
         self.brightnessSlider.grid(row=3, column=1, sticky=tk.N, pady=10)
 
-        self.applyBrightnessButton = tk.Button(master=self.power_handler, text="Apply Brightness", width=15, command=self.setBrightness)
+        self.applyBrightnessButton = tk.Button(master=self.power_handler, text="Apply Brightness", width=15,
+                                               command=self.setBrightness)
         self.applyBrightnessButton.grid(row=4, column=1, sticky=tk.N, pady=10)
 
         # ===============================| END POWER FRAME |=======================================
+
+        # ---------------------------| MODES FRAME |----------------------------------
+
+        self.modes_handler = tk.Frame(master=self.window, bg='black')
+        self.modes_handler.grid(row=0, column=2, sticky=tk.N, padx=30, pady=50)
+
+        self.mode_1 = tk.Button(master=self.modes_handler, text="Flow 1 (smooth)", width=15, command = lambda: self.showFlow([
+            RGBTransition(20, 255, 20, 2000),
+            RGBTransition(255, 20, 20, 2000),
+            RGBTransition(20, 20, 255, 2000),
+            RGBTransition(255, 255, 20, 2000),
+            RGBTransition(255, 20, 255, 2000),
+            RGBTransition(20, 255, 255, 2000)
+        ], 10))
+        self.mode_1.grid(column=0, row=0)
+
+        self.mode_2 = tk.Button(master=self.modes_handler, text="Flow 2 (speed)", width=15, command = lambda: self.showFlow([
+            RGBTransition(20, 255, 20, 100),
+            RGBTransition(255, 20, 20, 100),
+            RGBTransition(20, 20, 255, 100),
+            RGBTransition(255, 255, 20, 100),
+            RGBTransition(255, 20, 255, 100),
+            RGBTransition(20, 255, 255, 100)
+        ], 30))
+        self.mode_2.grid(column=0, row=1, pady=10)
 
         self.window.mainloop()
 
@@ -119,6 +146,15 @@ class App:
     def setFrameColor(self, r, g, b):
         rgb_color = "#%02x%02x%02x" % (r, g, b)
         self.colorFrame.configure(background=rgb_color)
+
+    @staticmethod
+    def showFlow(transactions, count):
+        flow = Flow(
+            count=count,
+            action=Flow.actions.recover,
+            transitions=transactions
+        )
+        bulb.start_flow(flow)
 
 
 app = App()
