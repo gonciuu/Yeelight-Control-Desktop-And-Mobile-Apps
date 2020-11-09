@@ -1,6 +1,8 @@
 from yeelight import Bulb, TemperatureTransition, SleepTransition, Flow, RGBTransition
 import tkinter as tk
 
+from yeelight.transitions import disco, strobe, pulse, alarm
+
 bulb = Bulb("192.168.0.108", effect="smooth", duration=1000)
 
 
@@ -92,25 +94,52 @@ class App:
         self.modes_handler = tk.Frame(master=self.window, bg='black')
         self.modes_handler.grid(row=0, column=2, sticky=tk.N, padx=30, pady=50)
 
-        self.mode_1 = tk.Button(master=self.modes_handler, text="Flow 1 (smooth)", width=15, command = lambda: self.showFlow([
-            RGBTransition(20, 255, 20, 2000),
-            RGBTransition(255, 20, 20, 2000),
-            RGBTransition(20, 20, 255, 2000),
-            RGBTransition(255, 255, 20, 2000),
-            RGBTransition(255, 20, 255, 2000),
-            RGBTransition(20, 255, 255, 2000)
-        ], 10))
-        self.mode_1.grid(column=0, row=0)
+        self.mode_1 = tk.Button(master=self.modes_handler, text="Flow 1 (smooth)", width=15,
+                                command=lambda: self.showFlow([
+                                    RGBTransition(20, 255, 20, 2000),
+                                    RGBTransition(255, 20, 20, 2000),
+                                    RGBTransition(20, 20, 255, 2000),
+                                    RGBTransition(255, 255, 20, 2000),
+                                    RGBTransition(255, 20, 255, 2000),
+                                    RGBTransition(20, 255, 255, 2000)
+                                ], 10))
+        self.mode_1.grid(column=0, row=0, pady=(0, 15))
 
-        self.mode_2 = tk.Button(master=self.modes_handler, text="Flow 2 (speed)", width=15, command = lambda: self.showFlow([
-            RGBTransition(20, 255, 20, 100),
-            RGBTransition(255, 20, 20, 100),
-            RGBTransition(20, 20, 255, 100),
-            RGBTransition(255, 255, 20, 100),
-            RGBTransition(255, 20, 255, 100),
-            RGBTransition(20, 255, 255, 100)
-        ], 30))
-        self.mode_2.grid(column=0, row=1, pady=10)
+        self.mode_2 = tk.Button(master=self.modes_handler, text="Flow 2 (speed)", width=15,
+                                command=lambda: self.showFlow([
+                                    RGBTransition(20, 255, 20, 100),
+                                    RGBTransition(255, 20, 20, 100),
+                                    RGBTransition(20, 20, 255, 100),
+                                    RGBTransition(255, 255, 20, 100),
+                                    RGBTransition(255, 20, 255, 100),
+                                    RGBTransition(20, 255, 255, 100)
+                                ], 30))
+        self.mode_2.grid(column=0, row=1, pady=(0, 15))
+
+        self.mode_3 = tk.Button(master=self.modes_handler, text="Flow 3 (temp)", width=15,
+                                command=lambda: self.showFlow([
+                                    TemperatureTransition(6500, 1000),
+                                    TemperatureTransition(5200, 1000),
+                                    TemperatureTransition(4000, 1000),
+                                    TemperatureTransition(2800, 1000),
+                                    TemperatureTransition(1700, 1000)
+                                ], 5))
+        self.mode_3.grid(column=0, row=2, pady=(0, 15))
+
+        self.mode_4 = tk.Button(master=self.modes_handler, text="Flow 4 (disco)", width=15,
+                                command=lambda: self.showFlow(disco(), 5))
+
+        self.mode_4.grid(column=0, row=3, pady=(0, 15))
+
+        self.mode_5 = tk.Button(master=self.modes_handler, text="Flow 5 (strobe)", width=15,
+                                command=lambda: self.showFlow(strobe(), 20))
+
+        self.mode_5.grid(column=0, row=4, pady=(0, 15))
+
+        self.mode_6 = tk.Button(master=self.modes_handler, text="Flow 6 (alarm)", width=15,
+                                command=lambda: self.showFlow(alarm(), 5))
+
+        self.mode_6.grid(column=0, row=5, pady=(0, 15))
 
         self.window.mainloop()
 
