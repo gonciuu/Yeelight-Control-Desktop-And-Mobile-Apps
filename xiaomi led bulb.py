@@ -1,7 +1,7 @@
 from yeelight import Bulb, TemperatureTransition, SleepTransition, Flow, RGBTransition
 import tkinter as tk
 
-from yeelight.transitions import disco, strobe, pulse, alarm
+from yeelight.transitions import disco, strobe, pulse, alarm, police, lsd, christmas
 
 bulb = Bulb("192.168.0.108", effect="smooth", duration=1000)
 
@@ -12,12 +12,12 @@ class App:
         self.window = tk.Tk()
         self.window.configure(bg='black')
         self.window.title("Xiaomi led Bulb control")
-        self.window.geometry("900x500")
+        self.window.geometry("920x500")
 
         # -------------------------------------| RGB FRAME |---------------------------------------------
 
         self.rgb_handler = tk.Frame(master=self.window, bg='black')
-        self.rgb_handler.grid(row=0, column=0, sticky=tk.S)
+        self.rgb_handler.grid(row=0, column=0, sticky=tk.N, pady=(15, 0), padx=(10, 0))
 
         self.redLabel = tk.Label(master=self.rgb_handler, text="Red", bg="red", fg='white')
         self.greenLabel = tk.Label(master=self.rgb_handler, text="Green", bg="green", fg='white')
@@ -59,7 +59,7 @@ class App:
         # ---------------------------------| POWER FRAME |----------------------------------------
 
         self.power_handler = tk.Frame(master=self.window, bg='black')
-        self.power_handler.grid(row=0, column=1, sticky=tk.N, padx=70, pady=20)
+        self.power_handler.grid(row=0, column=1, sticky=tk.N, padx=(60, 60), pady=20)
 
         self.title = tk.Label(master=self.power_handler, text='Xiaomi led Bulb remote control', fg='white', bg='black',
                               font=('Helvetica', 14, 'bold'))
@@ -140,6 +140,21 @@ class App:
                                 command=lambda: self.showFlow(alarm(), 5))
 
         self.mode_6.grid(column=0, row=5, pady=(0, 15))
+
+        self.mode_7 = tk.Button(master=self.modes_handler, text="Flow 7 (police)", width=15,
+                                command=lambda: self.showFlow(police(), 10))
+
+        self.mode_7.grid(column=0, row=6, pady=(0, 15))
+
+        self.mode_8 = tk.Button(master=self.modes_handler, text="Flow 8 (smooth)", width=15,
+                                command=lambda: self.showFlow(lsd(), 5))
+
+        self.mode_8.grid(column=0, row=7, pady=(0, 15))
+
+        self.mode_9 = tk.Button(master=self.modes_handler, text="Flow 9 (christmas)", width=15,
+                                command=lambda: self.showFlow(christmas(), 5))
+
+        self.mode_9.grid(column=0, row=8, pady=(0, 15))
 
         self.window.mainloop()
 
