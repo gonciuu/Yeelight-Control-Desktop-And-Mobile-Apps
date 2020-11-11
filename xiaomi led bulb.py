@@ -33,7 +33,6 @@ class App:
         else:
             self.showAlert("Warning", "Cannot find any xiaomi bulbs. Enter your bulb ip manually")
 
-    # "192.168.0.108"
     def showPanel(self):
         self.bulb = Bulb(self.ipEntry.get(), effect="smooth", duration=1000)
         self.confirmIp.destroy()
@@ -189,25 +188,25 @@ class App:
         try:
             self.bulb.turn_on()
         except:
-            self.showAlert("Warning", "Your bulb is probably turn off from internnet or your ip is badly formatted")
+            self.showAlert("Warning", "Your bulb is probably turn off from internet or your ip is badly formatted")
 
     def turnOffBulb(self):
         try:
             self.bulb.turn_off()
         except:
-            self.showAlert("Warning", "Your bulb is probably turn off from internnet or your ip is badly formatted")
+            self.showAlert("Warning", "Your bulb is probably turn off from internet or your ip is badly formatted")
 
     def setBrightness(self):
         try:
             self.bulb.set_brightness(int(self.brightnessSlider.get()))
         except:
-            self.showAlert("Warning", "Your bulb is probably turn off from internnet or your ip is badly formatted")
+            self.showAlert("Warning", "Your bulb is probably turn off from internet or your ip is badly formatted")
 
     def setColors(self):
         try:
             self.bulb.set_rgb(int(self.redInput.get()), int(self.greenInput.get()), int(self.blueInput.get()))
         except:
-            self.showAlert("Warning", "Your bulb is probably turn off from internnet or your ip is badly formatted")
+            self.showAlert("Warning", "Your bulb is probably turn off from internet or your ip is badly formatted")
 
     def setRedText(self, val):
         try:
@@ -215,7 +214,7 @@ class App:
             self.redInput.insert(0, val)
             self.setFrameColor(int(self.redInput.get()), int(self.greenInput.get()), int(self.blueInput.get()))
         except:
-            self.showAlert("Warning", "Your bulb is probably turn off from internnet or your ip is badly formatted")
+            self.showAlert("Warning", "Your bulb is probably turn off from internet or your ip is badly formatted")
 
     def setGreenText(self, val):
         try:
@@ -223,7 +222,7 @@ class App:
             self.greenInput.insert(0, val)
             self.setFrameColor(int(self.redInput.get()), int(self.greenInput.get()), int(self.blueInput.get()))
         except:
-            self.showAlert("Warning", "Your bulb is probably turn off from internnet or your ip is badly formatted")
+            self.showAlert("Warning", "Your bulb is probably turn off from internet or your ip is badly formatted")
 
     def setBlueText(self, val):
         try:
@@ -231,14 +230,14 @@ class App:
             self.blueInput.insert(0, val)
             self.setFrameColor(int(self.redInput.get()), int(self.greenInput.get()), int(self.blueInput.get()))
         except:
-            self.showAlert("Warning", "Your bulb is probably turn off from internnet or your ip is badly formatted")
+            self.showAlert("Warning", "Your bulb is probably turn off from internet or your ip is badly formatted")
 
     def setFrameColor(self, r, g, b):
         try:
             rgb_color = "#%02x%02x%02x" % (r, g, b)
             self.colorFrame.configure(background=rgb_color)
         except:
-            self.showAlert("Warning", "Your bulb is probably turn off from internnet or your ip is badly formatted")
+            self.showAlert("Warning", "Your bulb is probably turn off from internet or your ip is badly formatted")
 
     def showFlow(self, transactions, count):
         try:
@@ -249,7 +248,7 @@ class App:
             )
             self.bulb.start_flow(flow)
         except:
-            self.showAlert("Warning", "Your bulb is probably turn off from internnet or your ip is badly formatted")
+            self.showAlert("Warning", "Your bulb is probably turn off from internet or your ip is badly formatted")
 
     def quit(self):
         self.window.destroy()
