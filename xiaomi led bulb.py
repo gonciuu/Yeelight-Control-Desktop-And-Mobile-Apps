@@ -1,9 +1,8 @@
-from yeelight import Bulb, TemperatureTransition, SleepTransition, Flow, RGBTransition
+from yeelight import Bulb, TemperatureTransition, SleepTransition, Flow, RGBTransition, discover_bulbs
 import tkinter as tk
+import tkinter.messagebox
 
 from yeelight.transitions import disco, strobe, pulse, alarm, police, lsd, christmas, random_loop
-
-bulb = Bulb("192.168.0.108", effect="smooth", duration=1000)
 
 
 class App:
@@ -12,12 +11,13 @@ class App:
         self.window = tk.Tk()
         self.window.configure(bg='black')
         self.window.title("Xiaomi led Bulb control")
-        self.window.geometry("920x500")
+        self.window.geometry("1000x580")
 
         self.insertIp()
         self.window.mainloop()
 
     def insertIp(self):
+
         self.ipText = tk.Label(master=self.window, text='Enter your xiaomi yeelight ip', fg='white', bg='black',
                                font=('Helvetica', 12, 'bold'))
         self.ipText.grid(row=0, column=0, sticky=tk.N, pady=(15, 0), padx=(10, 0))
@@ -26,17 +26,23 @@ class App:
         self.confirmIp = tk.Button(master=self.window, width=30, bg='white', fg='black', text="Confirm",
                                    command=self.showPanel)
         self.confirmIp.grid(row=0, column=2, sticky=tk.N, pady=(15, 0), padx=(10, 0))
+        bulbs_list = discover_bulbs()
+        if len(bulbs_list) > 0:
+            self.ipEntry.delete(0, tk.END)
+            self.ipEntry.insert(0, bulbs_list[0]['ip'])
+        else:
+            self.showAlert("Warning", "Cannot find any xiaomi bulbs. Enter your bulb ip manually")
 
+    # "192.168.0.108"
     def showPanel(self):
-        self.ip = self.ipEntry.get()
-
+        self.bulb = Bulb(self.ipEntry.get(), effect="smooth", duration=1000)
         self.confirmIp.destroy()
         self.ipEntry.destroy()
         self.ipText.destroy()
 
         # -------------------------------------| RGB FRAME |---------------------------------------------
         self.rgb_handler = tk.Frame(master=self.window, bg='black')
-        self.rgb_handler.grid(row=0, column=0, sticky=tk.N, pady=(15, 0), padx=(10, 0))
+        self.rgb_handler.grid(row=0, column=0, sticky=tk.N, pady=(15, 0), padx=(50, 0))
 
         self.redLabel = tk.Label(master=self.rgb_handler, text="Red", bg="red", fg='white')
         self.greenLabel = tk.Label(master=self.rgb_handler, text="Green", bg="green", fg='white')
@@ -73,8 +79,6 @@ class App:
         self.applyButton = tk.Button(master=self.rgb_handler, command=self.setColors, text="Apply Color")
         self.applyButton.grid(row=4, column=1, sticky=tk.S)
 
-
-
         # ---------------------------------| POWER FRAME |----------------------------------------
 
         self.power_handler = tk.Frame(master=self.window, bg='black')
@@ -105,8 +109,6 @@ class App:
         self.applyBrightnessButton = tk.Button(master=self.power_handler, text="Apply Brightness", width=15,
                                                command=self.setBrightness)
         self.applyBrightnessButton.grid(row=4, column=1, sticky=tk.N, pady=10)
-
-
 
         # ---------------------------| MODES FRAME |----------------------------------
 
@@ -180,47 +182,81 @@ class App:
 
         self.mode_10.grid(column=0, row=9, pady=(0, 15))
 
-    @staticmethod
-    def turnOnBulb():
-        bulb.turn_on()
+        self.quitBT = tk.Button(master=self.window, text="Quit", font=('Helvetica', 12, 'bold'), command=self.quit)
+        self.quitBT.grid(column=1, row=1, pady=(0, 15))
 
-    @staticmethod
-    def turnOffBulb():
-        bulb.turn_off()
+    def turnOnBulb(self):
+        try:
+            self.bulb.turn_on()
+        except:
+            self.showAlert("Warning", "Your bulb is probably turn off from internnet or your ip is badly formatted")
+
+    def turnOffBulb(self):
+        try:
+            self.bulb.turn_off()
+        except:
+            self.showAlert("Warning", "Your bulb is probably turn off from internnet or your ip is badly formatted")
 
     def setBrightness(self):
-        bulb.set_brightness(int(self.brightnessSlider.get()))
+        try:
+            self.bulb.set_brightness(int(self.brightnessSlider.get()))
+        except:
+            self.showAlert("Warning", "Your bulb is probably turn off from internnet or your ip is badly formatted")
 
     def setColors(self):
-        bulb.set_rgb(int(self.redInput.get()), int(self.greenInput.get()), int(self.blueInput.get()))
+        try:
+            self.bulb.set_rgb(int(self.redInput.get()), int(self.greenInput.get()), int(self.blueInput.get()))
+        except:
+            self.showAlert("Warning", "Your bulb is probably turn off from internnet or your ip is badly formatted")
 
     def setRedText(self, val):
-        self.redInput.delete(0, tk.END)
-        self.redInput.insert(0, val)
-        self.setFrameColor(int(self.redInput.get()), int(self.greenInput.get()), int(self.blueInput.get()))
+        try:
+            self.redInput.delete(0, tk.END)
+            self.redInput.insert(0, val)
+            self.setFrameColor(int(self.redInput.get()), int(self.greenInput.get()), int(self.blueInput.get()))
+        except:
+            self.showAlert("Warning", "Your bulb is probably turn off from internnet or your ip is badly formatted")
 
     def setGreenText(self, val):
-        self.greenInput.delete(0, tk.END)
-        self.greenInput.insert(0, val)
-        self.setFrameColor(int(self.redInput.get()), int(self.greenInput.get()), int(self.blueInput.get()))
+        try:
+            self.greenInput.delete(0, tk.END)
+            self.greenInput.insert(0, val)
+            self.setFrameColor(int(self.redInput.get()), int(self.greenInput.get()), int(self.blueInput.get()))
+        except:
+            self.showAlert("Warning", "Your bulb is probably turn off from internnet or your ip is badly formatted")
 
     def setBlueText(self, val):
-        self.blueInput.delete(0, tk.END)
-        self.blueInput.insert(0, val)
-        self.setFrameColor(int(self.redInput.get()), int(self.greenInput.get()), int(self.blueInput.get()))
+        try:
+            self.blueInput.delete(0, tk.END)
+            self.blueInput.insert(0, val)
+            self.setFrameColor(int(self.redInput.get()), int(self.greenInput.get()), int(self.blueInput.get()))
+        except:
+            self.showAlert("Warning", "Your bulb is probably turn off from internnet or your ip is badly formatted")
 
     def setFrameColor(self, r, g, b):
-        rgb_color = "#%02x%02x%02x" % (r, g, b)
-        self.colorFrame.configure(background=rgb_color)
+        try:
+            rgb_color = "#%02x%02x%02x" % (r, g, b)
+            self.colorFrame.configure(background=rgb_color)
+        except:
+            self.showAlert("Warning", "Your bulb is probably turn off from internnet or your ip is badly formatted")
+
+    def showFlow(self, transactions, count):
+        try:
+            flow = Flow(
+                count=count,
+                action=Flow.actions.recover,
+                transitions=transactions
+            )
+            self.bulb.start_flow(flow)
+        except:
+            self.showAlert("Warning", "Your bulb is probably turn off from internnet or your ip is badly formatted")
+
+    def quit(self):
+        self.window.destroy()
 
     @staticmethod
-    def showFlow(transactions, count):
-        flow = Flow(
-            count=count,
-            action=Flow.actions.recover,
-            transitions=transactions
-        )
-        bulb.start_flow(flow)
+    def showAlert(title, message):
+        tk.messagebox.showwarning(title, message)
 
 
 app = App()
