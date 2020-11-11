@@ -14,8 +14,27 @@ class App:
         self.window.title("Xiaomi led Bulb control")
         self.window.geometry("920x500")
 
-        # -------------------------------------| RGB FRAME |---------------------------------------------
+        self.insertIp()
+        self.window.mainloop()
 
+    def insertIp(self):
+        self.ipText = tk.Label(master=self.window, text='Enter your xiaomi yeelight ip', fg='white', bg='black',
+                               font=('Helvetica', 12, 'bold'))
+        self.ipText.grid(row=0, column=0, sticky=tk.N, pady=(15, 0), padx=(10, 0))
+        self.ipEntry = tk.Entry(master=self.window, width=30, bg='white', fg='black', font=('Helvetica', 12, 'bold'))
+        self.ipEntry.grid(row=0, column=1, sticky=tk.N, pady=(15, 0), padx=(10, 0))
+        self.confirmIp = tk.Button(master=self.window, width=30, bg='white', fg='black', text="Confirm",
+                                   command=self.showPanel)
+        self.confirmIp.grid(row=0, column=2, sticky=tk.N, pady=(15, 0), padx=(10, 0))
+
+    def showPanel(self):
+        self.ip = self.ipEntry.get()
+
+        self.confirmIp.destroy()
+        self.ipEntry.destroy()
+        self.ipText.destroy()
+
+        # -------------------------------------| RGB FRAME |---------------------------------------------
         self.rgb_handler = tk.Frame(master=self.window, bg='black')
         self.rgb_handler.grid(row=0, column=0, sticky=tk.N, pady=(15, 0), padx=(10, 0))
 
@@ -54,7 +73,7 @@ class App:
         self.applyButton = tk.Button(master=self.rgb_handler, command=self.setColors, text="Apply Color")
         self.applyButton.grid(row=4, column=1, sticky=tk.S)
 
-        # ======================================= | END RGB FRAME | ============================================
+
 
         # ---------------------------------| POWER FRAME |----------------------------------------
 
@@ -87,7 +106,7 @@ class App:
                                                command=self.setBrightness)
         self.applyBrightnessButton.grid(row=4, column=1, sticky=tk.N, pady=10)
 
-        # ===============================| END POWER FRAME |=======================================
+
 
         # ---------------------------| MODES FRAME |----------------------------------
 
@@ -161,8 +180,6 @@ class App:
 
         self.mode_10.grid(column=0, row=9, pady=(0, 15))
 
-        self.window.mainloop()
-
     @staticmethod
     def turnOnBulb():
         bulb.turn_on()
@@ -204,8 +221,6 @@ class App:
             transitions=transactions
         )
         bulb.start_flow(flow)
-        print(bulb._port)
-        print(bulb._ip)
 
 
 app = App()
