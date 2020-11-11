@@ -1,7 +1,7 @@
 from yeelight import Bulb, TemperatureTransition, SleepTransition, Flow, RGBTransition
 import tkinter as tk
 
-from yeelight.transitions import disco, strobe, pulse, alarm, police, lsd, christmas
+from yeelight.transitions import disco, strobe, pulse, alarm, police, lsd, christmas, random_loop
 
 bulb = Bulb("192.168.0.108", effect="smooth", duration=1000)
 
@@ -156,6 +156,11 @@ class App:
 
         self.mode_9.grid(column=0, row=8, pady=(0, 15))
 
+        self.mode_10 = tk.Button(master=self.modes_handler, text="Flow 10 (random)", width=15,
+                                 command=lambda: self.showFlow(random_loop(), 5))
+
+        self.mode_10.grid(column=0, row=9, pady=(0, 15))
+
         self.window.mainloop()
 
     @staticmethod
@@ -199,6 +204,8 @@ class App:
             transitions=transactions
         )
         bulb.start_flow(flow)
+        print(bulb._port)
+        print(bulb._ip)
 
 
 app = App()
