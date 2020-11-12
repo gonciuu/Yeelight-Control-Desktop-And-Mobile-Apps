@@ -6,4 +6,10 @@
     <string name="take_control_of_your_yeelight">Take Control of your Yeelight</string>
     <string name="yellight_icon">yellight_icon</string>
     <string name="add_bulb">Add Bulb</string>
+    <string name="back_button">back_button</string>
+    <string name="enter_your_yeelight_data">Enter your yeelight data</string>
+    <string name="yeelight_ip">Yeelight Ip</string>
+    <string name="yeelight_port">Yeelight Port</string>
+    <string name="how_to_get_these_data_check_this">How to get these data? Check this</string>
+    <string name="welcome">Welcome</string>
 </resources>
