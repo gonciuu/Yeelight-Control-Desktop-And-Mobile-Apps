@@ -2,4 +2,7 @@
     <string name="app_name">Yeebum</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="let_s_get_started">Let\'s get Started</string>
+    <string name="take_control_of_your_yeelight">Take Control of your Yeelight</string>
+    <string name="yellight_icon">yellight_icon</string>
 </resources>
