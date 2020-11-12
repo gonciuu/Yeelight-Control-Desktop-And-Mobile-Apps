@@ -15,4 +15,7 @@
     <string name="settings_icon">settings_icon</string>
     <string name="timer_icon">timer_icon</string>
     <string name="power_icon">power_icon</string>
+    <string name="strength">Strength</string>
+    <string name="hue">Hue</string>
+    <string name="duration">Duration</string>
 </resources>
