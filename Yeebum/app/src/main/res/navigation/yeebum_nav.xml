@@ -3,11 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/yeebum_nav"
-    app:startDestination="@id/welcomeFragment">
+    app:startDestination="@id/enterBulbDataFragment">
 
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.example.yeebum.screens.WelcomeFragment"
         android:label="fragment_welcome"
         tools:layout="@layout/fragment_welcome" />
+    <fragment
+        android:id="@+id/enterBulbDataFragment"
+        android:name="com.example.yeebum.screens.EnterBulbDataFragment"
+        android:label="fragment_enter_bulb_data"
+        tools:layout="@layout/fragment_enter_bulb_data" />
 </navigation>
