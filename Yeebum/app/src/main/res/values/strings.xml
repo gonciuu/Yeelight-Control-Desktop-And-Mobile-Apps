@@ -13,4 +13,6 @@
     <string name="how_to_get_these_data_check_this">How to get these data? Check this</string>
     <string name="welcome">Welcome</string>
     <string name="settings_icon">settings_icon</string>
+    <string name="timer_icon">timer_icon</string>
+    <string name="power_icon">power_icon</string>
 </resources>

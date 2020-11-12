@@ -36,12 +36,12 @@
         android:id="@+id/imageView3"
         android:layout_width="35dp"
         android:layout_height="35dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
         android:contentDescription="@string/settings_icon"
         android:src="@drawable/ic_more"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="28dp"
-        android:layout_marginStart="28dp"
         app:tint="@color/white" />
 
 
@@ -50,13 +50,67 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
+        app:barrierAllowsGoneWidgets="false"
+        app:barrierDirection="top"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:barrierDirection="top"
-        app:barrierAllowsGoneWidgets="false"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:contentDescription="@string/power_icon"
+        android:src="@drawable/ic_power"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/colorPicker"
+        app:tint="#E30000" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="40dp"
+        android:contentDescription="@string/timer_icon"
+        android:src="@drawable/ic_timer"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView5"
+        app:layout_constraintVertical_bias="0.0"
+        app:tint="@color/lightGray" />
+
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="36dp"
+        android:contentDescription="@string/timer_icon"
+        android:src="@drawable/ic_brightness"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/colorPicker"
+        app:tint="@color/lightGray" />
+
+    <SeekBar
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="40dp"
+        android:max="100"
+        android:progressTint="@color/white"
+        android:progress="40"
+        android:splitTrack="false"
+        android:thumb="@drawable/seekbar_thumb"
+        android:progressDrawable="@drawable/seekbar_style"
+        android:maxHeight="6dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toEndOf="@+id/imageView6"
+        app:layout_constraintTop_toTopOf="@+id/imageView6" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
