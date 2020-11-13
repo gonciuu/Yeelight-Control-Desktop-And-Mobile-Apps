@@ -29,15 +29,17 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:gravity="center"
-        android:orientation="vertical"
-        tools:ignore="RtlSymmetry">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Hurry Up!"
             android:fontFamily="@font/open_sans_bold"
+            android:maxLines="2"
+            android:ellipsize="end"
             android:textColor="@color/white"
             android:textSize="16sp"/>
         <TextView
