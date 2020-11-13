@@ -18,4 +18,6 @@
     <string name="strength">Strength</string>
     <string name="hue">Hue</string>
     <string name="duration">Duration</string>
+    <string name="add">add</string>
+    <string name="enter">enter</string>
 </resources>

@@ -27,6 +27,8 @@ class ColorControlFragment : Fragment() {
 
     }
 
+
+    //--------------| Setup Wheel Color Picker |----------------
     private fun setupColorPicker(){
         colorPicker.showOldCenterColor = false
 
@@ -34,4 +36,5 @@ class ColorControlFragment : Fragment() {
             Log.d("TAG",it.toString())
         }
     }
+    //===========================================================
 }
