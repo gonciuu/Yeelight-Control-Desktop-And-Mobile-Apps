@@ -20,4 +20,6 @@
     <string name="duration">Duration</string>
     <string name="add">add</string>
     <string name="enter">enter</string>
+    <string name="flows">Flows</string>
+    <string name="color">Color</string>
 </resources>
