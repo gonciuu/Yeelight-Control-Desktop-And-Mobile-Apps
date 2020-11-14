@@ -7,16 +7,11 @@
     android:background="@color/colorPrimary"
     tools:context=".screens.FlowControlFragment">
 
-    <androidx.core.widget.NestedScrollView
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/flowsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/flowsRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </androidx.core.widget.NestedScrollView>
+        android:layout_height="wrap_content" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"

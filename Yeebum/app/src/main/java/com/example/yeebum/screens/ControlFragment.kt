@@ -19,7 +19,7 @@ class ControlFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        controlViewPager.adapter = ControlViewPagerAdapter(requireContext())
+        controlViewPager.adapter = ControlViewPagerAdapter(requireActivity())
     }
 
 }
