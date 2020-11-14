@@ -17,11 +17,7 @@ import kotlinx.android.synthetic.main.fragment_control.*
 class ControlFragment : Fragment() {
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_control, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.fragment_control, container, false)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,6 +26,8 @@ class ControlFragment : Fragment() {
         setupViewPager()
     }
 
+
+    //-------------------------------| Setup view pager and texts with it |----------------------------------
 
     private fun setupViewPager(){
         val listOfTexts = arrayListOf(colorText, flowsText)
@@ -61,11 +59,13 @@ class ControlFragment : Fragment() {
 
 
     }
-    
+
     private fun setTextsColor(listOfTexts: ArrayList<TextView>, position: Int){
         listOfTexts.forEach { textView -> textView.setTextColor(Color.parseColor("#44FFFFFF")) }
         listOfTexts[position].setTextColor(Color.parseColor("#FFFFFF"))
     }
+
+    //=========================================================================================================
 
 
 }

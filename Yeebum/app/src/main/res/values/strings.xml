@@ -22,4 +22,5 @@
     <string name="enter">enter</string>
     <string name="flows">Flows</string>
     <string name="color">Color</string>
+    <string name="choose_action">Choose Action</string>
 </resources>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/yeebum_nav"
-    app:startDestination="@id/controlFragment">
+    app:startDestination="@id/addActionFragment">
 
     <fragment
         android:id="@+id/welcomeFragment"
@@ -30,4 +30,9 @@
         android:name="com.example.yeebum.screens.ControlFragment"
         android:label="fragment_control"
         tools:layout="@layout/fragment_control" />
+    <fragment
+        android:id="@+id/addActionFragment"
+        android:name="com.example.yeebum.screens.AddActionFragment"
+        android:label="fragment_add_action"
+        tools:layout="@layout/fragment_add_action" />
 </navigation>
