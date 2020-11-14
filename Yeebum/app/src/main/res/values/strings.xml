@@ -23,4 +23,5 @@
     <string name="flows">Flows</string>
     <string name="color">Color</string>
     <string name="choose_action">Choose Action</string>
+    <string name="add_action">Add Action</string>
 </resources>

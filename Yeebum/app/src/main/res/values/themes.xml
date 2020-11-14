@@ -4,4 +4,9 @@
 
 
     </style>
+
+    <style name="AppTheme.Picker" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="colorControlNormal">#77FFFFFF</item>
+    </style>
 </resources>
