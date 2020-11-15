@@ -54,6 +54,7 @@ scelerisque, vitae lacinia sem ultricies."
             tools:ignore="NestedWeights" />
 
         <Button
+            android:id="@+id/welcomeButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"

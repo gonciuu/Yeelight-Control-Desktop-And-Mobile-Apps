@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.yeebum.R
 import com.example.yeebum.screens.adapters.recycler_views.AllBulbsRecyclerViewAdapter
@@ -25,6 +26,11 @@ class AllBulbsFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = AllBulbsRecyclerViewAdapter()
         }
+        addBulbButton.setOnClickListener {
+            findNavController().navigate(AllBulbsFragmentDirections.actionAllBulbsFragmentToEnterBulbDataFragment())
+        }
+
+        
     }
 
 
