@@ -24,4 +24,7 @@
     <string name="color">Color</string>
     <string name="choose_action">Choose Action</string>
     <string name="add_action">Add Action</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="flow_name">Flow Name</string>
+    <string name="next">Next</string>
 </resources>
