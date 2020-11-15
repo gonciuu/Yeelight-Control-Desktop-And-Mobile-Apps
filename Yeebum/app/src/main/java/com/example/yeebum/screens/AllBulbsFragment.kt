@@ -12,10 +12,14 @@ import com.example.yeebum.screens.adapters.recycler_views.AllBulbsRecyclerViewAd
 import kotlinx.android.synthetic.main.fragment_all_bulbs.*
 
 
-class AllBulbsFragment : Fragment() {
+class AllBulbsFragment : Fragment(), BulbsInterface {
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.fragment_all_bulbs, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = inflater.inflate(R.layout.fragment_all_bulbs, container, false)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -24,13 +28,17 @@ class AllBulbsFragment : Fragment() {
 
         bulbsRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = AllBulbsRecyclerViewAdapter()
+            adapter = AllBulbsRecyclerViewAdapter(this@AllBulbsFragment)
         }
         addBulbButton.setOnClickListener {
             findNavController().navigate(AllBulbsFragmentDirections.actionAllBulbsFragmentToEnterBulbDataFragment())
         }
 
-        
+
+    }
+
+    override fun onBulbClick() {
+        findNavController().navigate(AllBulbsFragmentDirections.actionAllBulbsFragmentToControlFragment())
     }
 
 
