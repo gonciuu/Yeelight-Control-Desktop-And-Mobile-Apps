@@ -3,28 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/yeebum_nav"
-    app:startDestination="@id/allBulbsFragment">
+    app:startDestination="@id/welcomeFragment">
 
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.example.yeebum.screens.WelcomeFragment"
         android:label="fragment_welcome"
-        tools:layout="@layout/fragment_welcome" />
+        tools:layout="@layout/fragment_welcome" >
+        <action
+            android:id="@+id/action_welcomeFragment_to_allBulbsFragment"
+            app:destination="@id/allBulbsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/enterBulbDataFragment"
         android:name="com.example.yeebum.screens.EnterBulbDataFragment"
         android:label="fragment_enter_bulb_data"
         tools:layout="@layout/fragment_enter_bulb_data" />
-    <fragment
-        android:id="@+id/colorControlFragment"
-        android:name="com.example.yeebum.screens.ColorControlFragment"
-        android:label="fragment_color_control"
-        tools:layout="@layout/fragment_color_control" />
-    <fragment
-        android:id="@+id/flowControlFragment"
-        android:name="com.example.yeebum.screens.FlowControlFragment"
-        android:label="fragment_flow_control"
-        tools:layout="@layout/fragment_flow_control" />
     <fragment
         android:id="@+id/controlFragment"
         android:name="com.example.yeebum.screens.ControlFragment"
@@ -34,7 +32,15 @@
         android:id="@+id/addActionFragment"
         android:name="com.example.yeebum.screens.AddActionFragment"
         android:label="fragment_add_action"
-        tools:layout="@layout/fragment_add_action" />
+        tools:layout="@layout/fragment_add_action" >
+        <action
+            android:id="@+id/action_addActionFragment_to_actionDetailsFragment"
+            app:destination="@id/actionDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/actionDetailsFragment"
         android:name="com.example.yeebum.screens.ActionDetailsFragment"
@@ -44,14 +50,65 @@
         android:id="@+id/actionsFragment"
         android:name="com.example.yeebum.screens.ActionsFragment"
         android:label="fragment_actions"
-        tools:layout="@layout/fragment_actions" />
+        tools:layout="@layout/fragment_actions" >
+        <action
+            android:id="@+id/action_actionsFragment_to_addActionFragment"
+            app:destination="@id/addActionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/enterActionNameFragment"
         android:name="com.example.yeebum.screens.EnterActionNameFragment"
         android:label="fragment_enter_action_name"
-        tools:layout="@layout/fragment_enter_action_name" />
+        tools:layout="@layout/fragment_enter_action_name" >
+        <action
+            android:id="@+id/action_enterActionNameFragment_to_actionsFragment"
+            app:destination="@id/actionsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/allBulbsFragment"
         android:name="com.example.yeebum.screens.AllBulbsFragment"
-        android:label="AllBulbsFragment" />
+        android:label="AllBulbsFragment" >
+        <action
+            android:id="@+id/action_allBulbsFragment_to_enterBulbDataFragment"
+            app:destination="@id/enterBulbDataFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_allBulbsFragment_to_controlFragment"
+            app:destination="@id/controlFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/flowControlFragment"
+        android:name="com.example.yeebum.screens.FlowControlFragment"
+        android:label="fragment_flow_control"
+        tools:layout="@layout/fragment_flow_control" >
+        <action
+            android:id="@+id/action_flowControlFragment_to_enterActionNameFragment"
+            app:destination="@id/enterActionNameFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_flowControlFragment_to_actionsFragment"
+            app:destination="@id/actionsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 </navigation>
