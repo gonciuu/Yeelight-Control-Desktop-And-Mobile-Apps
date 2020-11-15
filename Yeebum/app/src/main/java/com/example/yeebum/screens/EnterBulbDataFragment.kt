@@ -30,6 +30,9 @@ class EnterBulbDataFragment : Fragment() {
 
         setSpannableText()
 
+        enterBulbDataBackButton.setOnClickListener {
+            requireActivity().onBackPressed()          
+        }
     }
 
 

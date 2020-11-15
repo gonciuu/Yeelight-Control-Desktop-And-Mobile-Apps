@@ -21,5 +21,9 @@ class EnterActionNameFragment : Fragment() {
         nameNextButton.setOnClickListener {
             findNavController().navigate(EnterActionNameFragmentDirections.actionEnterActionNameFragmentToActionsFragment())
         }
+
+        enterNameBackButton.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
     }
 }

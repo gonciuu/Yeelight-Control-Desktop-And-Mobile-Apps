@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.yeebum.R
 import kotlinx.android.synthetic.main.fragment_action_details.*
 import kotlinx.android.synthetic.main.fragment_action_details.colorPicker
@@ -15,12 +16,7 @@ import kotlinx.android.synthetic.main.fragment_color_control.*
 class ActionDetailsFragment : Fragment() {
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View?
-            = inflater.inflate(R.layout.fragment_action_details, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.fragment_action_details, container, false)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,6 +58,15 @@ class ActionDetailsFragment : Fragment() {
             }
 
         })
+
+
+        addNewActionButton.setOnClickListener {
+            findNavController().navigate(ActionDetailsFragmentDirections.actionActionDetailsFragmentToActionsFragment())
+        }
+
+        actionDetailsBackButton.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
 
     }
 

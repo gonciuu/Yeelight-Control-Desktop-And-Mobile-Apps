@@ -26,6 +26,10 @@ class ActionsFragment : Fragment() {
         addActionButton.setOnClickListener {
             findNavController().navigate(ActionsFragmentDirections.actionActionsFragmentToAddActionFragment())
         }
+
+        actionsBackButton.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
     }
 
 }

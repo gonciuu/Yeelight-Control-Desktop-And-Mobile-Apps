@@ -13,7 +13,7 @@ import com.example.yeebum.screens.adapters.recycler_views.FlowsRecyclerViewAdapt
 import kotlinx.android.synthetic.main.fragment_flow_control.*
 
 
-class FlowControlFragment : Fragment() {
+class FlowControlFragment : Fragment(),FlowsInterface {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
@@ -23,7 +23,7 @@ class FlowControlFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         flowsRecyclerView.layoutManager = LinearLayoutManager(context)
-        flowsRecyclerView.adapter = FlowsRecyclerViewAdapter()
+        flowsRecyclerView.adapter = FlowsRecyclerViewAdapter(this)
         Log.d("TAG","Ustawiono")
 
         addFlowButton.setOnClickListener {
@@ -31,9 +31,9 @@ class FlowControlFragment : Fragment() {
         }
     }
 
-
-
-
+    override fun onSelectAction() {
+        findNavController().navigate(ControlFragmentDirections.actionControlFragmentToActionsFragment())
+    }
 
 
 }

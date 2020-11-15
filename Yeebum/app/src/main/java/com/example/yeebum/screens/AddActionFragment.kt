@@ -28,6 +28,11 @@ class AddActionFragment : Fragment() {
             }
         }
 
+        addActionBackButton.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+
+
     }
 
 

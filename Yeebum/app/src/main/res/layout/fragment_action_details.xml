@@ -16,7 +16,7 @@
 
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/actionDetailsBackButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="36dp"
@@ -39,7 +39,7 @@
             android:textColor="@color/white"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/actionDetailsBackButton" />
 
         <ImageView
             android:id="@+id/imageView10"
@@ -252,7 +252,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/addNewActionButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"

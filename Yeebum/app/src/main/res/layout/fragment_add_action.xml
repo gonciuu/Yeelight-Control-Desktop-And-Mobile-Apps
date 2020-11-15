@@ -9,7 +9,7 @@
     tools:context=".screens.AddActionFragment">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/addActionBackButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="36dp"
