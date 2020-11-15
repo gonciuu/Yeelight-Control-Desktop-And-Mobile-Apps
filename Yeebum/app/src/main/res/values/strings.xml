@@ -27,4 +27,5 @@
     <string name="enter_name">Enter Name</string>
     <string name="flow_name">Flow Name</string>
     <string name="next">Next</string>
+    <string name="yeelight_name">Yeelight Name</string>
 </resources>

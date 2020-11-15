@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/yeebum_nav"
-    app:startDestination="@id/enterActionNameFragment">
+    app:startDestination="@id/enterBulbDataFragment">
 
     <fragment
         android:id="@+id/welcomeFragment"

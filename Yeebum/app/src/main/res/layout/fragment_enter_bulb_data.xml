@@ -54,9 +54,8 @@
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editText3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -65,7 +64,7 @@
         android:autofillHints=""
         android:background="@drawable/rounded_stroke_bg_15"
         android:fontFamily="@font/open_sans_regular"
-        android:hint="@string/yeelight_ip"
+        android:hint="@string/yeelight_name"
         android:inputType="text"
         android:maxLines="1"
         android:paddingStart="30dp"
@@ -82,6 +81,32 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
+        android:id="@+id/editText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:autofillHints=""
+        android:background="@drawable/rounded_stroke_bg_15"
+        android:fontFamily="@font/open_sans_regular"
+        android:hint="@string/yeelight_ip"
+        android:layout_marginTop="16dp"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingStart="30dp"
+        android:paddingTop="18dp"
+        android:paddingEnd="30dp"
+        android:paddingBottom="18dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/lightGray"
+        android:textCursorDrawable="@null"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+
+    <EditText
         android:id="@+id/editText2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -92,7 +117,7 @@
         android:background="@drawable/rounded_stroke_bg_15"
         android:fontFamily="@font/open_sans_regular"
         android:hint="@string/yeelight_port"
-        android:inputType="text"
+        android:inputType="number"
         android:maxLines="1"
         android:paddingStart="30dp"
         android:paddingTop="18dp"
