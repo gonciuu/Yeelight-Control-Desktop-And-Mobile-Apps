@@ -31,6 +31,7 @@
         tools:ignore="RtlSymmetry">
 
         <TextView
+            android:id="@+id/bulbName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="My Bulb"
@@ -40,6 +41,7 @@
             android:fontFamily="@font/open_sans_bold"/>
 
         <TextView
+            android:id="@+id/bulbIp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="ip: 192.168.0.108"
@@ -48,6 +50,7 @@
             android:fontFamily="@font/open_sans_regular"/>
 
         <TextView
+            android:id="@+id/bulbPort"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="port: 33421"

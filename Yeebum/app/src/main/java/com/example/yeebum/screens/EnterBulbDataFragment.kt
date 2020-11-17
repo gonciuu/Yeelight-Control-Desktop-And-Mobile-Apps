@@ -42,9 +42,7 @@ class EnterBulbDataFragment : Fragment() {
             requireActivity().onBackPressed()          
         }
 
-        bulbsViewModel.allBulbs.observe(viewLifecycleOwner){
-            Log.d("XDDDDD", it.toString())
-        }
+
         saveBulbButton.setOnClickListener {
             saveBulb()
         }
