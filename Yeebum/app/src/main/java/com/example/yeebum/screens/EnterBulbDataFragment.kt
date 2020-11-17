@@ -7,6 +7,7 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import androidx.fragment.app.viewModels
 import com.example.yeebum.R
 import com.example.yeebum.YeebumApplication
 import com.example.yeebum.databases.bulbs_database.*
+import com.example.yeebum.models.Bulb
 import kotlinx.android.synthetic.main.fragment_enter_bulb_data.*
 
 
@@ -38,6 +40,13 @@ class EnterBulbDataFragment : Fragment() {
         setSpannableText()
         enterBulbDataBackButton.setOnClickListener {
             requireActivity().onBackPressed()          
+        }
+
+        bulbsViewModel.allBulbs.observe(viewLifecycleOwner){
+            Log.d("XDDDDD", it.toString())
+        }
+        saveBulbButton.setOnClickListener {
+            saveBulb()
         }
     }
 
@@ -62,7 +71,9 @@ class EnterBulbDataFragment : Fragment() {
     }
 
     private fun saveBulb(){
-        bulbsViewModel
+        val name = if(bulbNameInput.text.isNullOrEmpty()) "" else bulbNameInput.text.toString()
+        bulbsViewModel.insertBulb(Bulb(0, name, bulbIpInput.text.toString(), bulbPortInput.text.toString().toInt()))
+
     }
 
 
