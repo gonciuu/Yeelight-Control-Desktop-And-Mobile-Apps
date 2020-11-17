@@ -12,11 +12,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.viewModels
 import com.example.yeebum.R
+import com.example.yeebum.YeebumApplication
+import com.example.yeebum.databases.bulbs_database.*
 import kotlinx.android.synthetic.main.fragment_enter_bulb_data.*
 
 
 class EnterBulbDataFragment : Fragment() {
+
+    private val bulbsViewModel: BulbsViewModel by viewModels {
+        BulbsViewModelFactory((requireActivity().application as YeebumApplication).bulbsRepository)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -29,7 +36,6 @@ class EnterBulbDataFragment : Fragment() {
 
 
         setSpannableText()
-
         enterBulbDataBackButton.setOnClickListener {
             requireActivity().onBackPressed()          
         }
@@ -37,6 +43,7 @@ class EnterBulbDataFragment : Fragment() {
 
 
 
+    //set part of text more bold
     private fun setSpannableText(){
         val text :SpannableString = SpannableString(checkText.text)
         text.setSpan(
@@ -53,5 +60,13 @@ class EnterBulbDataFragment : Fragment() {
         )
         checkText.text = text
     }
+
+    private fun saveBulb(){
+        bulbsViewModel
+    }
+
+
+
+
 
 }

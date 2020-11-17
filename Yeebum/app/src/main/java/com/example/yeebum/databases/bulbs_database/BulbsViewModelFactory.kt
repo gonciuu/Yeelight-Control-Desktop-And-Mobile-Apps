@@ -3,7 +3,7 @@ package com.example.yeebum.databases.bulbs_database
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-class WordViewModelFactory(private val repository: BulbsRepository) : ViewModelProvider.Factory {
+class BulbsViewModelFactory(private val repository: BulbsRepository) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(BulbsViewModel::class.java)) {
