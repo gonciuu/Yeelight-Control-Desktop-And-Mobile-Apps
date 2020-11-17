@@ -68,11 +68,14 @@ class EnterBulbDataFragment : Fragment() {
         checkText.text = text
     }
 
-    private fun saveBulb(){
-        val name = if(bulbNameInput.text.isNullOrEmpty()) "" else bulbNameInput.text.toString()
-        bulbsViewModel.insertBulb(Bulb(0, name, bulbIpInput.text.toString(), bulbPortInput.text.toString().toInt()))
 
+
+    //-----------------------------| Save bulb into database |-----------------------------------
+    private fun saveBulb(){
+        val name = if(bulbNameInput.text.isNullOrEmpty()) "My Yeelight" else bulbNameInput.text.toString()
+        bulbsViewModel.insertBulb(Bulb(0, name, bulbIpInput.text.toString(), bulbPortInput.text.toString().toInt()))
     }
+    //===========================================================================================
 
 
 

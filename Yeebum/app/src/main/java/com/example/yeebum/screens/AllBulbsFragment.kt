@@ -41,6 +41,7 @@ class AllBulbsFragment : Fragment(), BulbsInterface {
         findNavController().navigate(AllBulbsFragmentDirections.actionAllBulbsFragmentToControlFragment())
     }
 
+    //------------------------| Get Bulbs From database and setup it into recyclerview |-------------------------
     private fun getBulbs(){
         bulbsViewModel.allBulbs.observe(viewLifecycleOwner){
             bulbsRecyclerView?.apply {
@@ -49,5 +50,6 @@ class AllBulbsFragment : Fragment(), BulbsInterface {
             }
         }
     }
+    //============================================================================================================
 
 }
