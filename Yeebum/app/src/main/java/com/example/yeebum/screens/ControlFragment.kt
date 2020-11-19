@@ -24,6 +24,9 @@ class ControlFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         controlViewPager.adapter = ControlViewPagerAdapter(requireActivity())
         setupViewPager()
+
+
+        AppDrawer().setOpenDrawer(controlDrawerButton,requireActivity())
     }
 
 

@@ -1,9 +1,7 @@
 package com.example.yeebum.screens
 
-import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.Looper
-import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import androidx.core.view.GravityCompat
@@ -56,7 +54,7 @@ class AppDrawer {
                     if (navController.currentDestination?.id != destination) navController.navigate(
                         destination,
                         null,
-                        getNavOptions()
+                        getNavOptions(navController.currentDestination!!.id == R.id.controlFragment)
                     )
                 }, 250) //await to drawer close
             }
@@ -65,11 +63,16 @@ class AppDrawer {
     //===========================================================================================
 
     //get nav options
-    private fun getNavOptions(): NavOptions = NavOptions.Builder()
-        .setPopExitAnim(R.anim.slide_out_right)
-        .setPopEnterAnim(R.anim.slide_in_left)
-        .setExitAnim(R.anim.slide_out_left)
-        .setEnterAnim(R.anim.slide_in_right)
-        .build()
+    private fun getNavOptions(deleteBackStack:Boolean): NavOptions {
+        val options = NavOptions.Builder()
+            .setPopExitAnim(R.anim.slide_out_right)
+            .setPopEnterAnim(R.anim.slide_in_left)
+            .setExitAnim(R.anim.slide_out_left)
+            .setEnterAnim(R.anim.slide_in_right)
+
+        if(deleteBackStack) options.setPopUpTo(R.id.yeebum_nav,false)
+
+        return options.build()
+    }
 
 }

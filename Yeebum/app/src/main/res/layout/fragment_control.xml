@@ -34,11 +34,11 @@
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toStartOf="@+id/imageView2"
-            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintStart_toEndOf="@+id/controlDrawerButton"
             app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/controlDrawerButton"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginStart="28dp"
