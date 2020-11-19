@@ -43,7 +43,7 @@ class AppDrawer {
             R.id.enterBulbDataFragment,
             R.id.flowControlFragment,
             R.id.flowControlFragment,
-            R.id.allBulbsFragment,
+            R.id.helpFragment,
             R.id.bugReportFragment
         )
         listOfBoxes.forEach {

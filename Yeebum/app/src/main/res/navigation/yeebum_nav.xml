@@ -124,4 +124,9 @@
         android:name="com.example.yeebum.screens.other.BugReportFragment"
         android:label="fragment_bug_report"
         tools:layout="@layout/fragment_bug_report" />
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="com.example.yeebum.screens.other.HelpFragment"
+        android:label="fragment_help"
+        tools:layout="@layout/fragment_help" />
 </navigation>
