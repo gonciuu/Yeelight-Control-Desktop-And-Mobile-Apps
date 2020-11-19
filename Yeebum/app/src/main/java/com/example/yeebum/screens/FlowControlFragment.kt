@@ -30,7 +30,7 @@ class FlowControlFragment : Fragment(),FlowsInterface {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.d("TAG","Ustawiono")
+
 
         addFlowButton.setOnClickListener {
             findNavController().navigate(ControlFragmentDirections.actionControlFragmentToEnterActionNameFragment())
@@ -38,15 +38,18 @@ class FlowControlFragment : Fragment(),FlowsInterface {
         getAllFlows()
     }
 
+
     override fun onSelectAction() {
         findNavController().navigate(ControlFragmentDirections.actionControlFragmentToActionsFragment())
     }
 
+    //--------------| Get all Flows From Database |----------------
     private fun getAllFlows(){
         flowsViewModel.allFlows.observe(viewLifecycleOwner){
             flowsRecyclerView.layoutManager = LinearLayoutManager(context)
             flowsRecyclerView.adapter = FlowsRecyclerViewAdapter(this,it)
         }
     }
+    //===============================================================
 
 }
