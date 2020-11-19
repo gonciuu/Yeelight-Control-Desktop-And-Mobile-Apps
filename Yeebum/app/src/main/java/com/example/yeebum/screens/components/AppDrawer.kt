@@ -42,7 +42,7 @@ class AppDrawer {
             R.id.allBulbsFragment,
             R.id.enterBulbDataFragment,
             R.id.flowControlFragment,
-            R.id.flowControlFragment,
+            R.id.settingsFragment,
             R.id.helpFragment,
             R.id.bugReportFragment
         )

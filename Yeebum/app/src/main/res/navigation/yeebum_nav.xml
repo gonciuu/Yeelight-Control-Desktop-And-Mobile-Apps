@@ -129,4 +129,9 @@
         android:name="com.example.yeebum.screens.other.HelpFragment"
         android:label="fragment_help"
         tools:layout="@layout/fragment_help" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.yeebum.screens.other.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>
