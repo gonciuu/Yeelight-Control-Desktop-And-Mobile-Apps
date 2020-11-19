@@ -13,5 +13,5 @@ class YeebumApplication : Application() {
 
      //get flows repository
      private val flowsDatabase by lazy { FlowsDatabase.getInstance(this) }
-     private val flowsRepository by lazy { FlowsRepository(flowsDatabase!!.flowsDao())}
+     val flowsRepository by lazy { FlowsRepository(flowsDatabase!!.flowsDao())}
 }

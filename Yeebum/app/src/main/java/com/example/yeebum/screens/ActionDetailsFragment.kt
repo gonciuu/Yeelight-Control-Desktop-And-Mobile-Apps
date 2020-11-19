@@ -6,8 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.yeebum.R
+import com.example.yeebum.YeebumApplication
+import com.example.yeebum.databases.flows_database.FlowsViewModel
+import com.example.yeebum.databases.flows_database.FlowsViewModelFactory
+import com.example.yeebum.models.Flow
 import kotlinx.android.synthetic.main.fragment_action_details.*
 import kotlinx.android.synthetic.main.fragment_action_details.colorPicker
 import kotlinx.android.synthetic.main.fragment_color_control.*
@@ -15,12 +20,31 @@ import kotlinx.android.synthetic.main.fragment_color_control.*
 
 class ActionDetailsFragment : Fragment() {
 
+    private val flowsViewModel:FlowsViewModel by viewModels{
+        FlowsViewModelFactory((requireActivity().application as YeebumApplication).flowsRepository)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.fragment_action_details, container, false)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setupPickers()
+        setupSeekbar()
+
+        addNewActionButton.setOnClickListener {
+            findNavController().navigate(ActionDetailsFragmentDirections.actionActionDetailsFragmentToActionsFragment())
+        }
+
+        actionDetailsBackButton.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+        saveFlow()
+    }
+
+    //-------------| Setup time pickers |------------------
+    private fun setupPickers(){
         minutePicker.apply {
             minValue=0
             maxValue=60
@@ -43,7 +67,11 @@ class ActionDetailsFragment : Fragment() {
             setOnLongPressUpdateInterval(100)
         }
         colorPicker.showOldCenterColor = false
+    }
+    //===============================================================================
 
+    //-----------------------|Setup brightness seekbar |--------------------------
+    private fun setupSeekbar(){
         brightnessSeekbar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
                 brightnessPercent.text = "${p1+1}%"
@@ -59,15 +87,13 @@ class ActionDetailsFragment : Fragment() {
 
         })
 
+    }
+    //===============================================================================
 
+    private fun saveFlow(){
         addNewActionButton.setOnClickListener {
-            findNavController().navigate(ActionDetailsFragmentDirections.actionActionDetailsFragmentToActionsFragment())
+            flowsViewModel.insertFlow(Flow(0, "XD", 95,"XD"))
         }
-
-        actionDetailsBackButton.setOnClickListener {
-            requireActivity().onBackPressed()
-        }
-
     }
 
 }
