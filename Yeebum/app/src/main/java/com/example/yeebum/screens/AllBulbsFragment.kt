@@ -28,6 +28,8 @@ class AllBulbsFragment : Fragment(), BulbsInterface {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        setupDrawer()
         getBulbs()
 
         addBulbButton.setOnClickListener {
@@ -51,5 +53,11 @@ class AllBulbsFragment : Fragment(), BulbsInterface {
         }
     }
     //============================================================================================================
+
+
+    private fun setupDrawer(){
+        val drawer: AppDrawer = AppDrawer()
+        drawer.setOpenDrawer(allBulbsDrawerButton,requireActivity())
+    }
 
 }

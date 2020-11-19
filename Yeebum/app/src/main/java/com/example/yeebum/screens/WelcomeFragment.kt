@@ -23,10 +23,6 @@ class WelcomeFragment : Fragment() {
         welcomeButton.setOnClickListener {
             findNavController().navigate(WelcomeFragmentDirections.actionWelcomeFragmentToAllBulbsFragment())
         }
-        xd.setOnClickListener {
-            val drawer = requireActivity().findViewById<DrawerLayout>(R.id.drawer_layout)
-            drawer.openDrawer(Gravity.START)
-        }
     }
 
 
