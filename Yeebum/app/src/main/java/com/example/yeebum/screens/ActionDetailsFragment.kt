@@ -16,9 +16,13 @@ import com.example.yeebum.models.Flow
 import kotlinx.android.synthetic.main.fragment_action_details.*
 import kotlinx.android.synthetic.main.fragment_action_details.colorPicker
 import kotlinx.android.synthetic.main.fragment_color_control.*
+import javax.inject.Inject
 
 
 class ActionDetailsFragment : Fragment() {
+
+
+    lateinit var flow: Flow
 
     private val flowsViewModel:FlowsViewModel by viewModels{
         FlowsViewModelFactory((requireActivity().application as YeebumApplication).flowsRepository)
@@ -29,6 +33,9 @@ class ActionDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //val component = DaggerFlowComponent.create()
+        //component.inject(this)
 
         setupPickers()
         setupSeekbar()
@@ -92,7 +99,7 @@ class ActionDetailsFragment : Fragment() {
 
     private fun saveFlow(){
         addNewActionButton.setOnClickListener {
-            flowsViewModel.insertFlow(Flow(0, "XD", 95,"XD"))
+            flowsViewModel.insertFlow(flow)
         }
     }
 
