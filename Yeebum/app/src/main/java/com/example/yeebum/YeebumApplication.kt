@@ -5,7 +5,9 @@ import com.example.yeebum.databases.bulbs_database.BulbsDatabase
 import com.example.yeebum.databases.bulbs_database.BulbsRepository
 import com.example.yeebum.databases.flows_database.FlowsDatabase
 import com.example.yeebum.databases.flows_database.FlowsRepository
-
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
+@HiltAndroidApp
 class YeebumApplication : Application() {
      //get bulbs repository
      private val bulbsDatabase by lazy { BulbsDatabase.getInstance(this)}

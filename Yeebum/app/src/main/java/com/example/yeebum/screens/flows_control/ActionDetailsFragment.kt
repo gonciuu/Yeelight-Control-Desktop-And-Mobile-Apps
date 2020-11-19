@@ -1,6 +1,7 @@
 package com.example.yeebum.screens.flows_control
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,14 +13,19 @@ import com.example.yeebum.R
 import com.example.yeebum.YeebumApplication
 import com.example.yeebum.databases.flows_database.FlowsViewModel
 import com.example.yeebum.databases.flows_database.FlowsViewModelFactory
+import com.example.yeebum.models.DaggerFlowComponent
 import com.example.yeebum.models.Flow
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_action_details.*
 import kotlinx.android.synthetic.main.fragment_action_details.colorPicker
+import javax.inject.Inject
 
 
+@AndroidEntryPoint
 class ActionDetailsFragment : Fragment() {
 
 
+    @Inject
     lateinit var flow: Flow
 
     private val flowsViewModel:FlowsViewModel by viewModels{
@@ -31,6 +37,10 @@ class ActionDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val component = DaggerFlowComponent.create()
+        component.inject(this)
+        Log.d("SIEMA",flow.toString())
 
         //val component = DaggerFlowComponent.create()
         //component.inject(this)
