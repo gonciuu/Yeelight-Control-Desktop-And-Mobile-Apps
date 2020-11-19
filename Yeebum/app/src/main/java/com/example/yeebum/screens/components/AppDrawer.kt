@@ -44,7 +44,7 @@ class AppDrawer {
             R.id.flowControlFragment,
             R.id.flowControlFragment,
             R.id.allBulbsFragment,
-            R.id.enterBulbDataFragment
+            R.id.bugReportFragment
         )
         listOfBoxes.forEach {
             it.setOnClickListener { _ ->

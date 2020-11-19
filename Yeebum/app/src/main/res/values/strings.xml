@@ -28,4 +28,6 @@
     <string name="flow_name">Flow Name</string>
     <string name="next">Next</string>
     <string name="yeelight_name">Yeelight Name</string>
+    <string name="enter_when_you_had_the_bug">Enter more information about the bug (when you had it, what\'s going on etc..)</string>
+    <string name="report">Report</string>
 </resources>
