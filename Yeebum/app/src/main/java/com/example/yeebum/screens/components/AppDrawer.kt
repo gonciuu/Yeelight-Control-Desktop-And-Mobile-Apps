@@ -1,4 +1,4 @@
-package com.example.yeebum.screens
+package com.example.yeebum.screens.components
 
 import android.os.Handler
 import android.os.Looper
@@ -28,6 +28,7 @@ class AppDrawer {
     //----------------------------| Setup drawer with navigation |-------------------------------
 
     fun setupDrawerNavigation(activity: MainActivity) {
+        val navigation = Navigation()
         val drawer = activity.findViewById<LinearLayout>(R.id.myDrawer)
         val listOfBoxes = arrayListOf<LinearLayout>(
             drawer.homeBox,
@@ -47,14 +48,14 @@ class AppDrawer {
         )
         listOfBoxes.forEach {
             it.setOnClickListener { _ ->
-                val navController = activity.findNavController(R.id.my_nav_host_fragment)
+                val currentDestination = navigation.getCurrentDestination(activity)
                 val destination = listOfDestinations[listOfBoxes.indexOf(it)]
                 activity.findViewById<DrawerLayout>(R.id.drawer_layout).closeDrawer(GravityCompat.START)
                 Handler(Looper.getMainLooper()).postDelayed({
-                    if (navController.currentDestination?.id != destination) navController.navigate(
+                    if (currentDestination != destination) navigation.getCurrentNavController(activity).navigate(
                         destination,
                         null,
-                        getNavOptions(navController.currentDestination!!.id == R.id.controlFragment)
+                        navigation.getNavOptions(currentDestination == R.id.controlFragment)
                     )
                 }, 250) //await to drawer close
             }
@@ -62,17 +63,6 @@ class AppDrawer {
     }
     //===========================================================================================
 
-    //get nav options
-    private fun getNavOptions(deleteBackStack:Boolean): NavOptions {
-        val options = NavOptions.Builder()
-            .setPopExitAnim(R.anim.slide_out_right)
-            .setPopEnterAnim(R.anim.slide_in_left)
-            .setExitAnim(R.anim.slide_out_left)
-            .setEnterAnim(R.anim.slide_in_right)
 
-        if(deleteBackStack) options.setPopUpTo(R.id.yeebum_nav,false)
-
-        return options.build()
-    }
 
 }

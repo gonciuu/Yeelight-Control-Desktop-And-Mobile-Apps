@@ -2,8 +2,8 @@ package com.example.yeebum.screens.adapters.pager_views
 
 import androidx.fragment.app.*
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.yeebum.screens.ColorControlFragment
-import com.example.yeebum.screens.FlowControlFragment
+import com.example.yeebum.screens.bulb_control.ColorControlFragment
+import com.example.yeebum.screens.bulb_control.FlowControlFragment
 
 class ControlViewPagerAdapter(fa:FragmentActivity) : FragmentStateAdapter(fa) {
 

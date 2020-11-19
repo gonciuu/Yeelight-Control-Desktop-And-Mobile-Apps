@@ -2,8 +2,7 @@ package com.example.yeebum
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.yeebum.models.DaggerFlowComponent
-import com.example.yeebum.screens.AppDrawer
+import com.example.yeebum.screens.components.AppDrawer
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.example.yeebum.screens.WelcomeFragment"
+        android:name="com.example.yeebum.screens.bulbs.WelcomeFragment"
         android:label="fragment_welcome"
         tools:layout="@layout/fragment_welcome">
         <action
@@ -20,12 +20,12 @@
     </fragment>
     <fragment
         android:id="@+id/enterBulbDataFragment"
-        android:name="com.example.yeebum.screens.EnterBulbDataFragment"
+        android:name="com.example.yeebum.screens.bulbs.EnterBulbDataFragment"
         android:label="fragment_enter_bulb_data"
         tools:layout="@layout/fragment_enter_bulb_data" />
     <fragment
         android:id="@+id/controlFragment"
-        android:name="com.example.yeebum.screens.ControlFragment"
+        android:name="com.example.yeebum.screens.bulb_control.ControlFragment"
         android:label="fragment_control"
         tools:layout="@layout/fragment_control">
         <action
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/addActionFragment"
-        android:name="com.example.yeebum.screens.AddActionFragment"
+        android:name="com.example.yeebum.screens.flows_control.AddActionFragment"
         android:label="fragment_add_action"
         tools:layout="@layout/fragment_add_action">
         <action
@@ -58,7 +58,7 @@
     </fragment>
     <fragment
         android:id="@+id/actionDetailsFragment"
-        android:name="com.example.yeebum.screens.ActionDetailsFragment"
+        android:name="com.example.yeebum.screens.flows_control.ActionDetailsFragment"
         android:label="fragment_action_details"
         tools:layout="@layout/fragment_action_details">
         <action
@@ -71,7 +71,7 @@
     </fragment>
     <fragment
         android:id="@+id/actionsFragment"
-        android:name="com.example.yeebum.screens.ActionsFragment"
+        android:name="com.example.yeebum.screens.flows_control.ActionsFragment"
         android:label="fragment_actions"
         tools:layout="@layout/fragment_actions">
         <action
@@ -84,7 +84,7 @@
     </fragment>
     <fragment
         android:id="@+id/enterActionNameFragment"
-        android:name="com.example.yeebum.screens.EnterActionNameFragment"
+        android:name="com.example.yeebum.screens.flows_control.EnterActionNameFragment"
         android:label="fragment_enter_action_name"
         tools:layout="@layout/fragment_enter_action_name">
         <action
@@ -97,7 +97,7 @@
     </fragment>
     <fragment
         android:id="@+id/allBulbsFragment"
-        android:name="com.example.yeebum.screens.AllBulbsFragment"
+        android:name="com.example.yeebum.screens.bulbs.AllBulbsFragment"
         android:label="AllBulbsFragment">
         <action
             android:id="@+id/action_allBulbsFragment_to_enterBulbDataFragment"
@@ -116,7 +116,7 @@
     </fragment>
     <fragment
         android:id="@+id/flowControlFragment"
-        android:name="com.example.yeebum.screens.FlowControlFragment"
+        android:name="com.example.yeebum.screens.bulb_control.FlowControlFragment"
         android:label="fragment_flow_control"
         tools:layout="@layout/fragment_flow_control" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.yeebum.screens
+package com.example.yeebum.screens.bulb_control
 
 import android.os.Bundle
 import android.util.Log
@@ -21,8 +21,6 @@ class ColorControlFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupColorPicker()
-
-
 
 
     }

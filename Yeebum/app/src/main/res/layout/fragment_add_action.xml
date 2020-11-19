@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:orientation="vertical"
-    tools:context=".screens.AddActionFragment">
+    tools:context=".screens.flows_control.AddActionFragment">
 
     <ImageView
         android:id="@+id/addActionBackButton"

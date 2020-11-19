@@ -1,4 +1,4 @@
-package com.example.yeebum.screens
+package com.example.yeebum.screens.flows_control
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,8 +15,6 @@ import com.example.yeebum.databases.flows_database.FlowsViewModelFactory
 import com.example.yeebum.models.Flow
 import kotlinx.android.synthetic.main.fragment_action_details.*
 import kotlinx.android.synthetic.main.fragment_action_details.colorPicker
-import kotlinx.android.synthetic.main.fragment_color_control.*
-import javax.inject.Inject
 
 
 class ActionDetailsFragment : Fragment() {

@@ -1,8 +1,7 @@
 package com.example.yeebum.models
 
-import com.example.yeebum.screens.ActionDetailsFragment
+import com.example.yeebum.screens.flows_control.ActionDetailsFragment
 import dagger.Component
-import javax.inject.Singleton
 
 @Component
 interface FlowComponent {

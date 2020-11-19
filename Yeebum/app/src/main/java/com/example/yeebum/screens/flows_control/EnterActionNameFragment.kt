@@ -1,4 +1,4 @@
-package com.example.yeebum.screens
+package com.example.yeebum.screens.flows_control
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

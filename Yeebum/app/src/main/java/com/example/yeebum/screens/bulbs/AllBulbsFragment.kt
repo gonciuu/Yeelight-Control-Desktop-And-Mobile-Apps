@@ -1,4 +1,4 @@
-package com.example.yeebum.screens
+package com.example.yeebum.screens.bulbs
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,6 +13,7 @@ import com.example.yeebum.YeebumApplication
 import com.example.yeebum.databases.bulbs_database.BulbsViewModel
 import com.example.yeebum.databases.bulbs_database.BulbsViewModelFactory
 import com.example.yeebum.screens.adapters.recycler_views.AllBulbsRecyclerViewAdapter
+import com.example.yeebum.screens.components.AppDrawer
 import kotlinx.android.synthetic.main.fragment_all_bulbs.*
 
 

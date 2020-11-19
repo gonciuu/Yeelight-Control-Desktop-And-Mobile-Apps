@@ -1,4 +1,4 @@
-package com.example.yeebum.screens
+package com.example.yeebum.screens.bulbs
 
 interface BulbsInterface {
 

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:orientation="vertical"
-    tools:context=".screens.WelcomeFragment">
+    tools:context=".screens.bulbs.WelcomeFragment">
 
     <ImageView
         android:id="@+id/xd"

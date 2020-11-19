@@ -1,4 +1,4 @@
-package com.example.yeebum.screens
+package com.example.yeebum.screens.bulb_control
 
 import android.graphics.Color
 import android.os.Bundle
@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.yeebum.R
+import com.example.yeebum.screens.components.AppDrawer
 import com.example.yeebum.screens.adapters.pager_views.ControlViewPagerAdapter
 import kotlinx.android.synthetic.main.fragment_control.*
 
