@@ -43,6 +43,7 @@
         android:background="@color/lightGray" />
 
     <LinearLayout
+        android:id="@+id/homeBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
@@ -73,6 +74,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/addBulbBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -103,6 +105,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/flowsBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -134,6 +137,7 @@
 
 
     <LinearLayout
+        android:id="@+id/settingsBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -170,6 +174,7 @@
         android:background="@color/lightGray" />
 
     <LinearLayout
+        android:id="@+id/helpCenterBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -200,6 +205,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/bugReportBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"

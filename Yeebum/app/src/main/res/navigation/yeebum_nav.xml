@@ -114,4 +114,9 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+    <fragment
+        android:id="@+id/flowControlFragment"
+        android:name="com.example.yeebum.screens.FlowControlFragment"
+        android:label="fragment_flow_control"
+        tools:layout="@layout/fragment_flow_control" />
 </navigation>
