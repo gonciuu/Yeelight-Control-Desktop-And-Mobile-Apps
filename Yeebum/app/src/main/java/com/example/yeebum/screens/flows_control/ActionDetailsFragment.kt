@@ -13,7 +13,7 @@ import com.example.yeebum.R
 import com.example.yeebum.YeebumApplication
 import com.example.yeebum.databases.flows_database.FlowsViewModel
 import com.example.yeebum.databases.flows_database.FlowsViewModelFactory
-import com.example.yeebum.models.DaggerFlowComponent
+import com.example.yeebum.hilt.DaggerFlowComponent
 import com.example.yeebum.models.Flow
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_action_details.*

@@ -1,6 +1,5 @@
-package com.example.yeebum.models
+package com.example.yeebum.hilt
 
-import com.example.yeebum.screens.flows_control.ActionDetailsFragment
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -8,7 +7,7 @@ import dagger.hilt.android.components.ActivityComponent
 
 @Module
 @InstallIn(ActivityComponent::class)
-class FloatModule {
+class StringModule {
     @Provides
-    fun provideFloat():Float = 0.0f
+    fun provideString():String = ""
 }

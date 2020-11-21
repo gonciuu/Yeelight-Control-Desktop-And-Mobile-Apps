@@ -1,4 +1,4 @@
-package com.example.yeebum.models
+package com.example.yeebum.hilt
 
 import dagger.Module
 import dagger.Provides
@@ -7,7 +7,7 @@ import dagger.hilt.android.components.ActivityComponent
 
 @Module
 @InstallIn(ActivityComponent::class)
-class StringModule {
+class IntModule {
     @Provides
-    fun provideString():String = ""
+    fun provideInt():Int = 1
 }
