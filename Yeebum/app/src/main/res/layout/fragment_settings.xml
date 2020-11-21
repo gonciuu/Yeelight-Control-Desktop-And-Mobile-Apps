@@ -23,11 +23,11 @@
             android:text="Settings"
             android:textColor="@color/white"
             android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="@+id/enterBulbDataBackButton4"
-            app:layout_constraintTop_toBottomOf="@+id/enterBulbDataBackButton4" />
+            app:layout_constraintStart_toStartOf="@+id/settingsBackButton"
+            app:layout_constraintTop_toBottomOf="@+id/settingsBackButton" />
 
         <ImageView
-            android:id="@+id/enterBulbDataBackButton4"
+            android:id="@+id/settingsBackButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="36dp"

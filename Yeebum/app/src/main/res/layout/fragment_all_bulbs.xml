@@ -18,7 +18,7 @@
             tools:context=".screens.bulbs.AllBulbsFragment">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/homeSettingsButton"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="32dp"
@@ -37,10 +37,10 @@
                 android:text="My Yeelight"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-                app:layout_constraintEnd_toStartOf="@+id/imageView2"
+                app:layout_constraintBottom_toBottomOf="@+id/homeSettingsButton"
+                app:layout_constraintEnd_toStartOf="@+id/homeSettingsButton"
                 app:layout_constraintStart_toEndOf="@+id/allBulbsDrawerButton"
-                app:layout_constraintTop_toTopOf="@+id/imageView2" />
+                app:layout_constraintTop_toTopOf="@+id/homeSettingsButton" />
 
             <ImageView
                 android:id="@+id/allBulbsDrawerButton"

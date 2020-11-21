@@ -38,6 +38,8 @@ class AllBulbsFragment : Fragment(), BulbsInterface {
         }
 
 
+        homeSettingsButton.setOnClickListener { findNavController().navigate(AllBulbsFragmentDirections.actionAllBulbsFragmentToSettingsFragment()) }
+
     }
 
     override fun onBulbClick() {

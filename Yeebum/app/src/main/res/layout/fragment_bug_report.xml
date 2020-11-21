@@ -26,7 +26,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/enterBulbDataBackButton2"
+        android:id="@+id/bugReportBackButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="36dp"
@@ -48,8 +48,8 @@
         android:text="Report a bug"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/enterBulbDataBackButton2"
-        app:layout_constraintTop_toBottomOf="@+id/enterBulbDataBackButton2" />
+        app:layout_constraintStart_toStartOf="@+id/bugReportBackButton"
+        app:layout_constraintTop_toBottomOf="@+id/bugReportBackButton" />
 
 
     <EditText

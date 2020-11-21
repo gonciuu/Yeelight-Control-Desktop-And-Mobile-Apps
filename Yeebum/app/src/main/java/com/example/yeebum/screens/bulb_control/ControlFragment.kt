@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.yeebum.R
@@ -27,6 +28,7 @@ class ControlFragment : Fragment() {
         setupViewPager()
 
 
+        controlSettingsButton.setOnClickListener { findNavController().navigate(ControlFragmentDirections.actionControlFragmentToSettingsFragment()) }
         AppDrawer().setOpenDrawer(controlDrawerButton,requireActivity())
     }
 

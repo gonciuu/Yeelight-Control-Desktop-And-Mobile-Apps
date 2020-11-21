@@ -24,7 +24,7 @@
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/enterBulbDataBackButton3" />
+            app:layout_constraintTop_toBottomOf="@+id/helpBackButton" />
 
         <TextView
             android:id="@+id/textView26"
@@ -78,7 +78,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
         <ImageView
-            android:id="@+id/enterBulbDataBackButton3"
+            android:id="@+id/helpBackButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="36dp"

@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/controlSettingsButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="32dp"
@@ -32,10 +32,10 @@
             android:text="My Yeelight"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-            app:layout_constraintEnd_toStartOf="@+id/imageView2"
+            app:layout_constraintBottom_toBottomOf="@+id/controlSettingsButton"
+            app:layout_constraintEnd_toStartOf="@+id/controlSettingsButton"
             app:layout_constraintStart_toEndOf="@+id/controlDrawerButton"
-            app:layout_constraintTop_toTopOf="@+id/imageView2" />
+            app:layout_constraintTop_toTopOf="@+id/controlSettingsButton" />
 
         <ImageView
             android:id="@+id/controlDrawerButton"
