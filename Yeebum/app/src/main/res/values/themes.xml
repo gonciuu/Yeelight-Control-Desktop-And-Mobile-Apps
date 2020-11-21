@@ -17,4 +17,13 @@
         <item name="DialogSpotCount">3</item>
     </style>
 
+    <style name="DialogTheme" parent="ThemeOverlay.AppCompat.Dialog.Alert">
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="android:fontFamily">@font/open_sans_semibold</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:colorAccent">#FFFFFF</item>
+        <item name="android:textColorPrimary">#ffffff</item>
+    </style>
+
+
 </resources>

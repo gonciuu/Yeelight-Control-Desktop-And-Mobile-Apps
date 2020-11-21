@@ -10,7 +10,9 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import com.example.yeebum.R
+import com.example.yeebum.control_bulb.ChooseValue
 import com.example.yeebum.control_bulb.Constants.CMD_BRIGHTNESS
+import com.example.yeebum.control_bulb.Constants.CMD_CT
 import com.example.yeebum.control_bulb.Constants.CMD_HSV
 import com.example.yeebum.control_bulb.Constants.CMD_OFF
 import com.example.yeebum.control_bulb.Constants.CMD_ON
@@ -26,7 +28,7 @@ import java.net.ConnectException
 import java.net.Socket
 
 
-class ColorControlFragment : Fragment() {
+class ColorControlFragment : Fragment() , ChooseValue {
 
     private lateinit var socket: Socket
     private lateinit var mBos: BufferedOutputStream
@@ -50,7 +52,7 @@ class ColorControlFragment : Fragment() {
         //===========================================================
 
         setupBrightness()
-
+        setupColorTemp()
     }
 
     //-------------------------------| Connect to the bulb |----------------------------------
@@ -152,8 +154,25 @@ class ColorControlFragment : Fragment() {
 
 
 
+    //-----------------------------| Change Color Temperature |--------------------------------
 
+    private fun setupColorTemp(){
+        arrayListOf<View>(colorTempImage,colorTempText,colorTempValueText)
+            .forEach {
+                it.setOnClickListener { view->
+                    val dialog = helpers.getSeekBarDialog(
+                        requireActivity(),requireContext(),"Choose Temp","Choose Temp Of your yeelight",this
+                    )
+                    dialog.show()
+                }
+            }
+    }
 
+    override fun onSetColorTemp(temp: Int) {
+        write(
+            CMD_CT.replace("%id", ID).replace("%value", temp.toString()))
+    }
 
+    //==========================================================================================
 
 }

@@ -59,7 +59,7 @@
         app:tint="@color/white" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/colorTempImage"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_marginTop="100dp"
@@ -83,7 +83,7 @@
         android:src="@drawable/ic_color"
         app:layout_constraintEnd_toStartOf="@+id/imageView9"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView7"
+        app:layout_constraintStart_toEndOf="@+id/colorTempImage"
         app:layout_constraintTop_toBottomOf="@+id/brightnessSeekBar"
         app:tint="@color/lightGray"
         tools:layout_editor_absoluteY="616dp" />
@@ -121,7 +121,7 @@
 
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/colorTempText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -129,10 +129,10 @@
         android:text="@string/strength"
         android:textColor="@color/white"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView7"
+        app:layout_constraintEnd_toEndOf="@+id/colorTempImage"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/imageView7"
-        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+        app:layout_constraintStart_toStartOf="@+id/colorTempImage"
+        app:layout_constraintTop_toBottomOf="@+id/colorTempImage" />
 
     <TextView
         android:id="@+id/brightnessPercentNumber"
@@ -147,18 +147,18 @@
         app:layout_constraintEnd_toEndOf="@+id/brightnessSeekBar" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/colorTempValueText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/open_sans_bold"
-        android:text="5300 lm"
+        android:text="5300 k"
         android:textColor="@color/lightGray"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView7"
+        app:layout_constraintEnd_toEndOf="@+id/colorTempImage"
         app:layout_constraintHorizontal_bias="0.473"
-        app:layout_constraintStart_toStartOf="@+id/imageView7"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintStart_toStartOf="@+id/colorTempImage"
+        app:layout_constraintTop_toBottomOf="@+id/colorTempText" />
 
     <TextView
         android:id="@+id/textView9"
