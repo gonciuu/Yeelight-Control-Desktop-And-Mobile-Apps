@@ -4,10 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.example.yeebum.models.Flow
 
-@Database(entities = [Flow::class], version = 1, exportSchema = false)
-abstract class FlowsDatabase() : RoomDatabase() {
+@Database(entities = [Flow::class], version = 4, exportSchema = false)
+@TypeConverters(ActionsTypeConverter::class)
+abstract class FlowsDatabase : RoomDatabase() {
 
     abstract fun flowsDao(): FlowsDao
 
@@ -17,7 +19,7 @@ abstract class FlowsDatabase() : RoomDatabase() {
         fun getInstance(context: Context): FlowsDatabase? {
             if (instance == null)
                 instance = synchronized(this){
-                    Room.databaseBuilder(context, FlowsDatabase::class.java, "flows_table").build()
+                    Room.databaseBuilder(context, FlowsDatabase::class.java, "flows_table").fallbackToDestructiveMigration().build()
                 }
             return instance
         }

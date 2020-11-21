@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.yeebum.models.Bulb
 
-@Database(entities = [Bulb::class], version = 1, exportSchema = false)
+@Database(entities = [Bulb::class], version = 4, exportSchema = false)
 abstract class BulbsDatabase : RoomDatabase() {
 
     abstract fun bulbsDao(): BulbsDao
@@ -16,7 +16,7 @@ abstract class BulbsDatabase : RoomDatabase() {
         private var instance: BulbsDatabase? = null
         fun getInstance(context: Context): BulbsDatabase? {
             if (instance == null) instance = synchronized(this) {
-                Room.databaseBuilder(context, BulbsDatabase::class.java, "bulbs_table").build()
+                Room.databaseBuilder(context, BulbsDatabase::class.java, "bulbs_table").fallbackToDestructiveMigration().build()
             }
             return instance
         }

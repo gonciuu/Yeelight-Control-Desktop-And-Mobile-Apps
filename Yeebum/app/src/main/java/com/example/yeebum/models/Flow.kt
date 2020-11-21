@@ -6,5 +6,8 @@ import javax.inject.Inject
 
 
 @Entity(tableName = "flows_table")
-data class Flow @Inject constructor(@PrimaryKey(autoGenerate = true) val id:Int, val name:String, val duration:Int, val actions:String)
+data class Flow @Inject constructor(val name:String, val duration:Int, val actions:ArrayList<Action>){
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0
+}
 

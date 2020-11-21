@@ -4,4 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "bulbs_table")
-data class Bulb(@PrimaryKey(autoGenerate = true) val id:Int, val name: String, val ip: String, val port: Int)
+data class Bulb(val name: String, val ip: String, val port: Int){
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0
+}
