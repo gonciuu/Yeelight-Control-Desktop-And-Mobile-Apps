@@ -27,14 +27,9 @@ class ColorControlFragment : Fragment() {
 
     private lateinit var socket: Socket
     private lateinit var mBos: BufferedOutputStream
+    private val helpers = Helpers()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_color_control, container, false)
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.fragment_color_control, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,7 +52,7 @@ class ColorControlFragment : Fragment() {
     //-------------------------------| Connect to the bulb |----------------------------------
     @Suppress("BlockingMethodInNonBlockingContext")
     private fun connectToBulb() {
-        val helpers = Helpers()
+
         val dialog = LoadingDialog.getDialog(requireContext(), "Connecting...")
         dialog.show()
         CoroutineScope(Dispatchers.IO).launch {
@@ -76,29 +71,18 @@ class ColorControlFragment : Fragment() {
     //========================================================================================
 
 
-    //-------------------------| Change bulb to on or Off state |-------------------------------------
-    private fun toggleSwitch(isOn: Boolean) {
-        onOffButton.setColorFilter(
-            if (isOn) Color.argb(255, 30, 255, 30) else Color.argb(
-                255,
-                255,
-                30,
-                30
-            )
-        )
-        write(if (isOn) CMD_ON.replace("%id", ID) else CMD_OFF.replace("%id", ID))
-    }
-    //================================================================================================
-
-
+    //----------------------| Write Command |--------------------------
     private fun write(cmd: String) {
         if (socket.isConnected)
             executeAction(cmd)
         else
-            Log.d("TAG", "mBos = null or mSocket is closed")
+            helpers.showSnackBar(requireView(), "Check your bulb ip and port", null, null)
     }
+    //=================================================================
 
 
+
+    //---------------------------| Execute write command action |---------------------------
     @Suppress("BlockingMethodInNonBlockingContext")
     private fun executeAction(cmd: String) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -106,6 +90,26 @@ class ColorControlFragment : Fragment() {
             mBos.flush()
         }
     }
+    //======================================================================================
+
+
+
+
+
+
+
+
+
+
+    //-------------------------| Change bulb to on or Off state |-------------------------------------
+    private fun toggleSwitch(isOn: Boolean) {
+        onOffButton.setColorFilter(if (isOn) Color.argb(255, 30, 255, 30) else Color.argb(255, 255, 30, 30))
+        write(if (isOn) CMD_ON.replace("%id", ID) else CMD_OFF.replace("%id", ID))
+    }
+    //================================================================================================
+
+
+
 
 
     //--------------| Setup Wheel Color Picker |----------------
