@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="03d51067-6f35-47d8-897a-3bc8ba2d4aa1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/xiaomi led bulb.py" beforeDir="false" afterPath="$PROJECT_DIR$/xiaomi led bulb.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,7 +18,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../README.md" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../macros/main.py" />
     <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RunDashboard">

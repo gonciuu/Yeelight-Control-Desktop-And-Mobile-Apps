@@ -9,5 +9,12 @@
         <item name="colorControlNormal">#77FFFFFF</item>
     </style>
 
+    <style name="LoadingDialogTheme" parent="android:Theme.DeviceDefault.Dialog">
+        <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="android:fontFamily">@font/open_sans_semibold</item>
+        <item name="DialogSpotColor">@color/white</item>
+        <item name="DialogSpotCount">3</item>
+    </style>
 
 </resources>

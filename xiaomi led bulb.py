@@ -21,7 +21,7 @@ class App:
         self.ipText = tk.Label(master=self.window, text='Enter your xiaomi yeelight ip', fg='white', bg='black',
                                font=('Helvetica', 12, 'bold'))
         self.ipText.grid(row=0, column=0, sticky=tk.N, pady=(15, 0), padx=(10, 0))
-        self.ipEntry = tk.Entry(master=self.window, width=30, bg='white', fg='black', font=('Helvetica', 12, 'bold'))
+        self.ipEntry = tk.Entry(master=self.window, width=30, bg='black', fg='white', font=('Helvetica', 12, 'bold'))
         self.ipEntry.grid(row=0, column=1, sticky=tk.N, pady=(15, 0), padx=(10, 0))
         self.confirmIp = tk.Button(master=self.window, width=30, bg='white', fg='black', text="Confirm",
                                    command=self.showPanel)
@@ -30,8 +30,6 @@ class App:
         if len(bulbs_list) > 0:
             self.ipEntry.delete(0, tk.END)
             self.ipEntry.insert(0, bulbs_list[0]['ip'])
-        else:
-            self.showAlert("Warning", "Cannot find any xiaomi bulbs. Enter your bulb ip manually")
 
     def showPanel(self):
         self.bulb = Bulb(self.ipEntry.get(), effect="smooth", duration=1000)
