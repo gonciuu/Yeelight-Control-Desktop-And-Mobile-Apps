@@ -8,7 +8,6 @@
     tools:context=".screens.bulb_control.ColorControlFragment">
 
 
-
     <com.larswerkman.holocolorpicker.ColorPicker
         android:id="@+id/colorPicker"
         android:layout_width="wrap_content"
@@ -70,47 +69,47 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar"
+        app:layout_constraintTop_toBottomOf="@+id/brightnessSeekBar"
         app:tint="@color/lightGray" />
 
     <ImageView
         android:id="@+id/imageView8"
         android:layout_width="32dp"
         android:layout_height="32dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="20dp"
         android:contentDescription="@string/timer_icon"
         android:src="@drawable/ic_color"
         app:layout_constraintEnd_toStartOf="@+id/imageView9"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView7"
+        app:layout_constraintTop_toBottomOf="@+id/brightnessSeekBar"
         app:tint="@color/lightGray"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar"
-        android:layout_marginTop="100dp"
         tools:layout_editor_absoluteY="616dp" />
 
     <ImageView
         android:id="@+id/imageView9"
         android:layout_width="32dp"
         android:layout_height="32dp"
+        android:layout_marginTop="100dp"
         android:contentDescription="@string/timer_icon"
         android:src="@drawable/ic_timer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView8"
+        app:layout_constraintTop_toBottomOf="@+id/brightnessSeekBar"
         app:tint="@color/lightGray"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar"
-        android:layout_marginTop="100dp"
         tools:layout_editor_absoluteY="616dp" />
 
     <SeekBar
-        android:id="@+id/seekBar"
+        android:id="@+id/brightnessSeekBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
         android:max="100"
         android:maxHeight="6dp"
-        android:progress="40"
+        android:progress="39"
         android:progressDrawable="@drawable/seekbar_style"
         android:progressTint="@color/white"
         android:splitTrack="false"
@@ -134,6 +133,18 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/imageView7"
         app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+
+    <TextView
+        android:id="@+id/brightnessPercentNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="40%"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView6"
+        app:layout_constraintEnd_toEndOf="@+id/brightnessSeekBar" />
 
     <TextView
         android:id="@+id/textView7"
@@ -172,8 +183,8 @@
         android:text="@string/hue"
         android:textColor="@color/white"
         android:textSize="16sp"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintEnd_toEndOf="@+id/imageView8"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
@@ -181,10 +192,10 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/open_sans_bold"
         android:text="@string/duration"
         android:textColor="@color/white"
-        android:layout_marginTop="8dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView9"
         app:layout_constraintHorizontal_bias="0.5"

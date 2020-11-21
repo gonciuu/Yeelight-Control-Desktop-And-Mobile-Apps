@@ -1,11 +1,13 @@
 package com.example.yeebum.screens.bulb_control
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import com.example.yeebum.R
 import com.example.yeebum.control_bulb.Constants.CMD_BRIGHTNESS
@@ -30,11 +32,7 @@ class ColorControlFragment : Fragment() {
     private lateinit var mBos: BufferedOutputStream
     private val helpers = Helpers()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_color_control, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.fragment_color_control, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,6 +49,7 @@ class ColorControlFragment : Fragment() {
         }
         //===========================================================
 
+        setupBrightness()
 
     }
 
@@ -87,6 +86,7 @@ class ColorControlFragment : Fragment() {
             executeAction(cmd)
         else
             helpers.showSnackBar(requireView(), "Check your bulb ip and port", null, null)
+        //Log.d("TAG",cmd)
     }
     //=================================================================
 
@@ -103,28 +103,12 @@ class ColorControlFragment : Fragment() {
     //======================================================================================
 
 
-
-
-
-
-
-
-
-
     //-------------------------| Change bulb to on or Off state |-------------------------------------
     private fun toggleSwitch(isOn: Boolean) {
-        onOffButton.setColorFilter(
-            if (isOn) Color.argb(255, 30, 255, 30) else Color.argb(
-                255,
-                255,
-                30,
-                30
-            )
-        )
+        onOffButton.setColorFilter(if (isOn) Color.argb(255, 30, 255, 30) else Color.argb(255, 255, 30, 30))
         write(if (isOn) CMD_ON.replace("%id", ID) else CMD_OFF.replace("%id", ID))
     }
     //================================================================================================
-
 
 
 
@@ -141,5 +125,35 @@ class ColorControlFragment : Fragment() {
         }
     }
     //===========================================================
+
+
+
+    //------------------------------| Set brightness on seekBar stop |----------------------------------
+    private fun setupBrightness(){
+        brightnessSeekBar.apply {
+            max = 99
+            setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
+                @SuppressLint("SetTextI18n")
+                override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
+                    brightnessPercentNumber.text = "${p1+1}%"
+                }
+                override fun onStartTrackingTouch(p0: SeekBar?) {}
+
+                override fun onStopTrackingTouch(p0: SeekBar?) {
+                    write(
+                        CMD_BRIGHTNESS.replace("%id", ID)
+                        .replace("%value", (p0!!.progress+1).toString()))
+                }
+
+            })
+        }
+    }
+    //==================================================================================================
+
+
+
+
+
+
 
 }
