@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentActivity
 import com.example.yeebum.R
 import com.example.yeebum.control_bulb.ChooseValue
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.color_picker_dialog.view.*
 import kotlinx.android.synthetic.main.seekbar_dialog.view.*
 
 class Helpers {
@@ -23,16 +24,17 @@ class Helpers {
     }
 
 
-    fun getSeekBarDialog(activity: FragmentActivity, context: Context, title: String, description: String, chooseValue: ChooseValue): AlertDialog {
-        val view = LayoutInflater.from(context).inflate(R.layout.seekbar_dialog,null,false)
+    fun getSeekBarColorTempDialog(activity: FragmentActivity, context: Context, title: String, description: String, chooseValue: ChooseValue): AlertDialog {
+        val view = LayoutInflater.from(context).inflate(R.layout.seekbar_dialog, null, false)
         view.dialogSeekBar.apply {
             max = 4800
             progress = 3000
-            setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+            setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                 @SuppressLint("SetTextI18n")
                 override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-                    view.colorTempValue.text = "${p1+1700}k"
+                    view.colorTempValue.text = "${p1 + 1700}k"
                 }
+
                 override fun onStartTrackingTouch(p0: SeekBar?) {}
                 override fun onStopTrackingTouch(p0: SeekBar?) {}
             })
@@ -47,7 +49,24 @@ class Helpers {
                     chooseValue.onSetColorTemp(view.dialogSeekBar.progress + 1700)
                     dialog.dismiss()
                 }.create()
-        }?: throw Exception("Activity must not be null!")
+        } ?: throw Exception("Activity must not be null!")
+    }
+
+
+    fun getChooseColorDialog(activity: FragmentActivity, context: Context, title: String, chooseValue: ChooseValue): AlertDialog {
+        val view = LayoutInflater.from(context).inflate(R.layout.color_picker_dialog, null, false)
+
+        return activity.let {
+            AlertDialog.Builder(context, R.style.DialogTheme).setTitle(title)
+                .setPositiveButton("Apply") { dialog, _ ->
+                    chooseValue.onSetColor(view.dialogColorPicker.color)
+                    dialog.dismiss()
+                }
+                .setNegativeButton("Cancel") { dialog, _ ->
+                    dialog.dismiss()
+                }.setView(view)
+                .create()
+        } ?: throw Exception("Activity must not be null!")
     }
 
 }

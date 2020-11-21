@@ -1,6 +1,7 @@
 package com.example.yeebum.screens.bulb_control
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import com.example.yeebum.R
 import com.example.yeebum.control_bulb.ChooseValue
@@ -53,6 +56,7 @@ class ColorControlFragment : Fragment() , ChooseValue {
 
         setupBrightness()
         setupColorTemp()
+        setupHueColorPickerDialog()
     }
 
     //-------------------------------| Connect to the bulb |----------------------------------
@@ -118,6 +122,12 @@ class ColorControlFragment : Fragment() , ChooseValue {
     //--------------| Setup Wheel Color Picker Command |----------------
     private fun setupColorPicker() {
         colorPicker.showOldCenterColor = false
+        colorPicker.setOnColorChangedListener {
+            ViewCompat.setBackgroundTintList(
+                currentHueColor,
+                ColorStateList.valueOf(it))
+        }
+
         colorPicker.setOnColorSelectedListener {
             val hsv = FloatArray(3)
             Color.colorToHSV(it, hsv)
@@ -159,8 +169,8 @@ class ColorControlFragment : Fragment() , ChooseValue {
     private fun setupColorTemp(){
         arrayListOf<View>(colorTempImage,colorTempText,colorTempValueText)
             .forEach {
-                it.setOnClickListener { view->
-                    val dialog = helpers.getSeekBarDialog(
+                it.setOnClickListener {
+                    val dialog = helpers.getSeekBarColorTempDialog(
                         requireActivity(),requireContext(),"Choose Temp","Choose Temp Of your yeelight",this
                     )
                     dialog.show()
@@ -168,11 +178,35 @@ class ColorControlFragment : Fragment() , ChooseValue {
             }
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onSetColorTemp(temp: Int) {
+        colorTempValueText.text = "$temp k"
         write(
             CMD_CT.replace("%id", ID).replace("%value", temp.toString()))
     }
 
     //==========================================================================================
+
+
+
+    //----------------------------------| Show color picker dialog |--------------------------------------------
+
+    private fun setupHueColorPickerDialog(){
+        arrayListOf<View>(hueImage,hueText,currentHueColor)
+            .forEach {
+                it.setOnClickListener {
+                    val dialog = helpers.getChooseColorDialog(requireActivity(),requireContext(),"Choose Color",this)
+                    dialog.show()
+                }
+            }
+    }
+
+    override fun onSetColor(color: Int) {
+        val hsv = FloatArray(3)
+        Color.colorToHSV(color, hsv)
+        write(CMD_HSV.replace("%id", ID)
+            .replace("%value", hsv[0].toString()))
+    }
+    //============================================================================================================
 
 }
