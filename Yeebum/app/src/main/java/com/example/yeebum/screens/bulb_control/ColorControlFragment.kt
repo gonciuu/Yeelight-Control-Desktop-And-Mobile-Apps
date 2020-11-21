@@ -3,11 +3,13 @@ package com.example.yeebum.screens.bulb_control
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.yeebum.R
+import com.example.yeebum.control_bulb.Constants.CMD_BRIGHTNESS
+import com.example.yeebum.control_bulb.Constants.CMD_HSV
 import com.example.yeebum.control_bulb.Constants.CMD_OFF
 import com.example.yeebum.control_bulb.Constants.CMD_ON
 import com.example.yeebum.control_bulb.Constants.ID
@@ -18,7 +20,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.BufferedOutputStream
-import java.lang.Exception
 import java.net.ConnectException
 import java.net.Socket
 
@@ -29,7 +30,11 @@ class ColorControlFragment : Fragment() {
     private lateinit var mBos: BufferedOutputStream
     private val helpers = Helpers()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.fragment_color_control, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = inflater.inflate(R.layout.fragment_color_control, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,7 +44,7 @@ class ColorControlFragment : Fragment() {
 
 
         //-----------------| Turn On\Off Button |--------------------
-        var isOn = true
+        var isOn = false
         onOffButton.setOnClickListener {
             isOn = !isOn
             toggleSwitch(isOn)
@@ -61,7 +66,12 @@ class ColorControlFragment : Fragment() {
                 socket.keepAlive = true
                 mBos = BufferedOutputStream(socket.getOutputStream())
             } catch (connectEx: ConnectException) {
-                helpers.showSnackBar(requireView(), "Error! Check your internet connection.", null, null)
+                helpers.showSnackBar(
+                    requireView(),
+                    "Error! Check your internet connection.",
+                    null,
+                    null
+                )
             } catch (ex: Exception) {
                 helpers.showSnackBar(requireView(), ex.message!!, null, null)
             }
@@ -103,7 +113,14 @@ class ColorControlFragment : Fragment() {
 
     //-------------------------| Change bulb to on or Off state |-------------------------------------
     private fun toggleSwitch(isOn: Boolean) {
-        onOffButton.setColorFilter(if (isOn) Color.argb(255, 30, 255, 30) else Color.argb(255, 255, 30, 30))
+        onOffButton.setColorFilter(
+            if (isOn) Color.argb(255, 30, 255, 30) else Color.argb(
+                255,
+                255,
+                30,
+                30
+            )
+        )
         write(if (isOn) CMD_ON.replace("%id", ID) else CMD_OFF.replace("%id", ID))
     }
     //================================================================================================
@@ -112,11 +129,15 @@ class ColorControlFragment : Fragment() {
 
 
 
-    //--------------| Setup Wheel Color Picker |----------------
+    //--------------| Setup Wheel Color Picker Command |----------------
     private fun setupColorPicker() {
         colorPicker.showOldCenterColor = false
         colorPicker.setOnColorSelectedListener {
-            Log.d("TAG", it.toString())
+            val hsv = FloatArray(3)
+            Color.colorToHSV(it, hsv)
+            write(CMD_HSV.replace("%id", ID)
+            .replace("%value", hsv[0].toString()))
+
         }
     }
     //===========================================================
