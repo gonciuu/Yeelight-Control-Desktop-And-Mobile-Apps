@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import com.example.yeebum.R
 import com.example.yeebum.control_bulb.ChooseValue
 import com.example.yeebum.control_bulb.Constants.CMD_BRIGHTNESS
+import com.example.yeebum.control_bulb.Constants.CMD_CRON_ADD
 import com.example.yeebum.control_bulb.Constants.CMD_CT
 import com.example.yeebum.control_bulb.Constants.CMD_HSV
 import com.example.yeebum.control_bulb.Constants.CMD_OFF
@@ -215,7 +216,7 @@ class ColorControlFragment : Fragment() , ChooseValue {
 
     //-------------------------------| Setup time picker |-----------------------------
     private fun setupDurationPickerDialog(){
-        arrayListOf<View>(durationImage,durationText,durationValueText)
+        arrayListOf<View>(durationImage,durationText,durationValueText, durationImage2)
             .forEach {
                 it.setOnClickListener {
                     val dialog = helpers.getDurationPickerDialog(requireActivity(),requireContext(),"Choose Duration", this)
@@ -224,9 +225,10 @@ class ColorControlFragment : Fragment() , ChooseValue {
             }
     }
 
-
     override fun onSetDuration(time: Int) {
-        Log.d("TIME",time.toString())
+        write(
+            CMD_CRON_ADD.replace("%id", ID)
+            .replace("%value",time.toString()))
     }
     //==================================================================================
 

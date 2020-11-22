@@ -33,7 +33,7 @@
         app:tint="#E30000" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/durationImage2"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="40dp"
