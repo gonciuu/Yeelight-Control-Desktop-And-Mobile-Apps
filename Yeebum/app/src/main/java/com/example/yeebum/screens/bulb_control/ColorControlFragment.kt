@@ -57,6 +57,7 @@ class ColorControlFragment : Fragment() , ChooseValue {
         setupBrightness()
         setupColorTemp()
         setupHueColorPickerDialog()
+        setupDurationPickerDialog()
     }
 
     //-------------------------------| Connect to the bulb |----------------------------------
@@ -207,6 +208,26 @@ class ColorControlFragment : Fragment() , ChooseValue {
         write(CMD_HSV.replace("%id", ID)
             .replace("%value", hsv[0].toString()))
     }
+
+
     //============================================================================================================
+
+
+    //-------------------------------| Setup time picker |-----------------------------
+    private fun setupDurationPickerDialog(){
+        arrayListOf<View>(durationImage,durationText,durationValueText)
+            .forEach {
+                it.setOnClickListener {
+                    val dialog = helpers.getDurationPickerDialog(requireActivity(),requireContext(),"Choose Duration", this)
+                    dialog.show()
+                }
+            }
+    }
+
+
+    override fun onSetDuration(time: Int) {
+        Log.d("TIME",time.toString())
+    }
+    //==================================================================================
 
 }
