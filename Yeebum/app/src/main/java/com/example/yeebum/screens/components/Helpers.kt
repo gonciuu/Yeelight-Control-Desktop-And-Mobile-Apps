@@ -27,6 +27,7 @@ class Helpers {
     }
 
 
+    //---------------------------------------------------------| Show Dialog with seekbar to control color temperature of bulb |-------------------------------------------------------
     fun getSeekBarColorTempDialog(activity: FragmentActivity, context: Context, title: String, description: String, actualTemp:Int, chooseValue: ChooseValue): AlertDialog {
         val view = LayoutInflater.from(context).inflate(R.layout.seekbar_dialog, null, false)
         view.dialogSeekBar.apply {
@@ -54,8 +55,9 @@ class Helpers {
                 }.create()
         } ?: throw Exception("Activity must not be null!")
     }
+    //=================================================================================================================================================================================
 
-
+    //---------------------------------------------------------| Show Dialog with color picker to control color of bulb |-------------------------------------------------------
     fun getChooseColorDialog(activity: FragmentActivity, context: Context, title: String,currentColor:Int, chooseValue: ChooseValue): AlertDialog {
         val view = LayoutInflater.from(context).inflate(R.layout.color_picker_dialog, null, false)
         view.dialogColorPicker.oldCenterColor = currentColor
@@ -71,8 +73,9 @@ class Helpers {
                 .create()
         } ?: throw Exception("Activity must not be null!")
     }
+    //==========================================================================================================================================================================
 
-
+    //---------------------------------------------------------| Show Dialog with duration picker to control color of bulb |-------------------------------------------------------
     fun getDurationPickerDialog(activity: FragmentActivity, context: Context, title: String, chooseValue: ChooseValue): AlertDialog {
         val view = LayoutInflater.from(context).inflate(R.layout.duration_dialog, null, false)
 
@@ -97,6 +100,7 @@ class Helpers {
         } ?: throw Exception("Activity must not be null!")
 
     }
+    //============================================================================================================================================================================
 
 
 }

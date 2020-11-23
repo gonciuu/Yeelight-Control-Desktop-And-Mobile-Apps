@@ -258,7 +258,6 @@ class ColorControlFragment : Fragment() , ChooseValue {
                 CMD_CRON_ADD.replace("%id", ID)
                     .replace("%value",time.toString()))
         }else{
-            Log.d("TIMER","WYKONANO")
             write(CMD_CRON_DELETE.replace("%id", ID))
             durationValueText.text = "∞"
         }
@@ -268,6 +267,7 @@ class ColorControlFragment : Fragment() , ChooseValue {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
+        //rotate device
         outState.putString("bulbDataMap",Gson().toJson(bulbData))
     }
 
