@@ -60,8 +60,6 @@ class ColorControlFragment : Fragment() , ChooseValue {
 
         setDataTextOnRotate()
 
-
-
         setupColorPicker()
         connectToBulb()
 
@@ -126,8 +124,11 @@ class ColorControlFragment : Fragment() , ChooseValue {
                 mBos.write(cmd.toByteArray())
                 mBos.flush()
             }catch (socketEx:SocketException){
-                Log.d("EXCEPTION",socketEx.toString())
-                helpers.showSnackBar(requireView(),"Check your internet connection",null,null)
+                requireActivity().runOnUiThread {
+                    connectToBulb()
+                }
+                //Log.d("EXCEPTION",socketEx.toString())
+                //helpers.showSnackBar(requireView(),"Check your internet connection",null,null)
             }catch (ex:Exception){
                 helpers.showSnackBar(requireView(), ex.message!!,null,null)
             }
