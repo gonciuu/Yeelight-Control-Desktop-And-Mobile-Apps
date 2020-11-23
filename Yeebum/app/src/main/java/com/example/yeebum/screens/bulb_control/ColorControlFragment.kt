@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
-import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import com.example.yeebum.R
@@ -34,6 +33,7 @@ import kotlinx.coroutines.launch
 import java.io.BufferedOutputStream
 import java.net.ConnectException
 import java.net.Socket
+import java.net.SocketException
 
 
 class ColorControlFragment : Fragment() , ChooseValue {
@@ -122,8 +122,15 @@ class ColorControlFragment : Fragment() , ChooseValue {
     @Suppress("BlockingMethodInNonBlockingContext")
     private fun executeAction(cmd: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            mBos.write(cmd.toByteArray())
-            mBos.flush()
+            try{
+                mBos.write(cmd.toByteArray())
+                mBos.flush()
+            }catch (socketEx:SocketException){
+                Log.d("EXCEPTION",socketEx.toString())
+                helpers.showSnackBar(requireView(),"Check your internet connection",null,null)
+            }catch (ex:Exception){
+                helpers.showSnackBar(requireView(), ex.message!!,null,null)
+            }
         }
     }
     //======================================================================================
@@ -282,4 +289,9 @@ class ColorControlFragment : Fragment() , ChooseValue {
             durationValueText.text = "∞"
     }
     //=============================================================================================
+
+    override fun onStop() {
+        super.onStop()
+        socket.close()
+    }
 }
