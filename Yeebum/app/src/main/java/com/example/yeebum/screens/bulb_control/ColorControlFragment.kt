@@ -16,6 +16,7 @@ import com.example.yeebum.R
 import com.example.yeebum.control_bulb.ChooseValue
 import com.example.yeebum.control_bulb.Constants.CMD_BRIGHTNESS
 import com.example.yeebum.control_bulb.Constants.CMD_CRON_ADD
+import com.example.yeebum.control_bulb.Constants.CMD_CRON_DELETE
 import com.example.yeebum.control_bulb.Constants.CMD_CT
 import com.example.yeebum.control_bulb.Constants.CMD_HSV
 import com.example.yeebum.control_bulb.Constants.CMD_OFF
@@ -23,7 +24,10 @@ import com.example.yeebum.control_bulb.Constants.CMD_ON
 import com.example.yeebum.control_bulb.Constants.ID
 import com.example.yeebum.screens.components.Helpers
 import com.example.yeebum.screens.components.LoadingDialog
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.fragment_color_control.*
+import kotlinx.android.synthetic.main.fragment_color_control.colorPicker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -38,20 +42,34 @@ class ColorControlFragment : Fragment() , ChooseValue {
     private lateinit var mBos: BufferedOutputStream
     private val helpers = Helpers()
 
+    //------------------| Bulb data to save when device rotate |--------------------------
+    private var bulbData = mutableMapOf(
+        "isOn" to 0,
+        "colorTemp" to 4000,
+        "duration" to -1,
+    )
+    //===================================================================================
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.fragment_color_control, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if(savedInstanceState!=null)
+            this.bulbData = Gson().fromJson(savedInstanceState.getString("bulbDataMap"),object: TypeToken<MutableMap<String,Int>>(){}.type)
+
+        setDataTextOnRotate()
+
+
 
         setupColorPicker()
         connectToBulb()
 
 
         //-----------------| Turn On\Off Button |--------------------
-        var isOn = false
         onOffButton.setOnClickListener {
-            isOn = !isOn
-            toggleSwitch(isOn)
+            bulbData["isOn"] = if(bulbData["isOn"] == 0) 1 else 0
+            toggleSwitch(bulbData["isOn"]!!)
         }
         //===========================================================
 
@@ -112,9 +130,9 @@ class ColorControlFragment : Fragment() , ChooseValue {
 
 
     //-------------------------| Change bulb to on or Off state |-------------------------------------
-    private fun toggleSwitch(isOn: Boolean) {
-        onOffButton.setColorFilter(if (isOn) Color.argb(255, 30, 255, 30) else Color.argb(255, 255, 30, 30))
-        write(if (isOn) CMD_ON.replace("%id", ID) else CMD_OFF.replace("%id", ID))
+    private fun toggleSwitch(isOn: Int) {
+        onOffButton.setColorFilter(if (isOn==1) Color.argb(255, 30, 255, 30) else Color.argb(255, 255, 30, 30))
+        write(if (isOn==1) CMD_ON.replace("%id", ID) else CMD_OFF.replace("%id", ID))
     }
     //================================================================================================
 
@@ -173,7 +191,8 @@ class ColorControlFragment : Fragment() , ChooseValue {
             .forEach {
                 it.setOnClickListener {
                     val dialog = helpers.getSeekBarColorTempDialog(
-                        requireActivity(),requireContext(),"Choose Temp","Choose Temp Of your yeelight",this
+                        requireActivity(),requireContext(),"Choose Temp","Choose Temp Of your yeelight",
+                        bulbData["colorTemp"]!!,this
                     )
                     dialog.show()
                 }
@@ -183,8 +202,8 @@ class ColorControlFragment : Fragment() , ChooseValue {
     @SuppressLint("SetTextI18n")
     override fun onSetColorTemp(temp: Int) {
         colorTempValueText.text = "$temp k"
-        write(
-            CMD_CT.replace("%id", ID).replace("%value", temp.toString()))
+        bulbData["colorTemp"] = temp
+        write(CMD_CT.replace("%id", ID).replace("%value", temp.toString()))
     }
 
     //==========================================================================================
@@ -197,17 +216,22 @@ class ColorControlFragment : Fragment() , ChooseValue {
         arrayListOf<View>(hueImage,hueText,currentHueColor)
             .forEach {
                 it.setOnClickListener {
-                    val dialog = helpers.getChooseColorDialog(requireActivity(),requireContext(),"Choose Color",this)
+                    val dialog = helpers.getChooseColorDialog(requireActivity(),requireContext(),"Choose Color",colorPicker.color,this)
                     dialog.show()
                 }
             }
     }
 
     override fun onSetColor(color: Int) {
+        ViewCompat.setBackgroundTintList(
+            currentHueColor,
+            ColorStateList.valueOf(color))
+        colorPicker.color = color
         val hsv = FloatArray(3)
         Color.colorToHSV(color, hsv)
         write(CMD_HSV.replace("%id", ID)
             .replace("%value", hsv[0].toString()))
+
     }
 
 
@@ -225,11 +249,37 @@ class ColorControlFragment : Fragment() , ChooseValue {
             }
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onSetDuration(time: Int) {
-        write(
-            CMD_CRON_ADD.replace("%id", ID)
-            .replace("%value",time.toString()))
+        bulbData["duration"] = time
+        if(time!=-1){
+            durationValueText.text = "$time min"
+            write(
+                CMD_CRON_ADD.replace("%id", ID)
+                    .replace("%value",time.toString()))
+        }else{
+            Log.d("TIMER","WYKONANO")
+            write(CMD_CRON_DELETE.replace("%id", ID))
+            durationValueText.text = "∞"
+        }
     }
     //==================================================================================
 
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("bulbDataMap",Gson().toJson(bulbData))
+    }
+
+    //----------------------------| Set bulb data in text views etc |------------------------------
+    @SuppressLint("SetTextI18n")
+    private fun setDataTextOnRotate(){
+        onOffButton.setColorFilter(if (bulbData["isOn"] == 1) Color.argb(255, 30, 255, 30) else Color.argb(255, 255, 30, 30))
+        colorTempValueText.text = bulbData["colorTemp"].toString() + "k"
+        if(bulbData["duration"] != -1)
+            durationValueText.text = bulbData["duration"].toString() + " min"
+        else
+            durationValueText.text = "∞"
+    }
+    //=============================================================================================
 }

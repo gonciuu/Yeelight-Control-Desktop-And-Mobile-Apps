@@ -27,11 +27,10 @@ class Helpers {
     }
 
 
-    fun getSeekBarColorTempDialog(activity: FragmentActivity, context: Context, title: String, description: String, chooseValue: ChooseValue): AlertDialog {
+    fun getSeekBarColorTempDialog(activity: FragmentActivity, context: Context, title: String, description: String, actualTemp:Int, chooseValue: ChooseValue): AlertDialog {
         val view = LayoutInflater.from(context).inflate(R.layout.seekbar_dialog, null, false)
         view.dialogSeekBar.apply {
             max = 4800
-            progress = 3000
             setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                 @SuppressLint("SetTextI18n")
                 override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
@@ -41,6 +40,7 @@ class Helpers {
                 override fun onStartTrackingTouch(p0: SeekBar?) {}
                 override fun onStopTrackingTouch(p0: SeekBar?) {}
             })
+            progress = actualTemp - 1700
         }
 
         return activity.let {
@@ -56,9 +56,9 @@ class Helpers {
     }
 
 
-    fun getChooseColorDialog(activity: FragmentActivity, context: Context, title: String, chooseValue: ChooseValue): AlertDialog {
+    fun getChooseColorDialog(activity: FragmentActivity, context: Context, title: String,currentColor:Int, chooseValue: ChooseValue): AlertDialog {
         val view = LayoutInflater.from(context).inflate(R.layout.color_picker_dialog, null, false)
-
+        view.dialogColorPicker.oldCenterColor = currentColor
         return activity.let {
             AlertDialog.Builder(context, R.style.DialogTheme).setTitle(title)
                 .setPositiveButton("Apply") { dialog, _ ->
@@ -76,7 +76,7 @@ class Helpers {
     fun getDurationPickerDialog(activity: FragmentActivity, context: Context, title: String, chooseValue: ChooseValue): AlertDialog {
         val view = LayoutInflater.from(context).inflate(R.layout.duration_dialog, null, false)
 
-        arrayListOf<NumberPicker>(view.hoursPickerDialog,view.minutesPickerDialog,view.secondsPickerDialog)
+        arrayListOf<NumberPicker>(view.hoursPickerDialog,view.minutesPickerDialog)
             .forEach {
                 it.apply {
                     minValue=0
@@ -89,9 +89,11 @@ class Helpers {
             AlertDialog.Builder(context, R.style.DialogTheme).setTitle(title)
                 .setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
                 .setPositiveButton("Apply") { dialog, _ ->
-                    chooseValue.onSetDuration(view.hoursPickerDialog.value*60 + view.minutesPickerDialog.value + view.secondsPickerDialog.value/60)
+                    chooseValue.onSetDuration(view.hoursPickerDialog.value*60 + view.minutesPickerDialog.value)
                     dialog.dismiss()
-                }.setView(view).create()
+                }.setNeutralButton("Infinite") { dialog, _ ->
+                    chooseValue.onSetDuration(-1)
+                    dialog.dismiss() }.setView(view).create()
         } ?: throw Exception("Activity must not be null!")
 
     }

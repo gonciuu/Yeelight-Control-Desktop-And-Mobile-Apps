@@ -31,27 +31,12 @@
         android:textColor="@color/white"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="@+id/minutesPickerDialog"
-        app:layout_constraintEnd_toStartOf="@+id/secondsPickerDialog"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/minutesPickerDialog"
         app:layout_constraintTop_toTopOf="@+id/minutesPickerDialog"
         app:layout_constraintVertical_bias="0.5" />
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/open_sans_semibold"
-        android:text="s"
-        android:layout_marginStart="8dp"
-        android:textColor="@color/white"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="@+id/secondsPickerDialog"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/secondsPickerDialog"
-        app:layout_constraintTop_toTopOf="@+id/secondsPickerDialog"
-        app:layout_constraintVertical_bias="0.5" />
 
     <NumberPicker
         android:id="@+id/hoursPickerDialog"
@@ -79,19 +64,7 @@
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <NumberPicker
-        android:id="@+id/secondsPickerDialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
 
-        android:layout_marginTop="16dp"
-        android:text="@string/hello_blank_fragment"
-        android:layout_marginStart="24dp"
-        android:theme="@style/AppTheme.Picker"
-        app:layout_constraintEnd_toStartOf="@+id/textView9"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

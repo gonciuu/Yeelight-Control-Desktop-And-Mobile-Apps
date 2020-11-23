@@ -11,5 +11,7 @@ object Constants {
     const val CMD_BRIGHTNESS_SCENE = "{\"id\":%id,\"method\":\"set_bright\",\"params\":[%value, \"smooth\", 500]}\r\n"
     const val CMD_COLOR_SCENE = "{\"id\":%id,\"method\":\"set_scene\",\"params\":[\"cf\",1,0,\"100,1,%color,1\"]}\r\n"
     const val CMD_CRON_ADD = "{\"id\":%id,\"method\":\"cron_add\",\"params\":[0, %value]}\r\n"
+    const val CMD_CRON_DELETE = "{\"id\":%id,\"method\":\"cron_del\",\"params\":[0]}\r\n"
+
 
 }
