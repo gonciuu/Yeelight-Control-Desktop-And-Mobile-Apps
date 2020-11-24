@@ -17,13 +17,13 @@ class BulbConnection {
 
     //-------------------------------| Connect to the bulb |----------------------------------
     @Suppress("BlockingMethodInNonBlockingContext")
-    fun connectToBulb(context: Context, activity:FragmentActivity,bulbControlViewModel:BulbControlViewModel,view:View) {
+    fun connectToBulb(context: Context, activity:FragmentActivity,bulbControlViewModel:BulbControlViewModel,view:View,ip:String,port:Int) {
         val helpers = Helpers()
         val dialog = LoadingDialog.getDialog(context, "Connecting...")
         dialog.show()
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val socket = Socket("192.168.0.108", 55443)
+                val socket = Socket(ip,port)
                 socket.keepAlive = true
                 activity.runOnUiThread {
                     bulbControlViewModel.setSocket(socket)
@@ -46,7 +46,7 @@ class BulbConnection {
 
     //---------------------------| Execute write command action |---------------------------
     @Suppress("BlockingMethodInNonBlockingContext")
-    fun executeAction(cmd: String, mBos:BufferedOutputStream,activity: FragmentActivity, view: View,context: Context,bulbControlViewModel:BulbControlViewModel) {
+    fun executeAction(cmd: String, mBos:BufferedOutputStream,activity: FragmentActivity, view: View,context: Context,bulbControlViewModel:BulbControlViewModel, ip:String,port:Int) {
         CoroutineScope(Dispatchers.IO).launch {
             try{
                 mBos.write(cmd.toByteArray())
@@ -54,7 +54,7 @@ class BulbConnection {
             }catch (socketEx: SocketException){
                 //helpers.showSnackBar(requireView(), socketEx.message!!,null,null)
                 activity.runOnUiThread {
-                    connectToBulb(context,activity, bulbControlViewModel, view)
+                    connectToBulb(context,activity, bulbControlViewModel, view, ip, port)
                 }
             }catch (ex:Exception){
                 Helpers().showSnackBar(view, ex.message!!,null,null)

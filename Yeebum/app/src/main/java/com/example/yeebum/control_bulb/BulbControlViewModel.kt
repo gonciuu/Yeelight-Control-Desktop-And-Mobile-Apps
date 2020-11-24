@@ -10,6 +10,9 @@ class BulbControlViewModel:ViewModel() {
     private var socket = MutableLiveData<Socket>()
     private var bos = MutableLiveData<BufferedOutputStream>()
 
+    private var ip = MutableLiveData<String>()
+    private var port = MutableLiveData<Int>()
+
     fun setSocket(socketToSet:Socket){
         this.socket.value = socketToSet
     }
@@ -21,5 +24,17 @@ class BulbControlViewModel:ViewModel() {
     }
 
     fun getBOS():LiveData<BufferedOutputStream> = bos
+
+    fun setIp(ipToSet:String){
+        this.ip.value = ipToSet
+    }
+
+    fun getIp():LiveData<String> = ip
+
+    fun setPort(portToSet:Int){
+        this.port.value = portToSet
+    }
+
+    fun getPort():LiveData<Int> = port
 
 }

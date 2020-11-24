@@ -34,6 +34,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.BufferedOutputStream
+import java.lang.Exception
 import java.net.ConnectException
 import java.net.Socket
 import java.net.SocketException
@@ -46,6 +47,9 @@ class ColorControlFragment : Fragment() , ChooseValue {
     private val helpers = Helpers()
     private lateinit var bulbControlViewModel: BulbControlViewModel
     private val bulbConnection = BulbConnection()
+
+    private var ip:String? = null
+    private var port:Int? = null
 
     //------------------| Bulb data to save when device rotate |--------------------------
     private var bulbData = mutableMapOf(
@@ -83,20 +87,27 @@ class ColorControlFragment : Fragment() , ChooseValue {
         setupDurationPickerDialog()
     }
 
-    //-------------------------------| Get Bulb Socket And Buffer Stream |----------------------------------
+    //-------------------------------| Get Bulb Socket, Buffer Stream, Ip, Port From Control Fragment |----------------------------------
     private fun getBulbSocketAndBOS() {
-        bulbControlViewModel.getSocket().observe(viewLifecycleOwner){sk-> socket = sk }
-        bulbControlViewModel.getBOS().observe(viewLifecycleOwner){bos->mBos = bos}
+        bulbControlViewModel.getIp().observe(viewLifecycleOwner){ip = it}
+        bulbControlViewModel.getPort().observe(viewLifecycleOwner){port = it}
+        bulbControlViewModel.getSocket().observe(viewLifecycleOwner){socket = it}
+        bulbControlViewModel.getBOS().observe(viewLifecycleOwner){mBos = it}
     }
     //========================================================================================
 
 
     //----------------------| Write Command |--------------------------
     private fun write(cmd: String) {
-        if (socket.isConnected)
-            bulbConnection.executeAction(cmd,mBos,requireActivity(),requireView(),requireContext(),bulbControlViewModel)
-        else
-            helpers.showSnackBar(requireView(), "Check your bulb ip and port", null, null)
+        try{
+            if (::socket.isInitialized && socket.isConnected && ip!=null && port!=null)
+                bulbConnection.executeAction(cmd,mBos,requireActivity(),requireView(),requireContext(),bulbControlViewModel,ip!!,port!!)
+            else
+                helpers.showSnackBar(requireView(), "Check your bulb ip and port", null, null)
+        }catch (ex:Exception){
+            helpers.showSnackBar(requireView(),ex.message!!,null,null)
+        }
+
         //Log.d("TAG",cmd)
     }
     //=================================================================

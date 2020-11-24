@@ -28,7 +28,7 @@ import java.net.Socket
 
 
 class ControlFragment : Fragment() {
-    private lateinit var socket: Socket
+
     private lateinit var bulbControlViewModel: BulbControlViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.fragment_control, container, false)
@@ -39,14 +39,18 @@ class ControlFragment : Fragment() {
 
         bulbControlViewModel = ViewModelProvider(requireActivity())[BulbControlViewModel::class.java]
 
-
         controlViewPager.adapter = ControlViewPagerAdapter(requireActivity())
         setupViewPager()
 
         controlSettingsButton.setOnClickListener { findNavController().navigate(ControlFragmentDirections.actionControlFragmentToSettingsFragment()) }
         AppDrawer().setOpenDrawer(controlDrawerButton,requireActivity())
 
-        BulbConnection().connectToBulb(requireContext(),requireActivity(), bulbControlViewModel, requireView())
+        bulbControlViewModel.setIp(arguments?.getString("ip")!!)
+        bulbControlViewModel.setPort(arguments?.getInt("port")!!)
+
+
+        BulbConnection().connectToBulb(requireContext(),requireActivity(), bulbControlViewModel, requireView(), arguments?.getString("ip")!!, arguments?.getInt("port")!!)
+
     }
 
 
