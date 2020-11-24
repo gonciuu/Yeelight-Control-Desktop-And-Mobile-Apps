@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.yeebum.R
+import com.example.yeebum.control_bulb.BulbConnection
 import com.example.yeebum.control_bulb.BulbControlViewModel
 import com.example.yeebum.screens.components.AppDrawer
 import com.example.yeebum.screens.adapters.pager_views.ControlViewPagerAdapter
@@ -45,7 +46,7 @@ class ControlFragment : Fragment() {
         controlSettingsButton.setOnClickListener { findNavController().navigate(ControlFragmentDirections.actionControlFragmentToSettingsFragment()) }
         AppDrawer().setOpenDrawer(controlDrawerButton,requireActivity())
 
-        connectToBulb()
+        BulbConnection().connectToBulb(requireContext(),requireActivity(), bulbControlViewModel, requireView())
     }
 
 
@@ -90,33 +91,6 @@ class ControlFragment : Fragment() {
     //=========================================================================================================
 
 
-    //-------------------------------| Connect to the bulb |----------------------------------
-    @Suppress("BlockingMethodInNonBlockingContext")
-    private fun connectToBulb() {
-        val helpers = Helpers()
-        val dialog = LoadingDialog.getDialog(requireContext(), "Connecting...")
-        dialog.show()
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                socket = Socket("192.168.0.108", 55443)
-                socket.keepAlive = true
-                requireActivity().runOnUiThread {
-                    bulbControlViewModel.setSocket(socket)
-                    bulbControlViewModel.setBOS(BufferedOutputStream(socket.getOutputStream()))
-                }
-            } catch (connectEx: ConnectException) {
-                helpers.showSnackBar(
-                    requireView(),
-                    "Error! Check your internet connection.",
-                    null,
-                    null
-                )
-            } catch (ex: Exception) {
-                helpers.showSnackBar(requireView(), ex.message!!, null, null)
-            }
-            dialog.dismiss()
-        }
-    }
-    //========================================================================================
+
 
 }

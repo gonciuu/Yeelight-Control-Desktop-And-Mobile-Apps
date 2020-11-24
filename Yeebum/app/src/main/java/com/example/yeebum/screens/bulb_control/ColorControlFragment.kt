@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.yeebum.R
+import com.example.yeebum.control_bulb.BulbConnection
 import com.example.yeebum.control_bulb.BulbControlViewModel
 import com.example.yeebum.control_bulb.ChooseValue
 import com.example.yeebum.control_bulb.Constants.CMD_BRIGHTNESS
@@ -43,6 +44,7 @@ class ColorControlFragment : Fragment() , ChooseValue {
     private lateinit var socket: Socket
     private lateinit var mBos: BufferedOutputStream
     private val helpers = Helpers()
+    private lateinit var bulbControlViewModel: BulbControlViewModel
 
     //------------------| Bulb data to save when device rotate |--------------------------
     private var bulbData = mutableMapOf(
@@ -56,6 +58,8 @@ class ColorControlFragment : Fragment() , ChooseValue {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        bulbControlViewModel = ViewModelProvider(requireActivity())[BulbControlViewModel::class.java]
 
         getBulbSocketAndBOS()
 
@@ -80,7 +84,6 @@ class ColorControlFragment : Fragment() , ChooseValue {
 
     //-------------------------------| Get Bulb Socket And Buffer Stream |----------------------------------
     private fun getBulbSocketAndBOS() {
-        val bulbControlViewModel = ViewModelProvider(requireActivity())[BulbControlViewModel::class.java]
         bulbControlViewModel.getSocket().observe(viewLifecycleOwner){sk-> socket = sk }
         bulbControlViewModel.getBOS().observe(viewLifecycleOwner){bos->mBos = bos}
     }
@@ -107,8 +110,9 @@ class ColorControlFragment : Fragment() , ChooseValue {
                 mBos.write(cmd.toByteArray())
                 mBos.flush()
             }catch (socketEx:SocketException){
+                //helpers.showSnackBar(requireView(), socketEx.message!!,null,null)
                 requireActivity().runOnUiThread {
-                    getBulbSocketAndBOS()
+                    BulbConnection().connectToBulb(requireContext(),requireActivity(), bulbControlViewModel, requireView())
                 }
             }catch (ex:Exception){
                 helpers.showSnackBar(requireView(), ex.message!!,null,null)
@@ -275,6 +279,5 @@ class ColorControlFragment : Fragment() , ChooseValue {
     override fun onStop() {
         super.onStop()
         socket.close()
-        mBos.close()
     }
 }
