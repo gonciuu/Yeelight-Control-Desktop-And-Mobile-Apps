@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 import java.io.BufferedOutputStream
 import java.net.ConnectException
 import java.net.Socket
+import java.net.SocketException
 
 class BulbConnection {
 
@@ -42,4 +43,23 @@ class BulbConnection {
         }
     }
     //========================================================================================
+
+    //---------------------------| Execute write command action |---------------------------
+    @Suppress("BlockingMethodInNonBlockingContext")
+    fun executeAction(cmd: String, mBos:BufferedOutputStream,activity: FragmentActivity, view: View,context: Context,bulbControlViewModel:BulbControlViewModel) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try{
+                mBos.write(cmd.toByteArray())
+                mBos.flush()
+            }catch (socketEx: SocketException){
+                //helpers.showSnackBar(requireView(), socketEx.message!!,null,null)
+                activity.runOnUiThread {
+                    connectToBulb(context,activity, bulbControlViewModel, view)
+                }
+            }catch (ex:Exception){
+                Helpers().showSnackBar(view, ex.message!!,null,null)
+            }
+        }
+    }
+    //======================================================================================
 }

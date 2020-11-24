@@ -45,6 +45,7 @@ class ColorControlFragment : Fragment() , ChooseValue {
     private lateinit var mBos: BufferedOutputStream
     private val helpers = Helpers()
     private lateinit var bulbControlViewModel: BulbControlViewModel
+    private val bulbConnection = BulbConnection()
 
     //------------------| Bulb data to save when device rotate |--------------------------
     private var bulbData = mutableMapOf(
@@ -93,7 +94,7 @@ class ColorControlFragment : Fragment() , ChooseValue {
     //----------------------| Write Command |--------------------------
     private fun write(cmd: String) {
         if (socket.isConnected)
-            executeAction(cmd)
+            bulbConnection.executeAction(cmd,mBos,requireActivity(),requireView(),requireContext(),bulbControlViewModel)
         else
             helpers.showSnackBar(requireView(), "Check your bulb ip and port", null, null)
         //Log.d("TAG",cmd)
@@ -102,24 +103,6 @@ class ColorControlFragment : Fragment() , ChooseValue {
 
 
 
-    //---------------------------| Execute write command action |---------------------------
-    @Suppress("BlockingMethodInNonBlockingContext")
-    private fun executeAction(cmd: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            try{
-                mBos.write(cmd.toByteArray())
-                mBos.flush()
-            }catch (socketEx:SocketException){
-                //helpers.showSnackBar(requireView(), socketEx.message!!,null,null)
-                requireActivity().runOnUiThread {
-                    BulbConnection().connectToBulb(requireContext(),requireActivity(), bulbControlViewModel, requireView())
-                }
-            }catch (ex:Exception){
-                helpers.showSnackBar(requireView(), ex.message!!,null,null)
-            }
-        }
-    }
-    //======================================================================================
 
 
     //-------------------------| Change bulb to on or Off state |-------------------------------------
