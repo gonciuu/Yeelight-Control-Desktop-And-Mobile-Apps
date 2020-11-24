@@ -11,7 +11,9 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.yeebum.R
+import com.example.yeebum.control_bulb.BulbControlViewModel
 import com.example.yeebum.control_bulb.ChooseValue
 import com.example.yeebum.control_bulb.Constants.CMD_BRIGHTNESS
 import com.example.yeebum.control_bulb.Constants.CMD_CRON_ADD
@@ -55,14 +57,13 @@ class ColorControlFragment : Fragment() , ChooseValue {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        getBulbSocketAndBOS()
+
         if(savedInstanceState!=null)
             this.bulbData = Gson().fromJson(savedInstanceState.getString("bulbDataMap"),object: TypeToken<MutableMap<String,Int>>(){}.type)
 
         setDataTextOnRotate()
-
         setupColorPicker()
-        connectToBulb()
-
 
         //-----------------| Turn On\Off Button |--------------------
         onOffButton.setOnClickListener {
@@ -77,29 +78,11 @@ class ColorControlFragment : Fragment() , ChooseValue {
         setupDurationPickerDialog()
     }
 
-    //-------------------------------| Connect to the bulb |----------------------------------
-    @Suppress("BlockingMethodInNonBlockingContext")
-    private fun connectToBulb() {
-
-        val dialog = LoadingDialog.getDialog(requireContext(), "Connecting...")
-        dialog.show()
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                socket = Socket("192.168.0.108", 55443)
-                socket.keepAlive = true
-                mBos = BufferedOutputStream(socket.getOutputStream())
-            } catch (connectEx: ConnectException) {
-                helpers.showSnackBar(
-                    requireView(),
-                    "Error! Check your internet connection.",
-                    null,
-                    null
-                )
-            } catch (ex: Exception) {
-                helpers.showSnackBar(requireView(), ex.message!!, null, null)
-            }
-            dialog.dismiss()
-        }
+    //-------------------------------| Get Bulb Socket And Buffer Stream |----------------------------------
+    private fun getBulbSocketAndBOS() {
+        val bulbControlViewModel = ViewModelProvider(requireActivity())[BulbControlViewModel::class.java]
+        bulbControlViewModel.getSocket().observe(viewLifecycleOwner){sk-> socket = sk }
+        bulbControlViewModel.getBOS().observe(viewLifecycleOwner){bos->mBos = bos}
     }
     //========================================================================================
 
@@ -125,10 +108,8 @@ class ColorControlFragment : Fragment() , ChooseValue {
                 mBos.flush()
             }catch (socketEx:SocketException){
                 requireActivity().runOnUiThread {
-                    connectToBulb()
+                    getBulbSocketAndBOS()
                 }
-                //Log.d("EXCEPTION",socketEx.toString())
-                //helpers.showSnackBar(requireView(),"Check your internet connection",null,null)
             }catch (ex:Exception){
                 helpers.showSnackBar(requireView(), ex.message!!,null,null)
             }
@@ -294,5 +275,6 @@ class ColorControlFragment : Fragment() , ChooseValue {
     override fun onStop() {
         super.onStop()
         socket.close()
+        mBos.close()
     }
 }
