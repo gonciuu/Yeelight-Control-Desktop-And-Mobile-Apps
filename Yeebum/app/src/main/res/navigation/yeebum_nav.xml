@@ -22,7 +22,15 @@
         android:id="@+id/enterBulbDataFragment"
         android:name="com.example.yeebum.screens.bulbs.EnterBulbDataFragment"
         android:label="fragment_enter_bulb_data"
-        tools:layout="@layout/fragment_enter_bulb_data" />
+        tools:layout="@layout/fragment_enter_bulb_data" >
+        <action
+            android:id="@+id/action_enterBulbDataFragment_to_helpFragment"
+            app:destination="@id/helpFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/controlFragment"
         android:name="com.example.yeebum.screens.bulb_control.ControlFragment"

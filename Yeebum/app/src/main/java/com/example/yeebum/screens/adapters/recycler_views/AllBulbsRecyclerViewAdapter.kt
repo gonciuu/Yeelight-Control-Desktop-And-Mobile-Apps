@@ -1,5 +1,6 @@
 package com.example.yeebum.screens.adapters.recycler_views
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -13,11 +14,12 @@ class AllBulbsRecyclerViewAdapter(private val listOfBulbs: List<Bulb> ,private v
        return AllBulbsHolder(LayoutInflater.from(parent.context).inflate(R.layout.bulb_card,parent,false))
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: AllBulbsHolder, position: Int) {
         val bulb = listOfBulbs[holder.adapterPosition]
         holder.bulbName?.text = bulb.name
-        holder.bulbIp?.text = bulb.ip
-        holder.bulbPort?.text = bulb.port.toString()
+        holder.bulbIp?.text = "ip: ${bulb.ip}"
+        holder.bulbPort?.text = "port: ${bulb.port}"
 
         holder.allBulbCard?.setOnClickListener {
             listener.onBulbClick(bulb.ip,bulb.port)

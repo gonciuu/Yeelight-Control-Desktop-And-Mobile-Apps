@@ -12,11 +12,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.yeebum.R
 import com.example.yeebum.YeebumApplication
 import com.example.yeebum.databases.bulbs_database.*
 import com.example.yeebum.models.Bulb
+import com.example.yeebum.screens.components.Helpers
 import kotlinx.android.synthetic.main.fragment_enter_bulb_data.*
+import java.lang.Exception
 
 
 class EnterBulbDataFragment : Fragment() {
@@ -64,6 +67,7 @@ class EnterBulbDataFragment : Fragment() {
             Spannable.SPAN_EXCLUSIVE_INCLUSIVE
         )
         checkText.text = text
+        checkText.setOnClickListener {findNavController().navigate(EnterBulbDataFragmentDirections.actionEnterBulbDataFragmentToHelpFragment()) }
     }
 
 
@@ -71,7 +75,14 @@ class EnterBulbDataFragment : Fragment() {
     //-----------------------------| Save bulb into database |-----------------------------------
     private fun saveBulb(){
         val name = if(bulbNameInput.text.isNullOrEmpty()) "My Yeelight" else bulbNameInput.text.toString()
-        bulbsViewModel.insertBulb(Bulb(name, bulbIpInput.text.toString(), bulbPortInput.text.toString().toInt()))
+        val ip =  bulbIpInput.text.toString()
+        val port = try {bulbPortInput.text.toString().toInt() }catch (ex:Exception){0}
+        if(ip.contains("192.168") && port>10000){
+            bulbsViewModel.insertBulb(Bulb(name,ip,port))
+            requireActivity().onBackPressed()
+        }
+        else
+            Helpers().showSnackBar(requireView(),"Check your port and ip format",null,null)
     }
     //===========================================================================================
 
