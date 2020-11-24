@@ -30,11 +30,10 @@ class FlowControlFragment : Fragment(), FlowsInterface {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         addFlowButton.setOnClickListener {
             findNavController().navigate(ControlFragmentDirections.actionControlFragmentToEnterActionNameFragment())
         }
+
         getAllFlows()
     }
 

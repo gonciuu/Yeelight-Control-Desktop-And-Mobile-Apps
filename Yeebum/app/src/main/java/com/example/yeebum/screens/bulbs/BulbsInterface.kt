@@ -2,7 +2,6 @@ package com.example.yeebum.screens.bulbs
 
 interface BulbsInterface {
 
-
-    fun onBulbClick()
+    fun onBulbClick(ip:String, port:Int)
 
 }

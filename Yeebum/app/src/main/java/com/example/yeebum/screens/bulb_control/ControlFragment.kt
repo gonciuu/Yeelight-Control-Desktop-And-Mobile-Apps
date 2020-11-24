@@ -24,9 +24,9 @@ class ControlFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         controlViewPager.adapter = ControlViewPagerAdapter(requireActivity())
         setupViewPager()
-
 
         controlSettingsButton.setOnClickListener { findNavController().navigate(ControlFragmentDirections.actionControlFragmentToSettingsFragment()) }
         AppDrawer().setOpenDrawer(controlDrawerButton,requireActivity())

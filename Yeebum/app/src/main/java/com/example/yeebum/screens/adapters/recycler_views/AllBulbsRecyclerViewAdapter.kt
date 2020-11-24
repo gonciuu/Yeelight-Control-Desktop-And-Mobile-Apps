@@ -20,7 +20,7 @@ class AllBulbsRecyclerViewAdapter(private val listOfBulbs: List<Bulb> ,private v
         holder.bulbPort?.text = bulb.port.toString()
 
         holder.allBulbCard?.setOnClickListener {
-            listener.onBulbClick()
+            listener.onBulbClick(bulb.ip,bulb.port)
         }
 
     }

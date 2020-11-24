@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,7 +30,6 @@ class AllBulbsFragment : Fragment(), BulbsInterface {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         setupDrawer()
         getBulbs()
 
@@ -42,8 +42,9 @@ class AllBulbsFragment : Fragment(), BulbsInterface {
 
     }
 
-    override fun onBulbClick() {
-        findNavController().navigate(AllBulbsFragmentDirections.actionAllBulbsFragmentToControlFragment())
+    override fun onBulbClick(ip:String, port:Int) {
+        val bundle = bundleOf("ip" to ip, "port" to port)
+        findNavController().navigate(AllBulbsFragmentDirections.actionAllBulbsFragmentToControlFragment().actionId,bundle)
     }
 
     //------------------------| Get Bulbs From database and setup it into recyclerview |-------------------------
