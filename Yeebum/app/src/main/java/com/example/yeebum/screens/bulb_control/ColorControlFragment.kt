@@ -94,7 +94,7 @@ class ColorControlFragment : Fragment() , ChooseValue {
         bulbControlViewModel.getSocket().observe(viewLifecycleOwner){socket = it}
         bulbControlViewModel.getBOS().observe(viewLifecycleOwner){mBos = it}
     }
-    //========================================================================================
+    //=====================================================================================================================================
 
 
     //----------------------| Write Command |--------------------------
@@ -107,8 +107,6 @@ class ColorControlFragment : Fragment() , ChooseValue {
         }catch (ex:Exception){
             helpers.showSnackBar(requireView(),ex.message!!,null,null)
         }
-
-        //Log.d("TAG",cmd)
     }
     //=================================================================
 
