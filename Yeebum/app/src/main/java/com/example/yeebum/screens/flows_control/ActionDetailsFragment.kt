@@ -1,36 +1,22 @@
 package com.example.yeebum.screens.flows_control
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.yeebum.R
-import com.example.yeebum.YeebumApplication
-import com.example.yeebum.databases.flows_database.FlowsViewModel
-import com.example.yeebum.databases.flows_database.FlowsViewModelFactory
-import com.example.yeebum.hilt.DaggerFlowComponent
-import com.example.yeebum.models.Flow
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_action_details.*
 import kotlinx.android.synthetic.main.fragment_action_details.colorPicker
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class ActionDetailsFragment : Fragment() {
 
 
-    @Inject
-    lateinit var flow: Flow
-
-    private val flowsViewModel:FlowsViewModel by viewModels{
-        FlowsViewModelFactory((requireActivity().application as YeebumApplication).flowsRepository)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.fragment_action_details, container, false)
 
@@ -38,12 +24,7 @@ class ActionDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val component = DaggerFlowComponent.create()
-        component.inject(this)
-        Log.d("SIEMA",flow.toString())
 
-        //val component = DaggerFlowComponent.create()
-        //component.inject(this)
 
         setupPickers()
         setupSeekbar()
@@ -55,7 +36,6 @@ class ActionDetailsFragment : Fragment() {
         actionDetailsBackButton.setOnClickListener {
             requireActivity().onBackPressed()
         }
-        saveFlow()
     }
 
     //-------------| Setup time pickers |------------------
@@ -105,10 +85,6 @@ class ActionDetailsFragment : Fragment() {
     }
     //===============================================================================
 
-    private fun saveFlow(){
-        addNewActionButton.setOnClickListener {
-            flowsViewModel.insertFlow(flow)
-        }
-    }
+
 
 }

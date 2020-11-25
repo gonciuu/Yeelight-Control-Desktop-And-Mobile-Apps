@@ -1,5 +1,6 @@
 package com.example.yeebum.screens.adapters.recycler_views
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +18,7 @@ class FlowsRecyclerViewAdapter(private val listener: FlowsInterface, private val
         val flow = listOfFlows[holder.adapterPosition]
         holder.allFlowCard.setOnClickListener {
             listener.onSelectAction()
+            Log.d("TAG",flow.id.toString())
         }
         holder.flowName.text = flow.name
         holder.flowDuration.text = flow.duration.toString()
