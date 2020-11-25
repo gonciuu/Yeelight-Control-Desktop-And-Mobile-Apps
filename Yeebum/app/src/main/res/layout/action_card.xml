@@ -31,35 +31,35 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView18"
+            android:id="@+id/firstValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_semibold"
             android:text="100%"
             android:textColor="@color/white"
             android:textSize="15sp"
-            app:layout_constraintEnd_toStartOf="@+id/textView19"
+            app:layout_constraintEnd_toStartOf="@+id/secondValue"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView19"
+            android:id="@+id/secondValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_semibold"
             android:text="100%"
             android:textColor="@color/white"
             android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView18"
-            app:layout_constraintEnd_toStartOf="@+id/textView20"
+            app:layout_constraintBottom_toBottomOf="@+id/firstValue"
+            app:layout_constraintEnd_toStartOf="@+id/thirdValueImage"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView18"
-            app:layout_constraintTop_toTopOf="@+id/textView18"
+            app:layout_constraintStart_toEndOf="@+id/firstValue"
+            app:layout_constraintTop_toTopOf="@+id/firstValue"
             app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
-            android:id="@+id/textView20"
+            android:id="@+id/thirdValueImage"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:background="@drawable/oval_bg"
@@ -67,50 +67,50 @@
             android:fontFamily="@font/open_sans_semibold"
             android:textColor="@color/white"
             android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView19"
+            app:layout_constraintBottom_toBottomOf="@+id/secondValue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView19"
-            app:layout_constraintTop_toTopOf="@+id/textView19"
+            app:layout_constraintStart_toEndOf="@+id/secondValue"
+            app:layout_constraintTop_toTopOf="@+id/secondValue"
             app:layout_constraintVertical_bias="0.75" />
 
         <TextView
-            android:id="@+id/textView23"
+            android:id="@+id/firstValueName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_regular"
             android:text="Brightness"
             android:textColor="@color/lightGray"
             android:textSize="13sp"
-            app:layout_constraintEnd_toEndOf="@+id/textView18"
-            app:layout_constraintStart_toStartOf="@+id/textView18"
-            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+            app:layout_constraintEnd_toEndOf="@+id/firstValue"
+            app:layout_constraintStart_toStartOf="@+id/firstValue"
+            app:layout_constraintTop_toBottomOf="@+id/firstValue" />
 
         <TextView
-            android:id="@+id/textView21"
+            android:id="@+id/secondValueName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_regular"
             android:text="Duration"
             android:textColor="@color/lightGray"
             android:textSize="13sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView23"
-            app:layout_constraintEnd_toEndOf="@+id/textView19"
-            app:layout_constraintStart_toStartOf="@+id/textView19"
-            app:layout_constraintTop_toTopOf="@+id/textView23" />
+            app:layout_constraintBottom_toBottomOf="@+id/firstValueName"
+            app:layout_constraintEnd_toEndOf="@+id/secondValue"
+            app:layout_constraintStart_toStartOf="@+id/secondValue"
+            app:layout_constraintTop_toTopOf="@+id/firstValueName" />
 
         <TextView
-            android:id="@+id/textView22"
+            android:id="@+id/thirdValueName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_regular"
             android:text="Color"
             android:textColor="@color/lightGray"
             android:textSize="13sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView21"
-            app:layout_constraintEnd_toEndOf="@+id/textView20"
-            app:layout_constraintStart_toStartOf="@+id/textView20"
-            app:layout_constraintTop_toBottomOf="@+id/textView19" />
+            app:layout_constraintBottom_toBottomOf="@+id/secondValueName"
+            app:layout_constraintEnd_toEndOf="@+id/thirdValueImage"
+            app:layout_constraintStart_toStartOf="@+id/thirdValueImage"
+            app:layout_constraintTop_toBottomOf="@+id/secondValue" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
