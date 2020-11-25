@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.yeebum.models.Flow
 
-@Database(entities = [Flow::class], version = 4, exportSchema = false)
+@Database(entities = [Flow::class], version = 5, exportSchema = false)
 @TypeConverters(ActionsTypeConverter::class)
 abstract class FlowsDatabase : RoomDatabase() {
 
