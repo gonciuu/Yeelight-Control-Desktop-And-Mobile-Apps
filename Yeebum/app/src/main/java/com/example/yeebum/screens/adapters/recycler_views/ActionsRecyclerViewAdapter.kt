@@ -4,9 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.yeebum.R
+import com.example.yeebum.models.Action
 import com.example.yeebum.screens.adapters.recycler_views.view_holders.ActionsViewHolder
 
-class ActionsRecyclerViewAdapter:RecyclerView.Adapter<ActionsViewHolder>() {
+class ActionsRecyclerViewAdapter(private val actions:ArrayList<Action>):RecyclerView.Adapter<ActionsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActionsViewHolder {
         return ActionsViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.action_card,parent,false))
     }
@@ -16,6 +17,6 @@ class ActionsRecyclerViewAdapter:RecyclerView.Adapter<ActionsViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-       return 2
+       return actions.size
     }
 }

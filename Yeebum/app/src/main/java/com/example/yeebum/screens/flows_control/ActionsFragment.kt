@@ -14,6 +14,7 @@ import com.example.yeebum.R
 import com.example.yeebum.YeebumApplication
 import com.example.yeebum.databases.flows_database.FlowsViewModel
 import com.example.yeebum.databases.flows_database.FlowsViewModelFactory
+import com.example.yeebum.models.Action
 import com.example.yeebum.models.Flow
 import com.example.yeebum.screens.adapters.recycler_views.ActionsRecyclerViewAdapter
 import com.example.yeebum.screens.components.Helpers
@@ -28,9 +29,11 @@ class ActionsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val flow = Gson().fromJson(arguments?.getString("flow"),Flow::class.java)
+       flow.actions.add(Action("XD","D",2,1f))
 
         actionsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        actionsRecyclerView.adapter = ActionsRecyclerViewAdapter()
+        actionsRecyclerView.adapter = ActionsRecyclerViewAdapter(flow.actions)
 
         addActionButton.setOnClickListener {
             findNavController().navigate(ActionsFragmentDirections.actionActionsFragmentToAddActionFragment())

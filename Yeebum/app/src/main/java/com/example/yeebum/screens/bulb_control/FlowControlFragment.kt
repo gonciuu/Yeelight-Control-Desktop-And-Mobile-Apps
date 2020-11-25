@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -18,9 +19,11 @@ import com.example.yeebum.control_bulb.Constants
 import com.example.yeebum.control_bulb.Constants.getFlowCommand
 import com.example.yeebum.databases.flows_database.FlowsViewModel
 import com.example.yeebum.databases.flows_database.FlowsViewModelFactory
+import com.example.yeebum.models.Flow
 import com.example.yeebum.screens.flows_control.FlowsInterface
 import com.example.yeebum.screens.adapters.recycler_views.FlowsRecyclerViewAdapter
 import com.example.yeebum.screens.components.Helpers
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_flow_control.*
 import java.io.BufferedOutputStream
 import java.lang.Exception
@@ -59,9 +62,10 @@ class FlowControlFragment : Fragment(), FlowsInterface {
     }
 
 
-    override fun onSelectAction() {
-       // findNavController().navigate(ControlFragmentDirections.actionControlFragmentToActionsFragment())
-        write(getFlowCommand(4, arrayListOf()).replace("%id", Constants.ID))
+    override fun onSelectFlow(flow:Flow) {
+        findNavController().navigate(ControlFragmentDirections.actionControlFragmentToActionsFragment().actionId,
+            bundleOf("flow" to Gson().toJson(flow)))
+        //write(getFlowCommand(4, arrayListOf()).replace("%id", Constants.ID))
     }
 
     //--------------| Get all Flows From Database |----------------

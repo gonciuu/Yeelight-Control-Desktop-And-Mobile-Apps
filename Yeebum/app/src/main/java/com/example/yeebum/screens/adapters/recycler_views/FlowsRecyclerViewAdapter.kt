@@ -17,8 +17,7 @@ class FlowsRecyclerViewAdapter(private val listener: FlowsInterface, private val
     override fun onBindViewHolder(holder: FlowsViewHolder, position: Int) {
         val flow = listOfFlows[holder.adapterPosition]
         holder.allFlowCard.setOnClickListener {
-            listener.onSelectAction()
-            Log.d("TAG",flow.id.toString())
+            listener.onSelectFlow(flow)
         }
         holder.flowName.text = flow.name
         holder.flowDuration.text = flow.duration.toString()

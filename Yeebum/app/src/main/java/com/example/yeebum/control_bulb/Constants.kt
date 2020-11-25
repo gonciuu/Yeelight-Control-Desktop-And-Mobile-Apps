@@ -20,6 +20,4 @@ object Constants {
         return flowCommand
     }
 
-
-
 }
