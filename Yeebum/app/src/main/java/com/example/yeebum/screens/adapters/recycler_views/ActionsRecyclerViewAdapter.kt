@@ -1,12 +1,19 @@
 package com.example.yeebum.screens.adapters.recycler_views
 
+import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.yeebum.R
 import com.example.yeebum.models.Action
 import com.example.yeebum.models.ActionType
 import com.example.yeebum.screens.adapters.recycler_views.view_holders.ActionsViewHolder
+
 
 class ActionsRecyclerViewAdapter(private val actions: ArrayList<Action>) :
     RecyclerView.Adapter<ActionsViewHolder>() {
@@ -31,15 +38,35 @@ class ActionsRecyclerViewAdapter(private val actions: ArrayList<Action>) :
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun setupColorAction(holder: ActionsViewHolder) {
-        //holder.thirdValueImage = actions[holder.adapterPosition].color
+        holder.firstValue.text = "${actions[holder.adapterPosition].brightness}%"
+        holder.secondValue.text = "${actions[holder.adapterPosition].duration/1000}s"
+        ViewCompat.setBackgroundTintList(
+            holder.thirdValueImage,
+            ColorStateList.valueOf(actions[holder.adapterPosition].color)
+        )
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setupColorTempAction(holder: ActionsViewHolder) {
-
+        holder.firstValue.text = "${actions[holder.adapterPosition].brightness}%"
+        holder.secondValue.text = "${actions[holder.adapterPosition].duration/1000}s"
+        holder.thirdValueImage.visibility = View.INVISIBLE
+        holder.thirdValueText.visibility = View.VISIBLE
+        holder.thirdValueName.text = "Color Temp"
+        holder.thirdValueText.text = "${actions[holder.adapterPosition].color}k"
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setupPauseAction(holder: ActionsViewHolder) {
-
+        holder.firstValue.text = "${actions[holder.adapterPosition].duration/1000}s"
+        holder.firstValueName.text = "Duration"
+        holder.thirdValueName.visibility = View.GONE
+        holder.thirdValueImage.visibility = View.GONE
+        holder.secondValue.visibility = View.GONE
+        holder.secondValueName.visibility = View.GONE
+        holder.firstValue.setPadding(15,0,0,0)
+        holder.firstValueName.setPadding(15,0,0,0)
     }
 }

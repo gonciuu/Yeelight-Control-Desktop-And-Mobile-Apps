@@ -12,5 +12,6 @@ class ActionsViewHolder(v:View):RecyclerView.ViewHolder(v){
     val secondValue: TextView = v.secondValue
     val secondValueName: TextView = v.secondValueName
     val thirdValueImage: ImageView = v.thirdValueImage
+    val thirdValueText: TextView = v.thirdValueText
     val thirdValueName: TextView = v.thirdValueName
 }
