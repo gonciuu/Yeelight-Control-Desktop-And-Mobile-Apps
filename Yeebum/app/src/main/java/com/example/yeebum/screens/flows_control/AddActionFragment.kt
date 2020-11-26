@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.os.bundleOf
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.example.yeebum.R
 import com.example.yeebum.models.ActionType
@@ -27,17 +28,17 @@ class AddActionFragment : Fragment() {
 
         val listOfOptions =
             arrayListOf<LinearLayout>(addColorAction, addPauseAction, addColorTempAction)
-        val listOfData =
-            arrayListOf<ActionType>(ActionType.Color, ActionType.Sleep, ActionType.ColorTemp)
+        val listOfDestinations = arrayListOf<NavDirections>(
+            AddActionFragmentDirections.actionAddActionFragmentToActionDetailsFragment(),
+            AddActionFragmentDirections.actionAddActionFragmentToActionPauseDetailsFragment(),
+            AddActionFragmentDirections.actionAddActionFragmentToActionColorTempDetailsFragment()
+        )
 
         listOfOptions.forEach { layout ->
             layout.setOnClickListener {
                 findNavController().navigate(
-                    AddActionFragmentDirections.actionAddActionFragmentToActionDetailsFragment().actionId,
-                    bundleOf(
-                        "actionType" to Gson().toJson(listOfData[listOfOptions.indexOf(layout)]),
-                        "flow" to arguments?.getString("flow")
-                    )
+                        listOfDestinations[listOfOptions.indexOf(layout)].actionId,
+                        bundleOf("flow" to arguments?.getString("flow"))
                 )
             }
         }

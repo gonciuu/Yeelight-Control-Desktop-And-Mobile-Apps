@@ -8,8 +8,8 @@ import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.yeebum.R
-import kotlinx.android.synthetic.main.fragment_action_details.*
-import kotlinx.android.synthetic.main.fragment_action_details.colorPicker
+import kotlinx.android.synthetic.main.fragment_action_color_details.*
+import kotlinx.android.synthetic.main.fragment_action_color_details.colorPicker
 
 
 
@@ -28,7 +28,7 @@ class ActionColorDetailsFragment : Fragment() {
         setupSeekbar()
 
         addNewActionButton.setOnClickListener {
-            findNavController().navigate(ActionDetailsFragmentDirections.actionActionDetailsFragmentToActionsFragment())
+            findNavController().navigate(ActionColorDetailsFragmentDirections.actionActionDetailsFragmentToActionsFragment())
         }
 
         actionDetailsBackButton.setOnClickListener {

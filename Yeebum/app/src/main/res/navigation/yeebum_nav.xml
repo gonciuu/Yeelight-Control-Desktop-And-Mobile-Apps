@@ -65,14 +65,26 @@
         tools:layout="@layout/fragment_add_action">
         <action
             android:id="@+id/action_addActionFragment_to_actionDetailsFragment"
-            app:destination="@id/actionDetailsFragment"
+            app:destination="@id/actionColorDetailsFragment"
             app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_addActionFragment_to_actionColorTempDetailsFragment"
+            app:destination="@id/actionColorTempDetailsFragment"  app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_addActionFragment_to_actionPauseDetailsFragment"
+            app:destination="@id/actionPauseDetailsFragment"   app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/actionDetailsFragment"
+        android:id="@+id/actionColorDetailsFragment"
         android:name="com.example.yeebum.screens.flows_control.ActionColorDetailsFragment"
         android:label="fragment_action_details"
         tools:layout="@layout/fragment_action_color_details">
@@ -111,6 +123,7 @@
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
+        tools:layout="@layout/fragment_all_bulbs"
         android:id="@+id/allBulbsFragment"
         android:name="com.example.yeebum.screens.bulbs.AllBulbsFragment"
         android:label="AllBulbsFragment">
@@ -156,4 +169,30 @@
         android:name="com.example.yeebum.screens.other.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        tools:layout="@layout/fragment_action_color_temp_details"
+        android:id="@+id/actionColorTempDetailsFragment"
+        android:name="com.example.yeebum.screens.flows_control.ActionColorTempDetailsFragment"
+        android:label="ActionColorTempDetailsFragment" >
+        <action
+            android:id="@+id/action_actionColorTempDetailsFragment_to_actionsFragment"
+            app:destination="@id/actionsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/actionPauseDetailsFragment"
+        android:name="com.example.yeebum.screens.flows_control.ActionPauseDetailsFragment"
+        android:label="fragment_action_pause_details"
+        tools:layout="@layout/fragment_action_pause_details" >
+        <action
+            android:id="@+id/action_actionPauseDetailsFragment_to_actionsFragment"
+            app:destination="@id/actionsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 </navigation>

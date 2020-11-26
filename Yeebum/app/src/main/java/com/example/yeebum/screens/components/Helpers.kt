@@ -14,7 +14,7 @@ import com.example.yeebum.control_bulb.ChooseValue
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.color_picker_dialog.view.*
 import kotlinx.android.synthetic.main.duration_dialog.view.*
-import kotlinx.android.synthetic.main.fragment_action_details.*
+import kotlinx.android.synthetic.main.fragment_action_color_details.*
 import kotlinx.android.synthetic.main.seekbar_dialog.view.*
 
 class Helpers {
