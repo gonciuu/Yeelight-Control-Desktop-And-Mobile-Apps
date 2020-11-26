@@ -64,11 +64,11 @@
             android:text="m"
             android:textColor="@color/white"
             android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="@+id/minutePicker"
-            app:layout_constraintEnd_toStartOf="@+id/secondsPicker"
+            app:layout_constraintBottom_toBottomOf="@+id/minutePausePicker"
+            app:layout_constraintEnd_toStartOf="@+id/secondsPausePicker"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/minutePicker"
-            app:layout_constraintTop_toTopOf="@+id/minutePicker"
+            app:layout_constraintStart_toEndOf="@+id/minutePausePicker"
+            app:layout_constraintTop_toTopOf="@+id/minutePausePicker"
             app:layout_constraintVertical_bias="0.5" />
 
         <TextView
@@ -80,11 +80,11 @@
             android:text="s"
             android:textColor="@color/white"
             android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="@+id/secondsPicker"
-            app:layout_constraintEnd_toStartOf="@+id/millisecondsPicker"
+            app:layout_constraintBottom_toBottomOf="@+id/secondsPausePicker"
+            app:layout_constraintEnd_toStartOf="@+id/millisecondsPausePicker"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/secondsPicker"
-            app:layout_constraintTop_toTopOf="@+id/secondsPicker"
+            app:layout_constraintStart_toEndOf="@+id/secondsPausePicker"
+            app:layout_constraintTop_toTopOf="@+id/secondsPausePicker"
             app:layout_constraintVertical_bias="0.496" />
 
         <TextView
@@ -96,11 +96,11 @@
             android:text="ss"
             android:textColor="@color/white"
             android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="@+id/millisecondsPicker"
+            app:layout_constraintBottom_toBottomOf="@+id/millisecondsPausePicker"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/millisecondsPicker"
-            app:layout_constraintTop_toTopOf="@+id/millisecondsPicker"
+            app:layout_constraintStart_toEndOf="@+id/millisecondsPausePicker"
+            app:layout_constraintTop_toTopOf="@+id/millisecondsPausePicker"
             app:layout_constraintVertical_bias="0.5" />
 
         <ImageView
@@ -116,7 +116,7 @@
             app:tint="@color/white" />
 
         <NumberPicker
-            android:id="@+id/minutePicker"
+            android:id="@+id/minutePausePicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -129,7 +129,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
         <NumberPicker
-            android:id="@+id/secondsPicker"
+            android:id="@+id/secondsPausePicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -142,7 +142,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
         <NumberPicker
-            android:id="@+id/millisecondsPicker"
+            android:id="@+id/millisecondsPausePicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -174,7 +174,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/secondsPicker"
+            app:layout_constraintTop_toBottomOf="@+id/secondsPausePicker"
             app:layout_constraintVertical_bias="0.9" />
 
 

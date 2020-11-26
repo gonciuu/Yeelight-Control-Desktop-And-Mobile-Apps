@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:fillViewport="true"
-    tools:context=".screens.flows_control.ActionColorDetailsFragment">
+    tools:context=".screens.flows_control.ActionColorTempDetailsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -69,7 +69,7 @@
 
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/CTValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
@@ -78,7 +78,7 @@
             android:textColor="@color/white"
             android:textSize="17sp"
             app:layout_constraintBottom_toBottomOf="@+id/textView10"
-            app:layout_constraintEnd_toEndOf="@+id/brightnessSeekbar2"
+            app:layout_constraintEnd_toEndOf="@+id/colorTempSeekBar"
             app:layout_constraintTop_toTopOf="@+id/textView10"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -105,7 +105,7 @@
             app:layout_constraintEnd_toEndOf="@+id/imageView10"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/imageView10"
-            app:layout_constraintTop_toBottomOf="@+id/brightnessSeekbar2"
+            app:layout_constraintTop_toBottomOf="@+id/colorTempSeekBar"
             app:tint="@color/white" />
 
         <TextView
@@ -123,7 +123,7 @@
             app:layout_constraintVertical_bias="0.5" />
 
         <TextView
-            android:id="@+id/brightnessPercent"
+            android:id="@+id/brightnessColorTempPercent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
@@ -132,7 +132,7 @@
             android:textColor="@color/white"
             android:textSize="17sp"
             app:layout_constraintBottom_toBottomOf="@+id/textView11"
-            app:layout_constraintEnd_toEndOf="@+id/brightnessSeekbar"
+            app:layout_constraintEnd_toEndOf="@+id/colorTempBrightnessSeekbar"
             app:layout_constraintTop_toTopOf="@+id/textView11"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -145,11 +145,11 @@
             android:text="m"
             android:textColor="@color/white"
             android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="@+id/minutePicker"
-            app:layout_constraintEnd_toStartOf="@+id/secondsPicker"
+            app:layout_constraintBottom_toBottomOf="@+id/minuteColorTempPicker"
+            app:layout_constraintEnd_toStartOf="@+id/secondsColorTempPicker"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/minutePicker"
-            app:layout_constraintTop_toTopOf="@+id/minutePicker"
+            app:layout_constraintStart_toEndOf="@+id/minuteColorTempPicker"
+            app:layout_constraintTop_toTopOf="@+id/minuteColorTempPicker"
             app:layout_constraintVertical_bias="0.5" />
 
         <TextView
@@ -161,11 +161,11 @@
             android:text="s"
             android:textColor="@color/white"
             android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="@+id/secondsPicker"
-            app:layout_constraintEnd_toStartOf="@+id/millisecondsPicker"
+            app:layout_constraintBottom_toBottomOf="@+id/secondsColorTempPicker"
+            app:layout_constraintEnd_toStartOf="@+id/millisecondsColorTempPicker"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/secondsPicker"
-            app:layout_constraintTop_toTopOf="@+id/secondsPicker"
+            app:layout_constraintStart_toEndOf="@+id/secondsColorTempPicker"
+            app:layout_constraintTop_toTopOf="@+id/secondsColorTempPicker"
             app:layout_constraintVertical_bias="0.496" />
 
         <TextView
@@ -177,15 +177,15 @@
             android:text="ss"
             android:textColor="@color/white"
             android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="@+id/millisecondsPicker"
+            app:layout_constraintBottom_toBottomOf="@+id/millisecondsColorTempPicker"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/millisecondsPicker"
-            app:layout_constraintTop_toTopOf="@+id/millisecondsPicker"
+            app:layout_constraintStart_toEndOf="@+id/millisecondsColorTempPicker"
+            app:layout_constraintTop_toTopOf="@+id/millisecondsColorTempPicker"
             app:layout_constraintVertical_bias="0.496" />
 
         <SeekBar
-            android:id="@+id/brightnessSeekbar"
+            android:id="@+id/colorTempBrightnessSeekbar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -203,7 +203,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
         <SeekBar
-            android:id="@+id/brightnessSeekbar2"
+            android:id="@+id/colorTempSeekBar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -229,11 +229,11 @@
             app:layout_constraintEnd_toEndOf="@+id/imageView11"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/imageView11"
-            app:layout_constraintTop_toBottomOf="@+id/brightnessSeekbar"
+            app:layout_constraintTop_toBottomOf="@+id/colorTempBrightnessSeekbar"
             app:tint="@color/white" />
 
         <NumberPicker
-            android:id="@+id/minutePicker"
+            android:id="@+id/minuteColorTempPicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -246,7 +246,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
         <NumberPicker
-            android:id="@+id/secondsPicker"
+            android:id="@+id/secondsColorTempPicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -259,7 +259,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
         <NumberPicker
-            android:id="@+id/millisecondsPicker"
+            android:id="@+id/millisecondsColorTempPicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -291,7 +291,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/secondsPicker"
+            app:layout_constraintTop_toBottomOf="@+id/secondsColorTempPicker"
             app:layout_constraintVertical_bias="0.9" />
 
 
