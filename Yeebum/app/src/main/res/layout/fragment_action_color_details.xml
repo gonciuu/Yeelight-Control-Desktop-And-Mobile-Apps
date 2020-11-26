@@ -59,7 +59,7 @@
             android:src="@drawable/ic_brightness"
             app:layout_constraintEnd_toEndOf="@+id/imageView10"
             app:layout_constraintStart_toStartOf="@+id/imageView10"
-            app:layout_constraintTop_toBottomOf="@+id/colorPicker"
+            app:layout_constraintTop_toBottomOf="@+id/colorDetailsColorPicker"
             app:tint="@color/white" />
 
 
@@ -169,7 +169,7 @@
             app:layout_constraintVertical_bias="0.496" />
 
         <com.larswerkman.holocolorpicker.ColorPicker
-            android:id="@+id/colorPicker"
+            android:id="@+id/colorDetailsColorPicker"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_marginTop="4dp"

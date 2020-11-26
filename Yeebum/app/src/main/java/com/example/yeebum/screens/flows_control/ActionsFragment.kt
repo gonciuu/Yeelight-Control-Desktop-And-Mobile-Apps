@@ -32,7 +32,7 @@ class ActionsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val flow = Gson().fromJson(arguments?.getString("flow"),Flow::class.java)
-       flow.actions.add(Action(ActionType.Color,"D",2,1f))
+       //flow.actions.add(Action(ActionType.Color,"D",2,1f))
 
         actionsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         actionsRecyclerView.adapter = ActionsRecyclerViewAdapter(flow.actions)

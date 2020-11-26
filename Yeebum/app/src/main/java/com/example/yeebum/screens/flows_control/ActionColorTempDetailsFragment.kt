@@ -42,7 +42,7 @@ class ActionColorTempDetailsFragment : ActionsDetailsFragment() {
                 }
 
             })
-            progress = 4000
+            progress = 2300
         }
     }
 
