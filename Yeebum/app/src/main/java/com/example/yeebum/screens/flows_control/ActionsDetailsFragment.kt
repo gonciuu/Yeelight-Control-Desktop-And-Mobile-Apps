@@ -9,7 +9,6 @@ import com.example.yeebum.databases.flows_database.FlowsViewModel
 import com.example.yeebum.models.Action
 import com.example.yeebum.models.ActionType
 import com.example.yeebum.models.Flow
-import kotlinx.android.synthetic.main.fragment_action_color_details.*
 
 abstract class ActionsDetailsFragment:Fragment() {
 

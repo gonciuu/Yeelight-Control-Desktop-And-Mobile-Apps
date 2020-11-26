@@ -2,7 +2,6 @@ package com.example.yeebum.screens.flows_control
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,9 +37,16 @@ class ActionColorTempDetailsFragment : ActionsDetailsFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        chooseFlowViewModel = ViewModelProvider(requireActivity())[ChooseFlowViewModel::class.java]
-        chooseFlowViewModel.getFlow().observe(viewLifecycleOwner) { flow = it }
+        setupSeekBars()
+        saveAction()
 
+        actionDetailsBackButton.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+    }
+
+    //--------------------------------| Setup SeekBars |------------------------------------
+    private fun setupSeekBars(){
         setupPickers(minuteColorTempPicker,secondsColorTempPicker,millisecondsColorTempPicker)
         setupBrightnessSeekBar(colorTempBrightnessSeekbar,brightnessColorTempPercent)
 
@@ -61,6 +67,13 @@ class ActionColorTempDetailsFragment : ActionsDetailsFragment() {
             })
             progress = 2300
         }
+    }
+    //=======================================================================================
+
+    //------------------------------| Get Flow And insert Color temp Action into it |--------------------------------
+    private fun saveAction(){
+        chooseFlowViewModel = ViewModelProvider(requireActivity())[ChooseFlowViewModel::class.java]
+        chooseFlowViewModel.getFlow().observe(viewLifecycleOwner) { flow = it }
 
         addNewColorTempActionButton.setOnClickListener {
             if (flow != null) {
@@ -76,11 +89,7 @@ class ActionColorTempDetailsFragment : ActionsDetailsFragment() {
                 findNavController().navigate(ActionColorTempDetailsFragmentDirections.actionActionColorTempDetailsFragmentToActionsFragment())
             }
         }
-
-        actionDetailsBackButton.setOnClickListener {
-            requireActivity().onBackPressed()
-        }
     }
-
+    //=================================================================================================================
 
 }

@@ -34,12 +34,18 @@ class ActionPauseDetailsFragment : ActionsDetailsFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupFragment()
+    }
+
+    //---------------------------------| Setup pause number picker, viewmodels etc.. |-----------------------------------
+    private fun setupFragment(){
 
         chooseFlowViewModel = ViewModelProvider(requireActivity())[ChooseFlowViewModel::class.java]
         chooseFlowViewModel.getFlow().observe(viewLifecycleOwner) { flow = it }
 
         setupPickers(minutePausePicker, secondsPausePicker, millisecondsPausePicker)
 
+        //add new pause action
         addNewPauseActionButton.setOnClickListener {
             if (flow != null) {
                 addAction(
@@ -59,6 +65,8 @@ class ActionPauseDetailsFragment : ActionsDetailsFragment() {
             requireActivity().onBackPressed()
         }
     }
+
+    //===================================================================================================================
 
 
 }
