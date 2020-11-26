@@ -28,9 +28,13 @@ class ActionColorDetailsFragment : ActionsDetailsFragment() {
         FlowsViewModelFactory((requireActivity().application as YeebumApplication).flowsRepository)
     }
 
-    private lateinit var chooseFlowViewModel:ChooseFlowViewModel
+    private lateinit var chooseFlowViewModel: ChooseFlowViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.fragment_action_color_details, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = inflater.inflate(R.layout.fragment_action_color_details, container, false)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,11 +51,19 @@ class ActionColorDetailsFragment : ActionsDetailsFragment() {
         setupPickers(minuteColorPicker, secondsColorPicker, millisecondsColorPicker)
         setupBrightnessSeekBar(colorBrightnessSeekbar, brightnessColorPercent)
 
-        addNewActionButton.setOnClickListener {
-
-            addAction()
-            if (flow != null) chooseFlowViewModel.setFlow(flow!!)
-            findNavController().navigate(ActionColorDetailsFragmentDirections.actionActionDetailsFragmentToActionsFragment())
+        addNewColorActionButton.setOnClickListener {
+            if (flow != null) {
+                addAction(
+                    flow,
+                    flowsViewModel,
+                    ActionType.Color,
+                    colorDetailsColorPicker.color,
+                    colorBrightnessSeekbar.progress + 1,
+                    getDuration(minuteColorPicker,secondsColorPicker,millisecondsColorPicker)
+                )
+                chooseFlowViewModel.setFlow(flow!!)
+                findNavController().navigate(ActionColorDetailsFragmentDirections.actionActionDetailsFragmentToActionsFragment())
+            }
         }
 
         actionDetailsBackButton.setOnClickListener {
@@ -59,20 +71,5 @@ class ActionColorDetailsFragment : ActionsDetailsFragment() {
         }
     }
 
-
-    private fun addAction() {
-
-        if (flow != null) {
-            val action = Action(
-                ActionType.Color,
-                colorDetailsColorPicker.color,
-                colorBrightnessSeekbar.progress + 1,
-                minuteColorPicker.value * 60000 + secondsColorPicker.value * 1000 + (millisecondsColorPicker.value - 1) * 100
-            )
-            flow?.actions?.add(action)
-            flowsViewModel.insertFlow(flow!!)
-        }
-
-    }
 
 }

@@ -5,6 +5,11 @@ import android.widget.NumberPicker
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.yeebum.databases.flows_database.FlowsViewModel
+import com.example.yeebum.models.Action
+import com.example.yeebum.models.ActionType
+import com.example.yeebum.models.Flow
+import kotlinx.android.synthetic.main.fragment_action_color_details.*
 
 abstract class ActionsDetailsFragment:Fragment() {
 
@@ -52,5 +57,28 @@ abstract class ActionsDetailsFragment:Fragment() {
     }
 
     //===============================================================================
+
+    //-----------------------| Save new Action to database |-------------------------
+
+    fun addAction(flow:Flow?, flowsViewModel: FlowsViewModel,actionType: ActionType,color:Int,brightness:Int,duration:Int){
+        if (flow != null) {
+            val action = Action(
+                actionType,
+                color,
+                brightness,
+                duration
+            )
+            flow.actions.add(action)
+            flowsViewModel.insertFlow(flow)
+        }
+
+    }
+
+    //===============================================================================
+
+    //get duration in millis from number pickers
+    fun getDuration(minutesPicker:NumberPicker,secondsPicker:NumberPicker,millisecondsPicker:NumberPicker):Int=
+         minutesPicker.value * 60000 + secondsPicker.value * 1000 + (millisecondsPicker.value - 1) * 100
+
 
 }
