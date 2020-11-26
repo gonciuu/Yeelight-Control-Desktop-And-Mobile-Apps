@@ -28,7 +28,7 @@ class AddActionFragment : Fragment() {
 
         val listOfOptions =
             arrayListOf<LinearLayout>(addColorAction, addPauseAction, addColorTempAction)
-        val listOfDestinations = arrayListOf<NavDirections>(
+        val listOfDestinations = arrayListOf(
             AddActionFragmentDirections.actionAddActionFragmentToActionDetailsFragment(),
             AddActionFragmentDirections.actionAddActionFragmentToActionPauseDetailsFragment(),
             AddActionFragmentDirections.actionAddActionFragmentToActionColorTempDetailsFragment()
@@ -36,17 +36,13 @@ class AddActionFragment : Fragment() {
 
         listOfOptions.forEach { layout ->
             layout.setOnClickListener {
-                findNavController().navigate(
-                        listOfDestinations[listOfOptions.indexOf(layout)].actionId,
-                        bundleOf("flow" to arguments?.getString("flow"))
-                )
+                findNavController().navigate(listOfDestinations[listOfOptions.indexOf(layout)])
             }
         }
 
         addActionBackButton.setOnClickListener {
             requireActivity().onBackPressed()
         }
-
 
     }
 

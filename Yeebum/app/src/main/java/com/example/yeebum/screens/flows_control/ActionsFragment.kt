@@ -9,10 +9,12 @@ import android.view.ViewGroup
 import androidx.constraintlayout.solver.widgets.Helper
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.yeebum.R
 import com.example.yeebum.YeebumApplication
+import com.example.yeebum.control_bulb.ChooseFlowViewModel
 import com.example.yeebum.databases.flows_database.FlowsViewModel
 import com.example.yeebum.databases.flows_database.FlowsViewModelFactory
 import com.example.yeebum.models.Action
@@ -21,29 +23,41 @@ import com.example.yeebum.models.Flow
 import com.example.yeebum.screens.adapters.recycler_views.ActionsRecyclerViewAdapter
 import com.example.yeebum.screens.components.Helpers
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.flow_card.*
 import kotlinx.android.synthetic.main.fragment_actions.*
 
 class ActionsFragment : Fragment() {
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?):View? = inflater.inflate(R.layout.fragment_actions, container, false)
+    private lateinit var chooseFlowViewModel: ChooseFlowViewModel
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = inflater.inflate(R.layout.fragment_actions, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupFlow()
+    }
 
-        val flow = Gson().fromJson(arguments?.getString("flow"),Flow::class.java)
-       //flow.actions.add(Action(ActionType.Color,"D",2,1f))
+    private fun setupFlow(){
+        chooseFlowViewModel = ViewModelProvider(requireActivity())[ChooseFlowViewModel::class.java]
+        chooseFlowViewModel.getFlow().observe(viewLifecycleOwner) { flow ->
 
-        actionsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        actionsRecyclerView.adapter = ActionsRecyclerViewAdapter(flow.actions)
+            flowTitle.text = flow.name
+            flowDurationText.text = flow.duration.toString()
 
-        addActionButton.setOnClickListener {
-            findNavController().navigate(ActionsFragmentDirections.actionActionsFragmentToAddActionFragment().actionId,
-                bundleOf("flow" to Gson().toJson(flow)))
-        }
+            actionsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+            actionsRecyclerView.adapter = ActionsRecyclerViewAdapter(flow.actions)
 
-        actionsBackButton.setOnClickListener {
-            requireActivity().onBackPressed()
+            addActionButton.setOnClickListener {
+                findNavController().navigate(ActionsFragmentDirections.actionActionsFragmentToAddActionFragment())
+            }
+
+            actionsBackButton.setOnClickListener {
+                requireActivity().onBackPressed()
+            }
         }
     }
 

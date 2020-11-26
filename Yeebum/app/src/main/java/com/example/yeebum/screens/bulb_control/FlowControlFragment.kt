@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.ui.viewinterop.viewModel
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +16,7 @@ import com.example.yeebum.R
 import com.example.yeebum.YeebumApplication
 import com.example.yeebum.control_bulb.BulbConnection
 import com.example.yeebum.control_bulb.BulbControlViewModel
+import com.example.yeebum.control_bulb.ChooseFlowViewModel
 import com.example.yeebum.control_bulb.Constants
 import com.example.yeebum.control_bulb.Constants.getFlowCommand
 import com.example.yeebum.databases.flows_database.FlowsViewModel
@@ -41,6 +43,8 @@ class FlowControlFragment : Fragment(), FlowsInterface {
     private var ip:String? = null
     private var port:Int? = null
 
+    private lateinit var chooseFlowViewModel:ChooseFlowViewModel
+
 
     private val flowsViewModel:FlowsViewModel by viewModels {
         FlowsViewModelFactory((requireActivity().application as YeebumApplication).flowsRepository)
@@ -52,6 +56,7 @@ class FlowControlFragment : Fragment(), FlowsInterface {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bulbControlViewModel = ViewModelProvider(requireActivity())[BulbControlViewModel::class.java]
+        chooseFlowViewModel = ViewModelProvider(requireActivity())[ChooseFlowViewModel::class.java]
 
         getBulbSocketAndBOS()
         addFlowButton.setOnClickListener {
@@ -63,9 +68,8 @@ class FlowControlFragment : Fragment(), FlowsInterface {
 
 
     override fun onSelectFlow(flow:Flow) {
-        findNavController().navigate(ControlFragmentDirections.actionControlFragmentToActionsFragment().actionId,
-            bundleOf("flow" to Gson().toJson(flow)))
-        //write(getFlowCommand(4, arrayListOf()).replace("%id", Constants.ID))
+        chooseFlowViewModel.setFlow(flow)
+        findNavController().navigate(ControlFragmentDirections.actionControlFragmentToActionsFragment())
     }
 
     //--------------| Get all Flows From Database |----------------

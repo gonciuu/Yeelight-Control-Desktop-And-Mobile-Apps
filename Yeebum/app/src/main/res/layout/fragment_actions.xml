@@ -39,7 +39,7 @@
 
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/flowTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -47,13 +47,13 @@
             android:text="Hurry Up!"
             android:textColor="@color/white"
             android:textSize="22sp"
-            app:layout_constraintBottom_toTopOf="@+id/textView17"
+            app:layout_constraintBottom_toTopOf="@+id/flowDurationText"
             app:layout_constraintStart_toEndOf="@+id/imageView13"
             app:layout_constraintTop_toTopOf="@+id/imageView13"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
-            android:id="@+id/textView17"
+            android:id="@+id/flowDurationText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_regular"
@@ -61,8 +61,8 @@
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView13"
-            app:layout_constraintStart_toStartOf="@+id/textView12"
-            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+            app:layout_constraintStart_toStartOf="@+id/flowTitle"
+            app:layout_constraintTop_toBottomOf="@+id/flowTitle" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/actionsRecyclerView"
