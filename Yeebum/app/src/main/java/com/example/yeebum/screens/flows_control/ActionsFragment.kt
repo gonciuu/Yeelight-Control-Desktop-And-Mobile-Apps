@@ -1,5 +1,6 @@
 package com.example.yeebum.screens.flows_control
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -41,12 +42,17 @@ class ActionsFragment : Fragment() {
         setupFlow()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setupFlow(){
         chooseFlowViewModel = ViewModelProvider(requireActivity())[ChooseFlowViewModel::class.java]
         chooseFlowViewModel.getFlow().observe(viewLifecycleOwner) { flow ->
 
             flowTitle.text = flow.name
-            flowDurationText.text = flow.duration.toString()
+            var duration = 0
+            flow.actions.forEach {
+                duration+=it.duration/1000
+            }
+            flowDurationText.text = "${duration}s"
 
             actionsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
             actionsRecyclerView.adapter = ActionsRecyclerViewAdapter(flow.actions)
