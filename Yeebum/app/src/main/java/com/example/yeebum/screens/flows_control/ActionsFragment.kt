@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.solver.widgets.Helper
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,7 +38,8 @@ class ActionsFragment : Fragment() {
         actionsRecyclerView.adapter = ActionsRecyclerViewAdapter(flow.actions)
 
         addActionButton.setOnClickListener {
-            findNavController().navigate(ActionsFragmentDirections.actionActionsFragmentToAddActionFragment())
+            findNavController().navigate(ActionsFragmentDirections.actionActionsFragmentToAddActionFragment().actionId,
+                bundleOf("flow" to Gson().toJson(flow)))
         }
 
         actionsBackButton.setOnClickListener {

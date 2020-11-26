@@ -73,9 +73,9 @@
     </fragment>
     <fragment
         android:id="@+id/actionDetailsFragment"
-        android:name="com.example.yeebum.screens.flows_control.ActionDetailsFragment"
+        android:name="com.example.yeebum.screens.flows_control.ActionColorDetailsFragment"
         android:label="fragment_action_details"
-        tools:layout="@layout/fragment_action_details">
+        tools:layout="@layout/fragment_action_color_details">
         <action
             android:id="@+id/action_actionDetailsFragment_to_actionsFragment"
             app:destination="@id/actionsFragment"

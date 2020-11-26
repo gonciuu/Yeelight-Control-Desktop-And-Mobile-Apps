@@ -1,6 +1,5 @@
 package com.example.yeebum.hilt
 
-import com.example.yeebum.screens.flows_control.ActionDetailsFragment
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

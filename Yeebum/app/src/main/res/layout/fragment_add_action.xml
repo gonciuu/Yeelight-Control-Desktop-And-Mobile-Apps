@@ -29,48 +29,14 @@
         android:textColor="@color/white"
         android:textSize="24sp" />
 
-    <LinearLayout
-        android:id="@+id/addBrightnessAction"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:background="@color/colorPrimaryLight"
-        android:orientation="horizontal"
-        android:paddingStart="20dp"
-        android:paddingTop="15dp"
-        android:paddingEnd="20dp"
-        android:paddingBottom="14dp">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/open_sans_semibold"
-            android:text="Brightness Action"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:scaleX="-1"
-            android:scaleY="-1"
-            android:src="@drawable/ic_enter"
-            app:tint="@color/white"
-            android:contentDescription="@string/enter" />
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#4C4C4C" />
 
     <LinearLayout
         android:id="@+id/addColorAction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:gravity="center"
         android:background="@color/colorPrimaryLight"
         android:orientation="horizontal"

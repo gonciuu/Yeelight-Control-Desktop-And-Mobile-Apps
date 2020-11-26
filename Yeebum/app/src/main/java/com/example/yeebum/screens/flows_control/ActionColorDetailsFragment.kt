@@ -8,17 +8,15 @@ import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.yeebum.R
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_action_details.*
 import kotlinx.android.synthetic.main.fragment_action_details.colorPicker
 
 
-@AndroidEntryPoint
-class ActionDetailsFragment : Fragment() {
+
+class ActionColorDetailsFragment : Fragment() {
 
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.fragment_action_details, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.fragment_action_color_details, container, false)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
