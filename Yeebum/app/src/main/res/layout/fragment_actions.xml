@@ -92,8 +92,11 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             app:drawableTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/actionsRecyclerView"
-            app:layout_constraintHorizontal_bias="0.498"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/actionsRecyclerView"
             app:layout_constraintTop_toBottomOf="@+id/actionsRecyclerView" />
 
