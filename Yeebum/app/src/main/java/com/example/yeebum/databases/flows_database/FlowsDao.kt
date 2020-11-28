@@ -12,6 +12,9 @@ interface FlowsDao {
     @Delete
     suspend fun deleteFlow(flow: Flow)
 
+    @Update
+    suspend fun updateFlow(flow: Flow)
+
     @Query("DELETE FROM flows_table")
     suspend fun deleteAllFlows()
 

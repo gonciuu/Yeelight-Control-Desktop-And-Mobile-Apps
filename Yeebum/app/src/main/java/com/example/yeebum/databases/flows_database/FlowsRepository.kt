@@ -22,5 +22,10 @@ class FlowsRepository(private val flowsDao: FlowsDao) {
         flowsDao.deleteAllFlows()
     }
 
+    @WorkerThread
+    suspend fun updateFlow(flow:Flow){
+        flowsDao.updateFlow(flow)
+    }
+
 
 }

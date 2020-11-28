@@ -19,6 +19,11 @@ class FlowsViewModel(private val repository: FlowsRepository) : ViewModel() {
         repository.deleteFlow(flow)
     }
 
+    fun updateFlow(flow: Flow) = viewModelScope.launch {
+        repository.updateFlow(flow)
+    }
+
+
     fun deleteAllFlows() = viewModelScope.launch {
         repository.deleteAllFlows()
     }

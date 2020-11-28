@@ -67,7 +67,7 @@ abstract class ActionsDetailsFragment:Fragment() {
                 duration
             )
             flow.actions.add(action)
-            flowsViewModel.insertFlow(flow)
+            flowsViewModel.updateFlow(flow)
         }
     }
     //===============================================================================

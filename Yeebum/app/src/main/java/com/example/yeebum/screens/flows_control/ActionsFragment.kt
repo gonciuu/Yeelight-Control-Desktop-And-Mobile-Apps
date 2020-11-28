@@ -82,7 +82,7 @@ class ActionsFragment : Fragment(), ActionsListener {
 
     //delete action
     override fun onActionDelete(action: Action) {
-        val index =  flow!!.actions.indexOf(action)
+        val index = flow!!.actions.indexOf(action)
         if(flow!=null){
             flow!!.actions.removeAt(index)
             setFlow(flow!!)
@@ -95,7 +95,7 @@ class ActionsFragment : Fragment(), ActionsListener {
 
     //on long click action
     override fun onActionSelected(action: Action) {
-        Helpers().getChooseOptionDialog(requireActivity(),requireContext(),"Choose option",this, action).show()
+        helpers.getChooseOptionDialog(requireActivity(),requireContext(),"Choose option",this, action).show()
     }
 
     //update flow and setup it into viewmodel
