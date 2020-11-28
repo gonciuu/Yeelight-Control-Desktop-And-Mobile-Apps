@@ -18,16 +18,18 @@ object Constants {
     fun getFlowCommand(listOfActions: ArrayList<Action>):String{
         var params = ""
         listOfActions.forEach { action->
+
+            //get mode int type
             val mode:Int = when(action.type){
                 ActionType.Color -> 1
                 ActionType.ColorTemp -> 2
                 ActionType.Sleep -> 7
             }
-          /*  Log.d("TAG", Color.red(action.color).toString())
-            Log.d("TAG", Color.green(action.color).toString())
-            Log.d("TAG", Color.blue(action.color).toString())*/
+
+            //get rgb color from int or if the type in color temp don't change anything
             val colorToSet: Int = if(mode ==1) ( Color.red(action.color) * 65536 + Color.green(action.color)*256 +  Color.blue(action.color)) else action.color
 
+            //add params to respond string
             params+="${action.duration}, $mode, ${colorToSet}, ${action.brightness}"
             if(listOfActions.indexOf(action) != listOfActions.size-1)
                 params+= ", "

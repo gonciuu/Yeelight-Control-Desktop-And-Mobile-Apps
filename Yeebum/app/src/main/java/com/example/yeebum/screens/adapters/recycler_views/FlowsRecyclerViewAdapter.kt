@@ -20,12 +20,18 @@ class FlowsRecyclerViewAdapter(private val listener: FlowsInterface, private val
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: FlowsViewHolder, position: Int) {
         val flow = listOfFlows[holder.adapterPosition]
+
+        //edit flow
         holder.editFlowButton.setOnClickListener {
             listener.onEditFlow(flow)
         }
+
+        //start flow
         holder.allFlowCard.setOnClickListener {
             listener.onStartFlow(flow)
         }
+
+
         holder.flowName.text = flow.name
 
         var duration = 0
