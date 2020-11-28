@@ -67,9 +67,15 @@ class FlowControlFragment : Fragment(), FlowsInterface {
     }
 
 
-    override fun onSelectFlow(flow:Flow) {
+    //edit the flow properties
+    override fun onEditFlow(flow:Flow) {
         chooseFlowViewModel.setFlow(flow)
         findNavController().navigate(ControlFragmentDirections.actionControlFragmentToActionsFragment())
+    }
+
+    //start flow
+    override fun onStartFlow(flow: Flow) {
+        write(getFlowCommand(flow.actions))
     }
 
     //--------------| Get all Flows From Database |----------------

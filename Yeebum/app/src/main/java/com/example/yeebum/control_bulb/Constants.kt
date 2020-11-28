@@ -1,5 +1,10 @@
 package com.example.yeebum.control_bulb
 
+import android.util.Log
+import android.graphics.Color
+import com.example.yeebum.models.Action
+import com.example.yeebum.models.ActionType
+
 object Constants {
     const val ID = "0"
     const val CMD_ON = "{\"id\":%id,\"method\":\"set_power\",\"params\":[\"on\",\"smooth\",500]}\r\n"
@@ -10,13 +15,28 @@ object Constants {
     const val CMD_CRON_ADD = "{\"id\":%id,\"method\":\"cron_add\",\"params\":[0, %value]}\r\n"
     const val CMD_CRON_DELETE = "{\"id\":%id,\"method\":\"cron_del\",\"params\":[0]}\r\n"
 
-    fun getFlowCommand(length:Int, listOfActions:ArrayList<String>):String{
-        /*val params = listOfActions.forEach {
+    fun getFlowCommand(listOfActions: ArrayList<Action>):String{
+        var params = ""
+        listOfActions.forEach { action->
+            val mode:Int = when(action.type){
+                ActionType.Color -> 1
+                ActionType.ColorTemp -> 2
+                ActionType.Sleep -> 7
+            }
+          /*  Log.d("TAG", Color.red(action.color).toString())
+            Log.d("TAG", Color.green(action.color).toString())
+            Log.d("TAG", Color.blue(action.color).toString())*/
+            val colorToSet: Int = if(mode ==1) ( Color.red(action.color) * 65536 + Color.green(action.color)*256 +  Color.blue(action.color)) else action.color
 
-        }*/
-        val params = "1000, 2, 2700, 100, 500, 1, 255, 10, 5000, 7, 0,0, 500, 2, 5000, 1"
-        val flowCommand = "{\"id\":%id,\"method\":\"start_cf\",\"params\":[ $length, 0, \"$params\"]}\r\n"
-        flowCommand.replace("%id", ID)
+            params+="${action.duration}, $mode, ${colorToSet}, ${action.brightness}"
+            if(listOfActions.indexOf(action) != listOfActions.size-1)
+                params+= ", "
+        }
+
+
+        var flowCommand = "{\"id\":%id,\"method\":\"start_cf\",\"params\":[ ${listOfActions.size}, 0, \"$params\"]}\r\n"
+        flowCommand = flowCommand.replace("%id", ID)
+        Log.d("TAG", flowCommand)
         return flowCommand
     }
 

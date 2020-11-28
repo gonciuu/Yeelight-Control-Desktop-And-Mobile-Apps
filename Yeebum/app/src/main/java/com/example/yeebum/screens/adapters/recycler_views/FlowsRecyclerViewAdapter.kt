@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.yeebum.R
 import com.example.yeebum.models.Flow
@@ -19,8 +20,11 @@ class FlowsRecyclerViewAdapter(private val listener: FlowsInterface, private val
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: FlowsViewHolder, position: Int) {
         val flow = listOfFlows[holder.adapterPosition]
+        holder.editFlowButton.setOnClickListener {
+            listener.onEditFlow(flow)
+        }
         holder.allFlowCard.setOnClickListener {
-            listener.onSelectFlow(flow)
+            listener.onStartFlow(flow)
         }
         holder.flowName.text = flow.name
 

@@ -37,9 +37,7 @@ class ActionsFragment : Fragment() {
 
             flowTitle.text = flow.name
             var duration = 0
-            flow.actions.forEach {
-                duration+=it.duration/1000
-            }
+            flow.actions.forEach { duration+=it.duration/1000 }
             flowDurationText.text = "${duration}s"
 
             actionsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
