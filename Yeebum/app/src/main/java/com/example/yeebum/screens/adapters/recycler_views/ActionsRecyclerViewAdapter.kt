@@ -10,12 +10,14 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.yeebum.R
+import com.example.yeebum.control_bulb.ActionsListener
 import com.example.yeebum.models.Action
 import com.example.yeebum.models.ActionType
 import com.example.yeebum.screens.adapters.recycler_views.view_holders.ActionsViewHolder
+import com.example.yeebum.screens.components.Helpers
 
 
-class ActionsRecyclerViewAdapter(private val actions: ArrayList<Action>) :
+class ActionsRecyclerViewAdapter(private val actions: ArrayList<Action>, private val listener:ActionsListener) :
     RecyclerView.Adapter<ActionsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActionsViewHolder {
         return ActionsViewHolder(
@@ -29,8 +31,10 @@ class ActionsRecyclerViewAdapter(private val actions: ArrayList<Action>) :
             ActionType.ColorTemp -> setupColorTempAction(holder)
             ActionType.Sleep -> setupPauseAction(holder)
         }
-
-
+            holder.allCard.setOnLongClickListener {
+                listener.onActionSelected(actions[holder.adapterPosition])
+                true
+            }
     }
 
     override fun getItemCount(): Int {

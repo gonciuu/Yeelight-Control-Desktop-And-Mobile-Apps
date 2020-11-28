@@ -10,8 +10,12 @@ import android.widget.SeekBar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.example.yeebum.R
+import com.example.yeebum.control_bulb.ActionsListener
 import com.example.yeebum.control_bulb.ChooseValue
+import com.example.yeebum.models.Action
+import com.example.yeebum.screens.flows_control.FlowsInterface
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.choose_option_dialog.view.*
 import kotlinx.android.synthetic.main.color_picker_dialog.view.*
 import kotlinx.android.synthetic.main.duration_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_action_color_details.*
@@ -101,6 +105,25 @@ class Helpers {
 
     }
     //============================================================================================================================================================================
+
+
+    fun getChooseOptionDialog(activity: FragmentActivity, context: Context, title: String, listener:ActionsListener,action:Action):AlertDialog{
+        val view = LayoutInflater.from(context).inflate(R.layout.choose_option_dialog, null, false)
+
+        return activity.let {
+            val dialog = AlertDialog.Builder(context, R.style.DialogTheme).setTitle(title).setView(view).create()
+            view.editAction.setOnClickListener {
+                listener.onActionEdit(action)
+                dialog.dismiss()
+            }
+            view.deleteAction.setOnClickListener {
+                listener.onActionDelete(action)
+                dialog.dismiss()
+            }
+            dialog
+        } ?: throw Exception("Activity must not be null!")
+
+    }
 
 
 }

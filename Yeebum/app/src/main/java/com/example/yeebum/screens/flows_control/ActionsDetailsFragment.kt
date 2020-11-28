@@ -58,7 +58,6 @@ abstract class ActionsDetailsFragment:Fragment() {
     //===============================================================================
 
     //-----------------------| Save new Action to database |-------------------------
-
     fun addAction(flow:Flow?, flowsViewModel: FlowsViewModel,actionType: ActionType,color:Int,brightness:Int,duration:Int){
         if (flow != null) {
             val action = Action(
@@ -70,9 +69,7 @@ abstract class ActionsDetailsFragment:Fragment() {
             flow.actions.add(action)
             flowsViewModel.insertFlow(flow)
         }
-
     }
-
     //===============================================================================
 
     //get duration in millis from number pickers
