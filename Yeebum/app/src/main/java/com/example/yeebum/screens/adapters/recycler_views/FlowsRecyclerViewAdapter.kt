@@ -57,7 +57,11 @@ class FlowsRecyclerViewAdapter(
                     }
                 }
                 setOnMenuItemClickListener { item ->
-                    Toast.makeText(holder.itemView.context, item.title, Toast.LENGTH_LONG).show()
+                    if(item.itemId == R.id.editFlow){
+                        listener.onEditFlow(flow)
+                    }else{
+                        listener.onDeleteFlow(flow)
+                    }
                     true
                 }
                 show()

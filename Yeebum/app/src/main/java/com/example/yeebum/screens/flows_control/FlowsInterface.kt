@@ -6,4 +6,6 @@ interface FlowsInterface {
     fun onEditFlow(flow: Flow)
 
     fun onStartFlow(flow: Flow)
+
+    fun onDeleteFlow(flow: Flow)
 }

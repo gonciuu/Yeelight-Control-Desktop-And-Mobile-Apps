@@ -77,6 +77,11 @@ class FlowControlFragment : Fragment(), FlowsInterface {
     override fun onStartFlow(flow: Flow) {
         write(getFlowCommand(flow.actions))
     }
+    //delete flow from database
+    override fun onDeleteFlow(flow: Flow) {
+        flowsViewModel.deleteFlow(flow)
+        helpers.showSnackBar(requireView(), "Deleted", "Undo") { flowsViewModel.insertFlow(flow) }
+    }
 
     //--------------| Get all Flows From Database |----------------
     private fun getAllFlows(){
