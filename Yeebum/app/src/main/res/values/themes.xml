@@ -25,5 +25,16 @@
         <item name="android:textColorPrimary">#ffffff</item>
     </style>
 
+    <style name="CustomPopupTheme" parent="ThemeOverlay.AppCompat.Dark">
+        <!-- if using android.widget.PopupMenu -->
+        <item name="android:popupMenuStyle">@style/PopupMenu</item>
+        <!-- if using android.support.v7.widget.PopupMenu -->
+        <item name="popupMenuStyle">@style/PopupMenu</item>
+    </style>
+
+    <style name="PopupMenu" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="android:popupBackground">@color/colorPrimary</item>
+        <item name="android:fontFamily">@font/open_sans_semibold</item>
+    </style>
 
 </resources>

@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.flow_card.view.*
 
 class FlowsViewHolder(v:View) :RecyclerView.ViewHolder(v) {
     val allFlowCard: LinearLayout = v.allFlowCard
-    val editFlowButton: ImageView = v.editFlow
+    val editFlowButton: ImageView = v.editFlowButton
     val flowName: TextView = v.flowName
     val flowDuration: TextView = v.flowDuration
 }
