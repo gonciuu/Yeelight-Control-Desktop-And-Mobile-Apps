@@ -9,6 +9,7 @@ import com.example.yeebum.databases.flows_database.FlowsViewModel
 import com.example.yeebum.models.Action
 import com.example.yeebum.models.ActionType
 import com.example.yeebum.models.Flow
+import java.util.*
 
 abstract class ActionsDetailsFragment:Fragment() {
 
@@ -76,5 +77,23 @@ abstract class ActionsDetailsFragment:Fragment() {
     fun getDuration(minutesPicker:NumberPicker,secondsPicker:NumberPicker,millisecondsPicker:NumberPicker):Int=
          minutesPicker.value * 60000 + secondsPicker.value * 1000 + (millisecondsPicker.value - 1) * 100
 
+
+    fun updateAction(flow:Flow?, oldAction: Action, flowsViewModel: FlowsViewModel, color:Int, brightness:Int, duration:Int){
+        val index = flow!!.actions.indexOf(oldAction)
+        oldAction.color = color
+        oldAction.brightness = brightness
+        oldAction.duration = duration
+        flow.actions[index] = oldAction
+        flowsViewModel.updateFlow(flow)
+    }
+
+
+    fun setNumberPickersValue(picker1:NumberPicker,picker2:NumberPicker,picker3:NumberPicker, duration:Long){
+        val c  = Calendar.getInstance()
+        c.timeInMillis = duration
+        picker1.value = c[Calendar.MINUTE]
+        picker2.value = c[Calendar.SECOND]
+        picker3.value = c[Calendar.MILLISECOND] /100 + 1
+    }
 
 }
