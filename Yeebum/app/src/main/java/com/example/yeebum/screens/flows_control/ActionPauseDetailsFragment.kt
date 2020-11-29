@@ -13,8 +13,11 @@ import com.example.yeebum.YeebumApplication
 import com.example.yeebum.control_bulb.ChooseFlowViewModel
 import com.example.yeebum.databases.flows_database.FlowsViewModel
 import com.example.yeebum.databases.flows_database.FlowsViewModelFactory
+import com.example.yeebum.models.Action
 import com.example.yeebum.models.ActionType
 import com.example.yeebum.models.Flow
+import com.google.gson.Gson
+import kotlinx.android.synthetic.main.fragment_action_color_temp_details.*
 import kotlinx.android.synthetic.main.fragment_action_pause_details.*
 import kotlinx.android.synthetic.main.fragment_action_pause_details.actionDetailsBackButton
 
@@ -35,10 +38,13 @@ class ActionPauseDetailsFragment : ActionsDetailsFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupFragment()
+        if(!requireArguments().isEmpty){
+            setupStartData()
+        }
     }
 
     //---------------------------------| Setup pause number picker, viewmodels etc.. |-----------------------------------
-    private fun setupFragment(){
+    private fun setupFragment() {
 
         chooseFlowViewModel = ViewModelProvider(requireActivity())[ChooseFlowViewModel::class.java]
         chooseFlowViewModel.getFlow().observe(viewLifecycleOwner) { flow = it }
@@ -48,14 +54,11 @@ class ActionPauseDetailsFragment : ActionsDetailsFragment() {
         //add new pause action
         addNewPauseActionButton.setOnClickListener {
             if (flow != null) {
-                addAction(
-                    flow,
-                    flowsViewModel,
-                    ActionType.Sleep,
-                    -1,
-                    -1,
-                    getDuration(minutePausePicker, secondsPausePicker, millisecondsPausePicker)
-                )
+                if (requireArguments().isEmpty) {
+                    addAction()
+                } else {
+                    updateAction()
+                }
                 chooseFlowViewModel.setFlow(flow!!)
                 findNavController().navigate(ActionPauseDetailsFragmentDirections.actionActionPauseDetailsFragmentToActionsFragment())
             }
@@ -68,5 +71,38 @@ class ActionPauseDetailsFragment : ActionsDetailsFragment() {
 
     //===================================================================================================================
 
+    private fun addAction() {
+        addAction(
+            flow,
+            flowsViewModel,
+            ActionType.Sleep,
+            -1,
+            -1,
+            getDuration(minutePausePicker, secondsPausePicker, millisecondsPausePicker)
+        )
+    }
+
+    private fun updateAction() {
+        updateAction(
+            flow,
+            Gson().fromJson(requireArguments().getString("action"), Action::class.java),
+            flowsViewModel,
+            -1,
+            -1,
+            getDuration(minutePausePicker, secondsPausePicker, millisecondsPausePicker)
+        )
+    }
+
+    private fun setupStartData() {
+        setNumberPickersValue(
+            minutePausePicker,
+            secondsPausePicker,
+            millisecondsPausePicker,
+            Gson().fromJson(
+                requireArguments().getString("action"),
+                Action::class.java
+            ).duration.toLong()
+        )
+    }
 
 }
