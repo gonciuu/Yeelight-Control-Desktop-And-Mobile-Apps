@@ -52,7 +52,6 @@ class BulbConnection {
                 mBos.write(cmd.toByteArray())
                 mBos.flush()
             }catch (socketEx: SocketException){
-                //helpers.showSnackBar(requireView(), socketEx.message!!,null,null)
                 activity.runOnUiThread {
                     connectToBulb(context,activity, bulbControlViewModel, view, ip, port)
                 }
