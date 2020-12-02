@@ -147,47 +147,56 @@ class EnterBulbDataFragment : Fragment() ,SearchedBulbsInterface{
         loadingDialog?.show()
 
         searchThread = Thread {
-            val mDSocket = DatagramSocket()
-            val dpSend = DatagramPacket(
-                message.toByteArray(),
-                message.toByteArray().size,
-                InetAddress.getByName(UDP_HOST),
-                UDP_PORT
-            )
-            mDSocket.send(dpSend)
-            mHandler.sendEmptyMessageDelayed(MSG_STOP_SEARCH, 2000)
-            while (isSearching) {
-                val buf = ByteArray(1024)
-                val dpReceive = DatagramPacket(buf, buf.size)
-                mDSocket.receive(dpReceive)
-                val bytes = dpReceive.data
-                val buffer = StringBuffer()
-                for (i in 0 until dpReceive.length) {
-                    if (bytes[i] == 13.toByte()) {
-                        continue
+            try{
+                val mDSocket = DatagramSocket()
+                val dpSend = DatagramPacket(
+                    message.toByteArray(),
+                    message.toByteArray().size,
+                    InetAddress.getByName(UDP_HOST),
+                    UDP_PORT
+                )
+                mDSocket.send(dpSend)
+                mHandler.sendEmptyMessageDelayed(MSG_STOP_SEARCH, 2000)
+                while (isSearching) {
+                    val buf = ByteArray(1024)
+                    val dpReceive = DatagramPacket(buf, buf.size)
+                    mDSocket.receive(dpReceive)
+                    val bytes = dpReceive.data
+                    val buffer = StringBuffer()
+                    for (i in 0 until dpReceive.length) {
+                        if (bytes[i] == 13.toByte()) {
+                            continue
+                        }
+                        buffer.append(bytes[i].toChar())
                     }
-                    buffer.append(bytes[i].toChar())
-                }
 
-                if (!buffer.toString().contains("yeelight")) {
+                    if (!buffer.toString().contains("yeelight")) {
+                        loadingDialog?.dismiss()
+                        helpers.showSnackBar(requireView(), "Cannot find any bulbs", null, null)
+                        return@Thread
+                    }
+
+                    val infos = buffer.toString().split("\n")
+                    val bulbInfoHashMap = HashMap<String, String>()
+                    for (i in infos) {
+                        val index = i.indexOf(":")
+                        if (index == -1) continue
+                        val title = i.substring(0, index)
+                        val value = i.substring(index + 1)
+                        bulbInfoHashMap[title] = value
+                    }
+                    if (!hasAdd(bulbInfoHashMap)) {
+                        listOfDevices.add(bulbInfoHashMap)
+                    }
+                }
+            }catch (ex:Exception){
+                requireActivity().runOnUiThread {
+                    helpers.showSnackBar(requireView(),ex.message.toString(),null,null)
                     loadingDialog?.dismiss()
-                    helpers.showSnackBar(requireView(), "Cannot find any bulbs", null, null)
-                    return@Thread
-                }
-
-                val infos = buffer.toString().split("\n")
-                val bulbInfoHashMap = HashMap<String, String>()
-                for (i in infos) {
-                    val index = i.indexOf(":")
-                    if (index == -1) continue
-                    val title = i.substring(0, index)
-                    val value = i.substring(index + 1)
-                    bulbInfoHashMap[title] = value
-                }
-                if (!hasAdd(bulbInfoHashMap)) {
-                    listOfDevices.add(bulbInfoHashMap)
+                    requireActivity().onBackPressed()
                 }
             }
+
         }
         searchThread.start()
     }
