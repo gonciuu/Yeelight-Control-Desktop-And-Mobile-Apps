@@ -18,7 +18,9 @@ import com.example.yeebum.YeebumApplication
 import com.example.yeebum.databases.bulbs_database.*
 import com.example.yeebum.models.Bulb
 import com.example.yeebum.screens.components.Helpers
+import com.example.yeebum.screens.components.LoadingDialog
 import kotlinx.android.synthetic.main.fragment_enter_bulb_data.*
+import kotlinx.coroutines.delay
 import java.lang.Exception
 
 
@@ -36,6 +38,8 @@ class EnterBulbDataFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
+
+        searchForDevices()
 
         setSpannableText()
         enterBulbDataBackButton.setOnClickListener {
@@ -85,6 +89,19 @@ class EnterBulbDataFragment : Fragment() {
     }
     //===========================================================================================
 
+
+    private fun searchForDevices(){
+        val loadingDialog = LoadingDialog.getDialog(requireContext(),"Searching For Devices...")
+        loadingDialog.show()
+
+
+
+        val list = ArrayList<HashMap<String,String>>()
+        list.add(hashMapOf("model" to "XDD","Location" to "XDDDD"))
+        //Helpers().getDevicesDialog(requireActivity(),requireContext(),"Choose Device",list)
+
+        //loadingDialog.dismiss()
+    }
 
 
 

@@ -9,17 +9,21 @@ import android.widget.NumberPicker
 import android.widget.SeekBar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.yeebum.R
 import com.example.yeebum.control_bulb.ActionsListener
 import com.example.yeebum.control_bulb.ChooseValue
 import com.example.yeebum.models.Action
+import com.example.yeebum.screens.adapters.recycler_views.DevicesAdapter
 import com.example.yeebum.screens.flows_control.FlowsInterface
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.choose_option_dialog.view.*
 import kotlinx.android.synthetic.main.color_picker_dialog.view.*
+import kotlinx.android.synthetic.main.devices_dialog.view.*
 import kotlinx.android.synthetic.main.duration_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_action_color_details.*
 import kotlinx.android.synthetic.main.seekbar_dialog.view.*
+import java.lang.IllegalStateException
 
 class Helpers {
 
@@ -107,6 +111,7 @@ class Helpers {
     //============================================================================================================================================================================
 
 
+    //-----------------------------------------------| Edit Or Delete Action Dialog |----------------------------------------
     fun getChooseOptionDialog(activity: FragmentActivity, context: Context, title: String, listener:ActionsListener,action:Action):AlertDialog{
         val view = LayoutInflater.from(context).inflate(R.layout.choose_option_dialog, null, false)
 
@@ -124,6 +129,19 @@ class Helpers {
         } ?: throw Exception("Activity must not be null!")
 
     }
+    //===========================================================================================================================
 
+
+    fun getDevicesDialog(activity: FragmentActivity, context: Context, title: String, devicesList:ArrayList<HashMap<String,String>>){
+        val view = LayoutInflater.from(context).inflate(R.layout.devices_dialog, null, false)
+        view.devicesRecyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = DevicesAdapter(devicesList)
+        }
+
+        activity.let {
+            AlertDialog.Builder(context, R.style.DialogTheme).setTitle(title).setView(view).create().show()
+        }
+    }
 
 }
