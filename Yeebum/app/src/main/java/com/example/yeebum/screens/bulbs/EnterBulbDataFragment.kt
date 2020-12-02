@@ -120,8 +120,7 @@ class EnterBulbDataFragment : Fragment() {
 
     //-----------------------------| Save bulb into database |-----------------------------------
     private fun saveBulb() {
-        val name =
-            if (bulbNameInput.text.isNullOrEmpty()) "My Yeelight" else bulbNameInput.text.toString()
+        val name = if (bulbNameInput.text.isNullOrEmpty()) "My Yeelight" else bulbNameInput.text.toString()
         val ip = bulbIpInput.text.toString()
         val port = try {
             bulbPortInput.text.toString().toInt()
@@ -141,7 +140,6 @@ class EnterBulbDataFragment : Fragment() {
     private fun searchForDevices() {
         loadingDialog?.show()
 
-        listOfDevices.clear()
         searchThread = Thread {
             val mDSocket = DatagramSocket()
             val dpSend = DatagramPacket(
@@ -201,6 +199,8 @@ class EnterBulbDataFragment : Fragment() {
     }
     //=========================================================================================
 
+
+    //show list of devices dialog
     private fun showDevicesDialog() = helpers.getDevicesDialog(
         requireActivity(),
         requireContext(),
@@ -209,6 +209,7 @@ class EnterBulbDataFragment : Fragment() {
     )
 
 
+    // release the multicast lock
     override fun onDestroy() {
         super.onDestroy()
         multicastLock.release()

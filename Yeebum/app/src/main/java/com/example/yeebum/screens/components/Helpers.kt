@@ -132,6 +132,7 @@ class Helpers {
     //===========================================================================================================================
 
 
+    //------------------------------------------------| Get list Of Devices Dialog |-----------------------------------------------
     fun getDevicesDialog(activity: FragmentActivity, context: Context, title: String, devicesList:ArrayList<HashMap<String,String>>){
         val view = LayoutInflater.from(context).inflate(R.layout.devices_dialog, null, false)
         view.devicesRecyclerView.apply {
@@ -143,5 +144,6 @@ class Helpers {
             AlertDialog.Builder(context, R.style.DialogTheme).setTitle(title).setView(view).create().show()
         }
     }
+    //===============================================================================================================================
 
 }
