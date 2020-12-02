@@ -1,12 +1,16 @@
 package com.example.yeebum.screens.flows_control
 
+import android.animation.AnimatorSet
+import android.animation.ArgbEvaluator
+import android.animation.IntArrayEvaluator
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -25,6 +29,7 @@ import com.example.yeebum.screens.components.Helpers
 import com.example.yeebum.screens.components.Navigation
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_actions.*
+
 
 class ActionsFragment : Fragment(), ActionsListener {
 
@@ -50,19 +55,19 @@ class ActionsFragment : Fragment(), ActionsListener {
 
     //------------------------------| Setup flow data in ui |-----------------------------------
     @SuppressLint("SetTextI18n")
-    private fun setupFlow(){
+    private fun setupFlow() {
         chooseFlowViewModel = ViewModelProvider(requireActivity())[ChooseFlowViewModel::class.java]
         chooseFlowViewModel.getFlow().observe(viewLifecycleOwner) { fl ->
 
             this.flow = fl
-            if(flow!=null){
+            if (flow != null) {
                 flowTitle.text = flow!!.name
                 var duration = 0
-                flow!!.actions.forEach { duration+=it.duration/1000 }
+                flow!!.actions.forEach { duration += it.duration / 1000 }
                 flowDurationText.text = "${duration}s"
 
                 actionsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-                actionsRecyclerView.adapter = ActionsRecyclerViewAdapter(flow!!.actions,this)
+                actionsRecyclerView.adapter = ActionsRecyclerViewAdapter(flow!!.actions, this)
 
 
                 addActionButton.setOnClickListener {
@@ -72,6 +77,7 @@ class ActionsFragment : Fragment(), ActionsListener {
                 actionsBackButton.setOnClickListener {
                     requireActivity().onBackPressed()
                 }
+
             }
 
         }
@@ -81,22 +87,26 @@ class ActionsFragment : Fragment(), ActionsListener {
 
     //edit action
     override fun onActionEdit(action: Action) {
-        val destination = when(action.type){
-            ActionType.Color->R.id.actionColorDetailsFragment
-            ActionType.ColorTemp->R.id.actionColorTempDetailsFragment
-            ActionType.Sleep->R.id.actionPauseDetailsFragment
+        val destination = when (action.type) {
+            ActionType.Color -> R.id.actionColorDetailsFragment
+            ActionType.ColorTemp -> R.id.actionColorTempDetailsFragment
+            ActionType.Sleep -> R.id.actionPauseDetailsFragment
         }
-        findNavController().navigate(destination, bundleOf("action" to Gson().toJson(action)) ,Navigation().getNavOptions(false))
+        findNavController().navigate(
+            destination, bundleOf("action" to Gson().toJson(action)), Navigation().getNavOptions(
+                false
+            )
+        )
     }
 
     //delete action
     override fun onActionDelete(action: Action) {
         val index = flow!!.actions.indexOf(action)
-        if(flow!=null){
+        if (flow != null) {
             flow!!.actions.removeAt(index)
             setFlow(flow!!)
-            helpers.showSnackBar(requireView(),"Deleted","Undo"){
-                flow!!.actions.add(index,action)
+            helpers.showSnackBar(requireView(), "Deleted", "Undo") {
+                flow!!.actions.add(index, action)
                 setFlow(flow!!)
             }
         }
@@ -104,12 +114,34 @@ class ActionsFragment : Fragment(), ActionsListener {
 
     //on long click action
     override fun onActionSelected(action: Action) {
-        helpers.getChooseOptionDialog(requireActivity(),requireContext(),"Choose option",this, action).show()
+        helpers.getChooseOptionDialog(
+            requireActivity(),
+            requireContext(),
+            "Choose option",
+            this,
+            action
+        ).show()
     }
 
     //update flow and setup it into viewmodel
-    private fun setFlow(flow: Flow){
+    private fun setFlow(flow: Flow) {
         flowsViewModel.insertFlow(flow)
         chooseFlowViewModel.setFlow(flow)
+    }
+
+    private fun showFlowPreview() {
+        val listOfColors = arrayListOf<Int>()
+        flow!!.actions.forEach {
+            listOfColors.add(it.color)
+        }
+
+        ObjectAnimator.ofInt(flowPreview, "colorFilter"/*list items here*/).apply {
+            duration = 4000
+            setEvaluator(ArgbEvaluator())
+            start()
+        }
+
+
+
     }
 }
