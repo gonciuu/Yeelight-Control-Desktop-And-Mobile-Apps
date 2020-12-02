@@ -15,15 +15,13 @@ import com.example.yeebum.control_bulb.ActionsListener
 import com.example.yeebum.control_bulb.ChooseValue
 import com.example.yeebum.models.Action
 import com.example.yeebum.screens.adapters.recycler_views.DevicesAdapter
-import com.example.yeebum.screens.flows_control.FlowsInterface
+import com.example.yeebum.screens.bulbs.SearchedBulbsInterface
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.choose_option_dialog.view.*
 import kotlinx.android.synthetic.main.color_picker_dialog.view.*
 import kotlinx.android.synthetic.main.devices_dialog.view.*
 import kotlinx.android.synthetic.main.duration_dialog.view.*
-import kotlinx.android.synthetic.main.fragment_action_color_details.*
 import kotlinx.android.synthetic.main.seekbar_dialog.view.*
-import java.lang.IllegalStateException
 
 class Helpers {
 
@@ -133,15 +131,17 @@ class Helpers {
 
 
     //------------------------------------------------| Get list Of Devices Dialog |-----------------------------------------------
-    fun getDevicesDialog(activity: FragmentActivity, context: Context, title: String, devicesList:ArrayList<HashMap<String,String>>){
+    fun getDevicesDialog(activity: FragmentActivity, context: Context, title: String, devicesList:ArrayList<HashMap<String,String>>, listener:SearchedBulbsInterface){
         val view = LayoutInflater.from(context).inflate(R.layout.devices_dialog, null, false)
+        val dialog = AlertDialog.Builder(context, R.style.DialogTheme).setTitle(title).setView(view).create()
+
         view.devicesRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = DevicesAdapter(devicesList)
+            adapter = DevicesAdapter(devicesList,listener,dialog)
         }
 
         activity.let {
-            AlertDialog.Builder(context, R.style.DialogTheme).setTitle(title).setView(view).create().show()
+           dialog.show()
         }
     }
     //===============================================================================================================================

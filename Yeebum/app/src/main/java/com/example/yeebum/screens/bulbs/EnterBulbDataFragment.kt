@@ -13,26 +13,28 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.yeebum.R
 import com.example.yeebum.YeebumApplication
-import com.example.yeebum.databases.bulbs_database.*
+import com.example.yeebum.databases.bulbs_database.BulbsViewModel
+import com.example.yeebum.databases.bulbs_database.BulbsViewModelFactory
 import com.example.yeebum.models.Bulb
 import com.example.yeebum.screens.components.Helpers
 import com.example.yeebum.screens.components.LoadingDialog
+import kotlinx.android.synthetic.main.fragment_all_bulbs.*
 import kotlinx.android.synthetic.main.fragment_enter_bulb_data.*
-import java.lang.Exception
 import java.net.DatagramPacket
 import java.net.DatagramSocket
 import java.net.InetAddress
 
 
-class EnterBulbDataFragment : Fragment() {
+class EnterBulbDataFragment : Fragment() ,SearchedBulbsInterface{
 
     //bulb message info to get the available bulbs
     companion object {
@@ -71,7 +73,11 @@ class EnterBulbDataFragment : Fragment() {
     }
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? =
         inflater.inflate(R.layout.fragment_enter_bulb_data, container, false)
 
 
@@ -205,7 +211,7 @@ class EnterBulbDataFragment : Fragment() {
         requireActivity(),
         requireContext(),
         "Choose Device",
-        listOfDevices
+        listOfDevices, this
     )
 
 
@@ -215,6 +221,15 @@ class EnterBulbDataFragment : Fragment() {
         multicastLock.release()
     }
 
+
+    //------------------------| Set texts inputs on choose the bulb |---------------------------
+    override fun onChooseBulb(bulbInfo: HashMap<String, String>) {
+        val ipinfo = bulbInfo["Location"]!!.split("//")[1]
+        bulbNameInput.setText("Yeelight :]")
+        bulbIpInput.setText(ipinfo.split(":".toRegex()).toTypedArray()[0])
+        bulbPortInput.setText(ipinfo.split(":".toRegex()).toTypedArray()[1])
+    }
+    //=========================================================================================
 
 
 }
