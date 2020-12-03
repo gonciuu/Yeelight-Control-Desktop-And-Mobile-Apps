@@ -2,6 +2,7 @@ package com.example.yeebum.screens.adapters.recycler_views
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.yeebum.R
@@ -23,6 +24,11 @@ class AllBulbsRecyclerViewAdapter(private val listOfBulbs: List<Bulb> ,private v
 
         holder.allBulbCard?.setOnClickListener {
             listener.onBulbClick(bulb.ip,bulb.port)
+        }
+
+        holder.allBulbCard!!.setOnLongClickListener {
+            listener.onLongClickBulb(bulb)
+            true
         }
 
     }

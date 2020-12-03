@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.NumberPicker
 import android.widget.SeekBar
-import androidx.compose.animation.core.RepeatMode
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,7 +15,9 @@ import com.example.yeebum.R
 import com.example.yeebum.control_bulb.ActionsListener
 import com.example.yeebum.control_bulb.ChooseValue
 import com.example.yeebum.models.Action
+import com.example.yeebum.models.Bulb
 import com.example.yeebum.screens.adapters.recycler_views.DevicesAdapter
+import com.example.yeebum.screens.bulbs.BulbsInterface
 import com.example.yeebum.screens.bulbs.SearchedBulbsInterface
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.choose_option_dialog.view.*
@@ -165,5 +166,23 @@ class Helpers {
         }
     }
     //===============================================================================================================================
+
+
+    fun getChooseOptionDialogBulb(activity: FragmentActivity, context: Context, title: String, listener:BulbsInterface,bulb: Bulb): AlertDialog {
+        val view = LayoutInflater.from(context).inflate(R.layout.choose_option_dialog, null, false)
+
+        return activity.let {
+            val dialog = AlertDialog.Builder(context, R.style.DialogTheme).setTitle(title).setView(view).create()
+            view.editAction.setOnClickListener {
+                listener.onEditBulb(bulb)
+                dialog.dismiss()
+            }
+            view.deleteAction.setOnClickListener {
+                listener.onDeleteBulb(bulb)
+                dialog.dismiss()
+            }
+            dialog
+        } ?: throw Exception("Activity must not be null!")
+    }
 
 }
