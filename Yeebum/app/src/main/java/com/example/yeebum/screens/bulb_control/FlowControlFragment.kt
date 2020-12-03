@@ -86,6 +86,9 @@ class FlowControlFragment : Fragment(), FlowsInterface {
     //--------------| Get all Flows From Database |----------------
     private fun getAllFlows(){
         flowsViewModel.allFlows.observe(viewLifecycleOwner){
+            if(it.isNullOrEmpty())emptyFlowListText.visibility = View.VISIBLE
+            else emptyFlowListText.visibility = View.GONE
+
             flowsRecyclerView.layoutManager = LinearLayoutManager(context)
             flowsRecyclerView.adapter = FlowsRecyclerViewAdapter(this,it)
         }

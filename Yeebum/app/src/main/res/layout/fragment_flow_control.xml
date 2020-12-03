@@ -17,6 +17,21 @@
         android:clipToPadding="false"
         android:paddingBottom="40dp" />
 
+    <TextView
+        android:id="@+id/emptyFlowListText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="60dp"
+        android:paddingEnd="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="80dp"
+        android:visibility="gone"
+        android:fontFamily="@font/open_sans_semibold"
+        android:text="Click '+' to add your first flow"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="24sp" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addFlowButton"
         android:layout_width="wrap_content"
