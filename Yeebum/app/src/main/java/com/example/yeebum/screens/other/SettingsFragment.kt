@@ -8,16 +8,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SwitchCompat
 import com.example.yeebum.R
+import com.example.yeebum.screens.components.Prefs
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingsFragment : Fragment() {
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? =
         inflater.inflate(R.layout.fragment_settings, container, false)
 
 
-
+    private val prefs = Prefs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,16 +34,12 @@ class SettingsFragment : Fragment() {
 
 
     //------------------------------| Save state to shared prefs on switch changed |-------------------------------
-    private fun setupSwitchesOnChange(){
-        val prefs = requireActivity().getSharedPreferences("OPTIONS",MODE_PRIVATE)
-        val listOfSwitches = arrayListOf<SwitchCompat>(showBulbNameSwitch,showBulbPortSwitch,showBulbIpSwitch)
-        val listOfPrefsName = arrayListOf<String>("showName","showPort","showIp")
+    private fun setupSwitchesOnChange() {
+        val listOfSwitches = arrayListOf<SwitchCompat>(showBulbNameSwitch, showBulbPortSwitch, showBulbIpSwitch)
+        val listOfPrefsName = arrayListOf("showName", "showPort", "showIp")
         listOfSwitches.forEach {
-            it.setOnCheckedChangeListener{ _, isChecked->
-                prefs.edit().apply {
-                    putBoolean(listOfPrefsName[listOfSwitches.indexOf(it)],isChecked)
-                    apply()
-                }
+            it.setOnCheckedChangeListener { _, isChecked ->
+                prefs.setField(requireActivity(), listOfPrefsName[listOfSwitches.indexOf(it)], isChecked)
             }
         }
     }
@@ -46,13 +47,11 @@ class SettingsFragment : Fragment() {
 
 
     //----------------------------------| setup switch start check state |-----------------------------------
-    private fun setupSwitchValues(){
-        val prefs = requireActivity().getSharedPreferences("OPTIONS",MODE_PRIVATE)
-        prefs.apply {
-            showBulbNameSwitch.isChecked = getBoolean("showName", true)
-            showBulbPortSwitch.isChecked = getBoolean("showPort", true)
-            showBulbIpSwitch.isChecked = getBoolean("showIp", true)
-        }
+    private fun setupSwitchValues() {
+        val settings = prefs.getSettings(requireActivity())
+        showBulbNameSwitch.isChecked = settings["showName"]!!
+        showBulbPortSwitch.isChecked = settings["showPort"]!!
+        showBulbIpSwitch.isChecked = settings["showIp"]!!
     }
     //========================================================================================================
 
