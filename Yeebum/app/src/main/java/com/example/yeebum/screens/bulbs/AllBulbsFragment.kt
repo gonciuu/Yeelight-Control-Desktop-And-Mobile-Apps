@@ -17,8 +17,10 @@ import com.example.yeebum.models.Bulb
 import com.example.yeebum.screens.adapters.recycler_views.AllBulbsRecyclerViewAdapter
 import com.example.yeebum.screens.components.AppDrawer
 import com.example.yeebum.screens.components.Helpers
+import com.example.yeebum.screens.components.Prefs
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_all_bulbs.*
+import kotlinx.android.synthetic.main.fragment_settings.*
 
 
 class AllBulbsFragment : Fragment(), BulbsInterface {
@@ -66,12 +68,14 @@ class AllBulbsFragment : Fragment(), BulbsInterface {
 
     //------------------------| Get Bulbs From database and setup it into recyclerview |-------------------------
     private fun getBulbs() {
+        val settings = Prefs().getSettings(requireActivity())
+
         bulbsViewModel.allBulbs.observe(viewLifecycleOwner) {
             if(it.isNullOrEmpty()) emptyListText.visibility = View.VISIBLE
             else emptyListText.visibility = View.GONE
             bulbsRecyclerView?.apply {
                 layoutManager = LinearLayoutManager(requireContext())
-                adapter = AllBulbsRecyclerViewAdapter(it, this@AllBulbsFragment)
+                adapter = AllBulbsRecyclerViewAdapter(it, this@AllBulbsFragment,settings)
             }
         }
     }
