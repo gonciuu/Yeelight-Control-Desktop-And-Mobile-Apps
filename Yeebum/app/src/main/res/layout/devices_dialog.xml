@@ -1,8 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/devicesRecyclerView"
-    android:layout_width="match_parent"
-    android:paddingTop="20dp"
-    android:paddingBottom="20dp"
-    android:clipToPadding="true"
-    android:layout_height="wrap_content"/>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/devicesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp" />
+
+    <TextView
+        android:id="@+id/emptyListInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cannot find any bulbs"
+        android:textAlignment="center"
+        android:paddingStart="40dp"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        android:paddingEnd="40dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/open_sans_semibold"
+        android:textSize="18sp"/>
+
+
+    <ImageView
+        android:id="@+id/refreshButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/oval_bg"
+        app:tint="@color/colorPrimary"
+        android:src="@drawable/ic_refresh"
+        android:padding="7dp"
+        android:backgroundTint="@color/white"
+        android:layout_marginBottom="20dp"
+        android:contentDescription="@string/refresh" />
+
+</LinearLayout>

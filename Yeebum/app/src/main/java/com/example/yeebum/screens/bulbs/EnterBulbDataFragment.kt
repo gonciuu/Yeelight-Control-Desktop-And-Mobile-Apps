@@ -1,5 +1,6 @@
 package com.example.yeebum.screens.bulbs
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Color
@@ -90,7 +91,7 @@ class EnterBulbDataFragment : Fragment() ,SearchedBulbsInterface{
         val wm = requireActivity().applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
         multicastLock = wm.createMulticastLock("yeebum")
         multicastLock.acquire()
-        searchForDevices()
+        searchForDevices(2000)
 
         setSpannableText()
         enterBulbDataBackButton.setOnClickListener {
@@ -126,10 +127,10 @@ class EnterBulbDataFragment : Fragment() ,SearchedBulbsInterface{
 
     //-----------------------------| Save bulb into database |-----------------------------------
     private fun saveBulb() {
-        val name = if (bulbNameInput.text.isNullOrEmpty()) "My Yeelight" else bulbNameInput.text.toString()
-        val ip = bulbIpInput.text.toString()
+        val name = if (bulbNameInput.text.isNullOrEmpty()) "My Yeelight" else bulbNameInput.text.toString().trim()
+        val ip = bulbIpInput.text.toString().trim()
         val port = try {
-            bulbPortInput.text.toString().toInt()
+            bulbPortInput.text.toString().trim().toInt()
         } catch (ex: Exception) {
             0
         }
@@ -143,7 +144,7 @@ class EnterBulbDataFragment : Fragment() ,SearchedBulbsInterface{
 
 
     //--------------------------------------------| Search for bulbs to pare |--------------------------------------
-    private fun searchForDevices() {
+    private fun searchForDevices(delay:Long) {
         loadingDialog?.show()
 
         searchThread = Thread {
@@ -156,7 +157,7 @@ class EnterBulbDataFragment : Fragment() ,SearchedBulbsInterface{
                     UDP_PORT
                 )
                 mDSocket.send(dpSend)
-                mHandler.sendEmptyMessageDelayed(MSG_STOP_SEARCH, 2000)
+                mHandler.sendEmptyMessageDelayed(MSG_STOP_SEARCH, delay)
                 while (isSearching) {
                     val buf = ByteArray(1024)
                     val dpReceive = DatagramPacket(buf, buf.size)
@@ -232,13 +233,17 @@ class EnterBulbDataFragment : Fragment() ,SearchedBulbsInterface{
 
 
     //------------------------| Set texts inputs on choose the bulb |---------------------------
+    @SuppressLint("SetTextI18n")
     override fun onChooseBulb(bulbInfo: HashMap<String, String>) {
-        val ipinfo = bulbInfo["Location"]!!.split("//")[1]
-        bulbNameInput.setText("Yeelight :]")
-        bulbIpInput.setText(ipinfo.split(":".toRegex()).toTypedArray()[0])
-        bulbPortInput.setText(ipinfo.split(":".toRegex()).toTypedArray()[1])
+        val ipInfo = bulbInfo["Location"]!!.split("//")[1]
+        bulbNameInput.setText("My Yeelight${bulbInfo["model"]}")
+        bulbIpInput.setText(ipInfo.split(":".toRegex()).toTypedArray()[0])
+        bulbPortInput.setText(ipInfo.split(":".toRegex()).toTypedArray()[1])
     }
     //=========================================================================================
+
+    override fun onRefresh() = searchForDevices(4000)
+
 
 
 }

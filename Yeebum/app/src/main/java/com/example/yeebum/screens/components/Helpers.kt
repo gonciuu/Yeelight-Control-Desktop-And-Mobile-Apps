@@ -1,5 +1,6 @@
 package com.example.yeebum.screens.components
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.NumberPicker
 import android.widget.SeekBar
+import androidx.compose.animation.core.RepeatMode
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -135,9 +137,27 @@ class Helpers {
         val view = LayoutInflater.from(context).inflate(R.layout.devices_dialog, null, false)
         val dialog = AlertDialog.Builder(context, R.style.DialogTheme).setTitle(title).setView(view).create()
 
-        view.devicesRecyclerView.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = DevicesAdapter(devicesList,listener,dialog)
+        //show refresh button animation
+        ObjectAnimator.ofFloat(view.refreshButton,View.ROTATION,0f,360f).apply {
+            duration = 2000
+            repeatMode = ObjectAnimator.RESTART
+            repeatCount = ObjectAnimator.INFINITE
+            start()
+        }
+
+        if(devicesList.isEmpty()){
+            view.emptyListInfo.visibility = View.VISIBLE
+            view.devicesRecyclerView.visibility = View.GONE
+        }else{
+            view.devicesRecyclerView.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = DevicesAdapter(devicesList,listener,dialog)
+            }
+        }
+
+        view.refreshButton.setOnClickListener {
+            dialog.dismiss()
+            listener.onRefresh()
         }
 
         activity.let {

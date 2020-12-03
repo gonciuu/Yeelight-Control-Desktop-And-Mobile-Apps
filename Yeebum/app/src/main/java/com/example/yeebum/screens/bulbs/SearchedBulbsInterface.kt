@@ -4,4 +4,6 @@ interface SearchedBulbsInterface {
 
     fun onChooseBulb(bulbInfo:HashMap<String,String>)
 
+    fun onRefresh()
+
 }
