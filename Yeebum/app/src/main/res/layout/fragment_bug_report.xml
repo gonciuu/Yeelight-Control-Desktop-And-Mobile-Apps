@@ -8,13 +8,15 @@
     tools:context=".screens.other.BugReportFragment">
 
     <Button
-        android:id="@+id/saveBulbButton2"
-        android:layout_width="351dp"
+        android:id="@+id/sendBugReportButton"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"
         android:background="@drawable/rounded_bg_15"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/open_sans_semibold"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
         android:text="@string/report"
@@ -53,28 +55,28 @@
 
 
     <EditText
+        android:id="@+id/bugTextEntry"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
-        android:gravity="top"
+        android:layout_marginBottom="40dp"
+        android:autofillHints=""
         android:background="@drawable/rounded_stroke_bg_15"
+        android:gravity="top"
         android:hint="@string/enter_when_you_had_the_bug"
+        android:maxLines="100"
         android:padding="20dp"
         android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textCursorDrawable="@null"
         android:textColorHint="@color/lightGray"
-        app:layout_constraintBottom_toTopOf="@+id/saveBulbButton2"
+        android:textCursorDrawable="@null"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/sendBugReportButton"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="40dp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView24"
-        android:autofillHints=""
-        android:maxLines="100"
-         />
+        app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
