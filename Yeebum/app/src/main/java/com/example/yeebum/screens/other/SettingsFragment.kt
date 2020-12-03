@@ -1,15 +1,19 @@
 package com.example.yeebum.screens.other
 
-import android.content.Context.MODE_PRIVATE
+import android.content.pm.PackageManager
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SwitchCompat
+import androidx.fragment.app.Fragment
+import com.example.yeebum.BuildConfig
 import com.example.yeebum.R
+import com.example.yeebum.screens.components.Helpers
 import com.example.yeebum.screens.components.Prefs
 import kotlinx.android.synthetic.main.fragment_settings.*
+import java.lang.Exception
+
 
 class SettingsFragment : Fragment() {
 
@@ -23,6 +27,7 @@ class SettingsFragment : Fragment() {
 
 
     private val prefs = Prefs()
+    private val helpers = Helpers()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,16 +35,28 @@ class SettingsFragment : Fragment() {
         settingsBackButton.setOnClickListener { requireActivity().onBackPressed() }
         setupSwitchValues()
         setupSwitchesOnChange()
+
+
+        //show app version
+        showAppVersion()
     }
 
 
     //------------------------------| Save state to shared prefs on switch changed |-------------------------------
     private fun setupSwitchesOnChange() {
-        val listOfSwitches = arrayListOf<SwitchCompat>(showBulbNameSwitch, showBulbPortSwitch, showBulbIpSwitch)
+        val listOfSwitches = arrayListOf<SwitchCompat>(
+            showBulbNameSwitch,
+            showBulbPortSwitch,
+            showBulbIpSwitch
+        )
         val listOfPrefsName = arrayListOf("showName", "showPort", "showIp")
         listOfSwitches.forEach {
             it.setOnCheckedChangeListener { _, isChecked ->
-                prefs.setField(requireActivity(), listOfPrefsName[listOfSwitches.indexOf(it)], isChecked)
+                prefs.setField(
+                    requireActivity(),
+                    listOfPrefsName[listOfSwitches.indexOf(it)],
+                    isChecked
+                )
             }
         }
     }
@@ -54,5 +71,19 @@ class SettingsFragment : Fragment() {
         showBulbIpSwitch.isChecked = settings["showIp"]!!
     }
     //========================================================================================================
+
+    //-----------------------------| Show App version in snackbar |-------------------------
+    private fun showAppVersion(){
+        appVersionBox.setOnClickListener {
+            try {
+                helpers.showSnackBar(requireView(),"App version : ${BuildConfig.VERSION_NAME}",null,null)
+            } catch (e: PackageManager.NameNotFoundException) {
+                helpers.showSnackBar(requireView(),"Cannot find app version",null,null)
+            }catch (ex:Exception){
+                helpers.showSnackBar(requireView(),ex.message.toString(),null,null)
+            }
+        }
+    }
+    //=======================================================================================
 
 }
