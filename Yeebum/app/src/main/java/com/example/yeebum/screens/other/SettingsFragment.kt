@@ -7,16 +7,28 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.yeebum.BuildConfig
 import com.example.yeebum.R
+import com.example.yeebum.YeebumApplication
+import com.example.yeebum.databases.bulbs_database.BulbsViewModel
+import com.example.yeebum.databases.bulbs_database.BulbsViewModelFactory
+import com.example.yeebum.databases.flows_database.FlowsViewModel
+import com.example.yeebum.databases.flows_database.FlowsViewModelFactory
 import com.example.yeebum.screens.components.Helpers
 import com.example.yeebum.screens.components.Prefs
 import kotlinx.android.synthetic.main.fragment_settings.*
 import java.lang.Exception
 
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : Fragment(),SettingsInterface {
+    private val bulbsViewModel: BulbsViewModel by viewModels {
+        BulbsViewModelFactory((requireActivity().application as YeebumApplication).bulbsRepository)
+    }
 
+    private val flowsViewModel: FlowsViewModel by viewModels {
+        FlowsViewModelFactory((requireActivity().application as YeebumApplication).flowsRepository)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +47,7 @@ class SettingsFragment : Fragment() {
         settingsBackButton.setOnClickListener { requireActivity().onBackPressed() }
         setupSwitchValues()
         setupSwitchesOnChange()
-
+        setupFactorySettings()
 
         //show app version
         showAppVersion()
@@ -85,5 +97,23 @@ class SettingsFragment : Fragment() {
         }
     }
     //=======================================================================================
+
+    private fun setupFactorySettings(){
+        factorySettingsBox.setOnClickListener {
+            helpers.getConfirmFactorySettingsDialog(requireActivity(),requireContext(),this).show()
+        }
+    }
+
+    override fun setFactorySettings() {
+        prefs.apply {
+            setField(requireActivity(),"showName",true)
+            setField(requireActivity(),"showIp",true)
+            setField(requireActivity(),"showPort",true)
+        }
+        bulbsViewModel.deleteAllBulbs()
+        flowsViewModel.deleteAllFlows()
+        helpers.showSnackBar(requireView(),"Factory settings has been set",null,null)
+        requireActivity().onBackPressed()
+    }
 
 }

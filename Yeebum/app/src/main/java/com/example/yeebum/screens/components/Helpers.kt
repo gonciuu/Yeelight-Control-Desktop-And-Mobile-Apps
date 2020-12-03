@@ -19,6 +19,7 @@ import com.example.yeebum.models.Bulb
 import com.example.yeebum.screens.adapters.recycler_views.DevicesAdapter
 import com.example.yeebum.screens.bulbs.BulbsInterface
 import com.example.yeebum.screens.bulbs.SearchedBulbsInterface
+import com.example.yeebum.screens.other.SettingsInterface
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.choose_option_dialog.view.*
 import kotlinx.android.synthetic.main.color_picker_dialog.view.*
@@ -37,7 +38,14 @@ class Helpers {
 
 
     //---------------------------------------------------------| Show Dialog with seekbar to control color temperature of bulb |-------------------------------------------------------
-    fun getSeekBarColorTempDialog(activity: FragmentActivity, context: Context, title: String, description: String, actualTemp:Int, chooseValue: ChooseValue): AlertDialog {
+    fun getSeekBarColorTempDialog(
+        activity: FragmentActivity,
+        context: Context,
+        title: String,
+        description: String,
+        actualTemp: Int,
+        chooseValue: ChooseValue
+    ): AlertDialog {
         val view = LayoutInflater.from(context).inflate(R.layout.seekbar_dialog, null, false)
         view.dialogSeekBar.apply {
             max = 4800
@@ -67,7 +75,13 @@ class Helpers {
     //=================================================================================================================================================================================
 
     //---------------------------------------------------------| Show Dialog with color picker to control color of bulb |-------------------------------------------------------
-    fun getChooseColorDialog(activity: FragmentActivity, context: Context, title: String,currentColor:Int, chooseValue: ChooseValue): AlertDialog {
+    fun getChooseColorDialog(
+        activity: FragmentActivity,
+        context: Context,
+        title: String,
+        currentColor: Int,
+        chooseValue: ChooseValue
+    ): AlertDialog {
         val view = LayoutInflater.from(context).inflate(R.layout.color_picker_dialog, null, false)
         view.dialogColorPicker.oldCenterColor = currentColor
         return activity.let {
@@ -85,14 +99,19 @@ class Helpers {
     //==========================================================================================================================================================================
 
     //---------------------------------------------------------| Show Dialog with duration picker to control color of bulb |-------------------------------------------------------
-    fun getDurationPickerDialog(activity: FragmentActivity, context: Context, title: String, chooseValue: ChooseValue): AlertDialog {
+    fun getDurationPickerDialog(
+        activity: FragmentActivity,
+        context: Context,
+        title: String,
+        chooseValue: ChooseValue
+    ): AlertDialog {
         val view = LayoutInflater.from(context).inflate(R.layout.duration_dialog, null, false)
 
-        arrayListOf<NumberPicker>(view.hoursPickerDialog,view.minutesPickerDialog)
+        arrayListOf<NumberPicker>(view.hoursPickerDialog, view.minutesPickerDialog)
             .forEach {
                 it.apply {
-                    minValue=0
-                    maxValue=60
+                    minValue = 0
+                    maxValue = 60
                     setOnLongPressUpdateInterval(100)
                 }
             }
@@ -101,11 +120,12 @@ class Helpers {
             AlertDialog.Builder(context, R.style.DialogTheme).setTitle(title)
                 .setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
                 .setPositiveButton("Apply") { dialog, _ ->
-                    chooseValue.onSetDuration(view.hoursPickerDialog.value*60 + view.minutesPickerDialog.value)
+                    chooseValue.onSetDuration(view.hoursPickerDialog.value * 60 + view.minutesPickerDialog.value)
                     dialog.dismiss()
                 }.setNeutralButton("Infinite") { dialog, _ ->
                     chooseValue.onSetDuration(-1)
-                    dialog.dismiss() }.setView(view).create()
+                    dialog.dismiss()
+                }.setView(view).create()
         } ?: throw Exception("Activity must not be null!")
 
     }
@@ -113,11 +133,19 @@ class Helpers {
 
 
     //-----------------------------------------------| Edit Or Delete Action Dialog |----------------------------------------
-    fun getChooseOptionDialog(activity: FragmentActivity, context: Context, title: String, listener:ActionsListener,action:Action):AlertDialog{
+    fun getChooseOptionDialog(
+        activity: FragmentActivity,
+        context: Context,
+        title: String,
+        listener: ActionsListener,
+        action: Action
+    ): AlertDialog {
         val view = LayoutInflater.from(context).inflate(R.layout.choose_option_dialog, null, false)
 
         return activity.let {
-            val dialog = AlertDialog.Builder(context, R.style.DialogTheme).setTitle(title).setView(view).create()
+            val dialog =
+                AlertDialog.Builder(context, R.style.DialogTheme).setTitle(title).setView(view)
+                    .create()
             view.editAction.setOnClickListener {
                 listener.onActionEdit(action)
                 dialog.dismiss()
@@ -134,25 +162,32 @@ class Helpers {
 
 
     //------------------------------------------------| Get list Of Devices Dialog |-----------------------------------------------
-    fun getDevicesDialog(activity: FragmentActivity, context: Context, title: String, devicesList:ArrayList<HashMap<String,String>>, listener:SearchedBulbsInterface){
+    fun getDevicesDialog(
+        activity: FragmentActivity,
+        context: Context,
+        title: String,
+        devicesList: ArrayList<HashMap<String, String>>,
+        listener: SearchedBulbsInterface
+    ) {
         val view = LayoutInflater.from(context).inflate(R.layout.devices_dialog, null, false)
-        val dialog = AlertDialog.Builder(context, R.style.DialogTheme).setTitle(title).setView(view).create()
+        val dialog =
+            AlertDialog.Builder(context, R.style.DialogTheme).setTitle(title).setView(view).create()
 
         //show refresh button animation
-        ObjectAnimator.ofFloat(view.refreshButton,View.ROTATION,0f,360f).apply {
+        ObjectAnimator.ofFloat(view.refreshButton, View.ROTATION, 0f, 360f).apply {
             duration = 2000
             repeatMode = ObjectAnimator.RESTART
             repeatCount = ObjectAnimator.INFINITE
             start()
         }
 
-        if(devicesList.isEmpty()){
+        if (devicesList.isEmpty()) {
             view.emptyListInfo.visibility = View.VISIBLE
             view.devicesRecyclerView.visibility = View.GONE
-        }else{
+        } else {
             view.devicesRecyclerView.apply {
                 layoutManager = LinearLayoutManager(context)
-                adapter = DevicesAdapter(devicesList,listener,dialog)
+                adapter = DevicesAdapter(devicesList, listener, dialog)
             }
         }
 
@@ -162,17 +197,26 @@ class Helpers {
         }
 
         activity.let {
-           dialog.show()
+            dialog.show()
         }
     }
     //===============================================================================================================================
 
 
-    fun getChooseOptionDialogBulb(activity: FragmentActivity, context: Context, title: String, listener:BulbsInterface,bulb: Bulb): AlertDialog {
+    //----------------------------------| Show options Dialog about bulb |----------------------------------------------
+    fun getChooseOptionDialogBulb(
+        activity: FragmentActivity,
+        context: Context,
+        title: String,
+        listener: BulbsInterface,
+        bulb: Bulb
+    ): AlertDialog {
         val view = LayoutInflater.from(context).inflate(R.layout.choose_option_dialog, null, false)
 
         return activity.let {
-            val dialog = AlertDialog.Builder(context, R.style.DialogTheme).setTitle(title).setView(view).create()
+            val dialog =
+                AlertDialog.Builder(context, R.style.DialogTheme).setTitle(title).setView(view)
+                    .create()
             view.editAction.setOnClickListener {
                 listener.onEditBulb(bulb)
                 dialog.dismiss()
@@ -184,5 +228,21 @@ class Helpers {
             dialog
         } ?: throw Exception("Activity must not be null!")
     }
+    //======================================================================================================================
+
+    //-------------------------------| Show conform factory Settings Dialog |---------------------------------------
+    fun getConfirmFactorySettingsDialog(activity: FragmentActivity, context: Context, listener:SettingsInterface): AlertDialog {
+        return activity.let {
+            AlertDialog.Builder(context, R.style.DialogTheme).setTitle("Are you sure?")
+                .setMessage("Are you sure to back to factory settings?")
+                .setPositiveButton("Confirm") { dialog, _ ->
+                    listener.setFactorySettings()
+                    dialog.dismiss()
+                }.setNegativeButton("Cancel") { dialog, _ ->
+                    dialog.dismiss()
+                }.create()
+        }?: throw Exception("Activity must not be null!")
+    }
+    //===============================================================================================================
 
 }
