@@ -54,6 +54,7 @@ class AllBulbsFragment : Fragment(), BulbsInterface {
 
     }
 
+    //go to control fragment on bulb click
     override fun onBulbClick(ip: String, port: Int) {
         val bundle = bundleOf("ip" to ip, "port" to port)
         findNavController().navigate(
@@ -66,6 +67,8 @@ class AllBulbsFragment : Fragment(), BulbsInterface {
     //------------------------| Get Bulbs From database and setup it into recyclerview |-------------------------
     private fun getBulbs() {
         bulbsViewModel.allBulbs.observe(viewLifecycleOwner) {
+            if(it.isNullOrEmpty()) emptyListText.visibility = View.VISIBLE
+            else emptyListText.visibility = View.GONE
             bulbsRecyclerView?.apply {
                 layoutManager = LinearLayoutManager(requireContext())
                 adapter = AllBulbsRecyclerViewAdapter(it, this@AllBulbsFragment)
@@ -80,7 +83,7 @@ class AllBulbsFragment : Fragment(), BulbsInterface {
         drawer.setOpenDrawer(allBulbsDrawerButton, requireActivity())
     }
 
-
+    //on long click on bulb (show dialog)
     override fun onLongClickBulb(bulb: Bulb) {
         helpers.getChooseOptionDialogBulb(
             requireActivity(),
@@ -91,6 +94,8 @@ class AllBulbsFragment : Fragment(), BulbsInterface {
         ).show()
     }
 
+
+    //on delete the bulb
     override fun onDeleteBulb(bulb: Bulb) {
         bulbsViewModel.deleteBulb(bulb)
         helpers.showSnackBar(requireView(),"Deleted","Undo"){
@@ -98,6 +103,7 @@ class AllBulbsFragment : Fragment(), BulbsInterface {
         }
     }
 
+    //on edit the bulb
     override fun onEditBulb(bulb: Bulb) {
         findNavController().navigate(
            AllBulbsFragmentDirections.actionAllBulbsFragmentToEnterBulbDataFragment().actionId, bundleOf("bulb" to Gson().toJson(bulb))

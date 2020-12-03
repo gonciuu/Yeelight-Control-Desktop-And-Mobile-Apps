@@ -260,6 +260,7 @@ class EnterBulbDataFragment : Fragment() ,SearchedBulbsInterface{
     override fun onRefresh() = searchForDevices(4000)
 
 
+    //--------------------------------setup start data in edittexts-----------------------
     private fun setupStartData(){
         if(!requireArguments().isEmpty){
             val bulb = Gson().fromJson(requireArguments().getString("bulb"),Bulb::class.java)
@@ -268,5 +269,6 @@ class EnterBulbDataFragment : Fragment() ,SearchedBulbsInterface{
             bulbIpInput.setText(bulb.ip)
         }
     }
+    //====================================================================================
 
 }

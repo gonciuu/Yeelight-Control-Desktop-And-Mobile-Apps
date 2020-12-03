@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary"
@@ -59,13 +60,31 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="48dp"
-                android:paddingBottom="30dp"
                 android:clipToPadding="true"
                 android:overScrollMode="never"
+                android:paddingBottom="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+            <TextView
+                android:id="@+id/emptyListText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingStart="60dp"
+                android:paddingEnd="60dp"
+                android:layout_marginTop="28dp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="Click '+' to add your first bulb"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bulbsRecyclerView" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
