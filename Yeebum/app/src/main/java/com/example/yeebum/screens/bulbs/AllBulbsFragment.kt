@@ -17,6 +17,7 @@ import com.example.yeebum.models.Bulb
 import com.example.yeebum.screens.adapters.recycler_views.AllBulbsRecyclerViewAdapter
 import com.example.yeebum.screens.components.AppDrawer
 import com.example.yeebum.screens.components.Helpers
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_all_bulbs.*
 
 
@@ -98,7 +99,9 @@ class AllBulbsFragment : Fragment(), BulbsInterface {
     }
 
     override fun onEditBulb(bulb: Bulb) {
-
+        findNavController().navigate(
+           AllBulbsFragmentDirections.actionAllBulbsFragmentToEnterBulbDataFragment().actionId, bundleOf("bulb" to Gson().toJson(bulb))
+        )
     }
 
 

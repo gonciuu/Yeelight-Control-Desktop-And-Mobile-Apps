@@ -20,6 +20,11 @@ class BulbsRepository(private val bulbsDao: BulbsDao) {
     }
 
     @WorkerThread
+    suspend fun updateBulb(bulb: Bulb){
+        bulbsDao.updateBulb(bulb)
+    }
+
+    @WorkerThread
     suspend fun deleteAllBulbs(){
         bulbsDao.deleteAllBulbs()
     }

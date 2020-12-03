@@ -28,6 +28,7 @@ import com.example.yeebum.databases.bulbs_database.BulbsViewModelFactory
 import com.example.yeebum.models.Bulb
 import com.example.yeebum.screens.components.Helpers
 import com.example.yeebum.screens.components.LoadingDialog
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_all_bulbs.*
 import kotlinx.android.synthetic.main.fragment_enter_bulb_data.*
 import java.net.DatagramPacket
@@ -91,6 +92,7 @@ class EnterBulbDataFragment : Fragment() ,SearchedBulbsInterface{
         val wm = requireActivity().applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
         multicastLock = wm.createMulticastLock("yeebum")
         multicastLock.acquire()
+        setupStartData()
         searchForDevices(2000)
 
         setSpannableText()
@@ -102,6 +104,8 @@ class EnterBulbDataFragment : Fragment() ,SearchedBulbsInterface{
         saveBulbButton.setOnClickListener {
             saveBulb()
         }
+
+
     }
 
 
@@ -134,11 +138,22 @@ class EnterBulbDataFragment : Fragment() ,SearchedBulbsInterface{
         } catch (ex: Exception) {
             0
         }
-        if (ip.contains("192.168") && port > 10000) {
-            bulbsViewModel.insertBulb(Bulb(name, ip, port))
-            requireActivity().onBackPressed()
-        } else
-            helpers.showSnackBar(requireView(), "Check your port and ip format", null, null)
+
+            if (ip.contains("192.168") && port > 10000) {
+                if(requireArguments().isEmpty){
+                    bulbsViewModel.insertBulb(Bulb(name, ip, port))
+                }else{
+                    val bulb = Gson().fromJson(requireArguments().getString("bulb"),Bulb::class.java)
+                    bulb.ip = ip
+                    bulb.port = port
+                    bulb.name = name
+                    bulbsViewModel.updateBulb(bulb)
+                }
+                requireActivity().onBackPressed()
+            } else
+                helpers.showSnackBar(requireView(), "Check your port and ip format", null, null)
+
+
     }
     //===========================================================================================
 
@@ -245,5 +260,13 @@ class EnterBulbDataFragment : Fragment() ,SearchedBulbsInterface{
     override fun onRefresh() = searchForDevices(4000)
 
 
+    private fun setupStartData(){
+        if(!requireArguments().isEmpty){
+            val bulb = Gson().fromJson(requireArguments().getString("bulb"),Bulb::class.java)
+            bulbNameInput.setText(bulb.name)
+            bulbPortInput.setText(bulb.port.toString())
+            bulbIpInput.setText(bulb.ip)
+        }
+    }
 
 }

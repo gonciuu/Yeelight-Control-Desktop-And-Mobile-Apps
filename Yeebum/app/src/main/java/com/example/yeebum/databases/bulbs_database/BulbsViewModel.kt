@@ -19,6 +19,10 @@ class BulbsViewModel(private val repository: BulbsRepository):ViewModel() {
         repository.deleteBulb(bulb)
     }
 
+    fun updateBulb(bulb: Bulb) = viewModelScope.launch {
+        repository.updateBulb(bulb)
+    }
+
 
     fun deleteAllBulbs() = viewModelScope.launch {
         repository.deleteAllBulbs()

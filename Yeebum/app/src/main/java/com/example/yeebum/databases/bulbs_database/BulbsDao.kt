@@ -14,6 +14,9 @@ interface BulbsDao {
     @Delete
     suspend fun deleteBulb(bulb: Bulb)
 
+    @Update
+    suspend fun updateBulb(bulb: Bulb)
+
     @Query("SELECT * FROM bulbs_table")
     fun getAllBulbs() : Flow<List<Bulb>>
 
