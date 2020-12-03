@@ -34,6 +34,7 @@ class BugReportFragment : Fragment() {
     }
 
 
+    //----------------------------| Send Bug Report to Firestore |---------------------------
     private fun sendBugReport() {
         val dialog = LoadingDialog.getDialog(requireContext(), "Sending...")
         dialog.show()
@@ -52,7 +53,7 @@ class BugReportFragment : Fragment() {
             dialog.dismiss()
             helpers.showSnackBar(requireView(), ex.message.toString(), null, null)
         }
-
     }
+    //=====================================================================================
 
 }

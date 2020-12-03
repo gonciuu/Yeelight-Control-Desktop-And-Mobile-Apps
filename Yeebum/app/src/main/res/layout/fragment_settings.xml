@@ -77,10 +77,10 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:background="@drawable/oval_bg"
-                android:backgroundTint="#FFC107"
+                android:backgroundTint="#00877B"
                 android:contentDescription="@string/icon"
                 android:padding="5dp"
-                android:src="@drawable/ic_bug_report"
+                android:src="@drawable/ic_name"
                 app:tint="@color/white" />
 
 
@@ -90,17 +90,15 @@
                 android:layout_marginStart="20dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/open_sans_semibold"
-                android:text="Showing bulb ip"
+                android:text="Show bulb name"
                 android:textColor="@color/white"
                 android:textSize="17sp" />
 
 
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:padding="5dp"
-                android:src="@drawable/ic_next"
-                app:tint="@color/white" />
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/showBulbNameSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
 
         </LinearLayout>
@@ -130,10 +128,10 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:background="@drawable/oval_bg"
-                android:backgroundTint="#FFC107"
+                android:backgroundTint="#D100A3"
                 android:contentDescription="@string/icon"
                 android:padding="5dp"
-                android:src="@drawable/ic_bug_report"
+                android:src="@drawable/ic_port"
                 app:tint="@color/white" />
 
 
@@ -143,17 +141,16 @@
                 android:layout_marginStart="20dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/open_sans_semibold"
-                android:text="Showing bulb port"
+                android:text="Show bulb port"
                 android:textColor="@color/white"
                 android:textSize="17sp" />
 
 
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:padding="5dp"
-                android:src="@drawable/ic_next"
-                app:tint="@color/white" />
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/showBulbPortSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
 
 
         </LinearLayout>
@@ -183,10 +180,10 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:background="@drawable/oval_bg"
-                android:backgroundTint="#FFC107"
+                android:backgroundTint="#2196F3"
                 android:contentDescription="@string/icon"
                 android:padding="5dp"
-                android:src="@drawable/ic_bug_report"
+                android:src="@drawable/ic_ip"
                 app:tint="@color/white" />
 
 
@@ -196,18 +193,16 @@
                 android:layout_marginStart="20dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/open_sans_semibold"
-                android:text="Showing bulb port"
+                android:text="Show bulb ip"
                 android:textColor="@color/white"
                 android:textSize="17sp" />
 
 
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:padding="5dp"
-                android:src="@drawable/ic_next"
-                app:tint="@color/white" />
-
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/showBulbIpSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
 
         </LinearLayout>
 
@@ -248,10 +243,10 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:background="@drawable/oval_bg"
-                android:backgroundTint="#FFC107"
+                android:backgroundTint="#673AB7"
                 android:contentDescription="@string/icon"
                 android:padding="5dp"
-                android:src="@drawable/ic_bug_report"
+                android:src="@drawable/ic_refresh"
                 app:tint="@color/white" />
 
 
@@ -261,7 +256,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/open_sans_semibold"
-                android:text="Showing bulb port"
+                android:text="Factory settings"
                 android:textColor="@color/white"
                 android:textSize="17sp" />
 
@@ -301,10 +296,10 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:background="@drawable/oval_bg"
-                android:backgroundTint="#FFC107"
+                android:backgroundTint="#4CAF50"
                 android:contentDescription="@string/icon"
-                android:padding="5dp"
-                android:src="@drawable/ic_bug_report"
+                android:padding="7dp"
+                android:src="@drawable/ic_android"
                 app:tint="@color/white" />
 
 
@@ -314,7 +309,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/open_sans_semibold"
-                android:text="Showing bulb port"
+                android:text="App version"
                 android:textColor="@color/white"
                 android:textSize="17sp" />
 
