@@ -205,5 +205,20 @@
         android:id="@+id/flowDetachFragment"
         android:name="com.example.yeebum.screens.other.FlowDetachFragment"
         android:label="FlowDetachFragment"
-        tools:layout="@layout/fragment_flow_detach"/>
+        tools:layout="@layout/fragment_flow_detach">
+        <action
+            android:id="@+id/action_flowDetachFragment_to_enterActionNameFragment"
+            app:destination="@id/enterActionNameFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_flowDetachFragment_to_actionsFragment"
+            app:destination="@id/actionsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 </navigation>

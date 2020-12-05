@@ -6,19 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.yeebum.R
 import com.example.yeebum.YeebumApplication
+import com.example.yeebum.control_bulb.ChooseFlowViewModel
 import com.example.yeebum.databases.flows_database.FlowsViewModel
 import com.example.yeebum.databases.flows_database.FlowsViewModelFactory
 import com.example.yeebum.models.Flow
 import com.example.yeebum.screens.adapters.recycler_views.FlowsRecyclerViewAdapter
+import com.example.yeebum.screens.bulb_control.ControlFragmentDirections
+import com.example.yeebum.screens.components.Helpers
 import com.example.yeebum.screens.flows_control.FlowsInterface
 import kotlinx.android.synthetic.main.fragment_flow_detach.*
 
 
 class FlowDetachFragment : Fragment(),FlowsInterface {
-
+    private lateinit var chooseFlowViewModel: ChooseFlowViewModel
     private val flowsViewModel: FlowsViewModel by viewModels {
         FlowsViewModelFactory((requireActivity().application as YeebumApplication).flowsRepository)
     }
@@ -27,10 +32,11 @@ class FlowDetachFragment : Fragment(),FlowsInterface {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        chooseFlowViewModel = ViewModelProvider(requireActivity())[ChooseFlowViewModel::class.java]
         getAllFlows()
 
-
+        flowDetachBackButton.setOnClickListener{requireActivity().onBackPressed()}
+        addDetachFlowButton.setOnClickListener { findNavController().navigate(FlowDetachFragmentDirections.actionFlowDetachFragmentToEnterActionNameFragment()) }
     }
 
 
@@ -48,13 +54,15 @@ class FlowDetachFragment : Fragment(),FlowsInterface {
 
 
     override fun onEditFlow(flow: Flow) {
-        //TODO("Not yet implemented")
+        chooseFlowViewModel.setFlow(flow)
+        findNavController().navigate(FlowDetachFragmentDirections.actionFlowDetachFragmentToActionsFragment())
     }
 
     override fun onStartFlow(flow: Flow) {}
 
     override fun onDeleteFlow(flow: Flow) {
-        //TODO("Not yet implemented")
+        flowsViewModel.deleteFlow(flow)
+        Helpers().showSnackBar(requireView(), "Deleted", "Undo") { flowsViewModel.insertFlow(flow) }
     }
 
 }

@@ -28,12 +28,12 @@
                 android:textColor="@color/white"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/helpBackButton2" />
+                app:layout_constraintTop_toBottomOf="@+id/flowDetachBackButton" />
 
             <ImageView
-                android:id="@+id/helpBackButton2"
+                android:id="@+id/flowDetachBackButton"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="36dp"
