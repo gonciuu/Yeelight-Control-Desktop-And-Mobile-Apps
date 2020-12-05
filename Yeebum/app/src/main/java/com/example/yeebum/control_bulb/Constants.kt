@@ -29,7 +29,6 @@ object Constants {
             //get rgb color from int or if the type in color temp don't change anything
             val colorToSet: Int = if(mode ==1) ( Color.red(action.color) * 65536 + Color.green(action.color)*256 +  Color.blue(action.color)) else action.color
 
-            Log.d("XD",action.duration.toString())
             //add params to respond string
             params+="${if(action.duration>0) action.duration else 50}, $mode, ${colorToSet}, ${action.brightness}"
             if(listOfActions.indexOf(action) != listOfActions.size-1)
