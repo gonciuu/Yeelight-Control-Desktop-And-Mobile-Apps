@@ -142,6 +142,7 @@ class ActionsFragment : Fragment(), ActionsListener {
         chooseFlowViewModel.setFlow(flow)
     }
 
+    //-------------------------------------| Show flow preview by changing color filter of bulb image |------------------------------------------
     private val previewHandler = Handler(Looper.getMainLooper())
     private fun showFlowPreview() {
         val anim: ObjectAnimator =
@@ -159,13 +160,14 @@ class ActionsFragment : Fragment(), ActionsListener {
                     }
                 }
 
-                if(i == flow!!.actions.size-1) 
+                if(i == flow!!.actions.size-1)
                     previewHandler.postDelayed({showFlowPreview()},2000)
 
             }, i * 1000L)
         }
 
     }
+    //==========================================================================================================================================
 
     override fun onDestroy() {
         super.onDestroy()

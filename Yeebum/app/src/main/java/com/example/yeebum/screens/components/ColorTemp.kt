@@ -5,6 +5,7 @@ import android.graphics.Color
 
 class ColorTemp {
 
+    //--------------------------| Ger Int Color from Color Temperature |---------------------------------
     fun getRGBFromK(temperature: Int): Int {
 
         var x = temperature / 1000.0
@@ -78,6 +79,7 @@ class ColorTemp {
             Color.WHITE
         }
     }
+    //=======================================================================================================
 
     private fun poly(coefficients: DoubleArray, x: Double): Double {
         var result = coefficients[0]
