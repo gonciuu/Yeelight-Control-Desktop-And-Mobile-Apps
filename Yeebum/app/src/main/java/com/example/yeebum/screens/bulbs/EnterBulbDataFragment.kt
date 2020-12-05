@@ -269,7 +269,7 @@ class EnterBulbDataFragment : Fragment(), SearchedBulbsInterface {
 
     //--------------------------------setup start data in edittexts-----------------------
     private fun setupStartData() {
-        if (!requireArguments().isEmpty) {
+        if (arguments !=null && !requireArguments().isEmpty) {
             val bulb = Gson().fromJson(requireArguments().getString("bulb"), Bulb::class.java)
             bulbNameInput.setText(bulb.name)
             bulbPortInput.setText(bulb.port.toString())
