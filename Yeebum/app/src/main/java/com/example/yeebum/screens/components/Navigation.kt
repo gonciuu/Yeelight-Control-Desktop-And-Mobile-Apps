@@ -25,7 +25,7 @@ class Navigation {
             .setExitAnim(R.anim.slide_out_left)
             .setEnterAnim(R.anim.slide_in_right)
 
-        if(deleteBackStack) options.setPopUpTo(R.id.yeebum_nav,false)
+        if(deleteBackStack) options.setPopUpTo(R.id.yeebum_nav,true)
 
         return options.build()
     }

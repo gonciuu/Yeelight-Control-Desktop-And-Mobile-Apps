@@ -55,7 +55,7 @@ class AppDrawer {
                     if (currentDestination != destination) navigation.getCurrentNavController(activity).navigate(
                         destination,
                         null,
-                        navigation.getNavOptions(currentDestination == R.id.controlFragment)
+                        navigation.getNavOptions(false)
                     )
                 }, 250) //await to drawer close
             }

@@ -5,11 +5,19 @@ import android.animation.ArgbEvaluator
 import android.animation.IntArrayEvaluator
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.ColorFilter
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.alpha
 import androidx.core.os.bundleOf
+import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -25,6 +33,7 @@ import com.example.yeebum.models.Action
 import com.example.yeebum.models.ActionType
 import com.example.yeebum.models.Flow
 import com.example.yeebum.screens.adapters.recycler_views.ActionsRecyclerViewAdapter
+import com.example.yeebum.screens.components.ColorTemp
 import com.example.yeebum.screens.components.Helpers
 import com.example.yeebum.screens.components.Navigation
 import com.google.gson.Gson
@@ -50,6 +59,10 @@ class ActionsFragment : Fragment(), ActionsListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+//        Log.d("COLOR",flowPreview.colorFilter.toString())
+
+
         setupFlow()
     }
 
@@ -77,7 +90,7 @@ class ActionsFragment : Fragment(), ActionsListener {
                 actionsBackButton.setOnClickListener {
                     requireActivity().onBackPressed()
                 }
-
+                showFlowPreview()
             }
 
         }
@@ -129,19 +142,33 @@ class ActionsFragment : Fragment(), ActionsListener {
         chooseFlowViewModel.setFlow(flow)
     }
 
+    private val previewHandler = Handler(Looper.getMainLooper())
     private fun showFlowPreview() {
-        val listOfColors = arrayListOf<Int>()
-        flow!!.actions.forEach {
-            listOfColors.add(it.color)
+        val anim: ObjectAnimator =
+            ObjectAnimator.ofInt(flowPreview, "colorFilter", Color.WHITE).apply {
+                duration = 1000
+                setEvaluator(ArgbEvaluator())
+            }
+        Log.d("COLOR",flow!!.actions.toString())
+        for(i in 0 until flow!!.actions.size){
+            previewHandler.postDelayed({
+                if (flow!!.actions[i].type != ActionType.Sleep) {
+                    anim.apply {
+                        setIntValues(anim.animatedValue as Int, if(flow!!.actions[i].type == ActionType.Color) flow!!.actions[i].color else ColorTemp().getRGBFromK(flow!!.actions[i].color))
+                        anim.start()
+                    }
+                }
+
+                if(i == flow!!.actions.size-1) 
+                    previewHandler.postDelayed({showFlowPreview()},2000)
+
+            }, i * 1000L)
         }
 
-        ObjectAnimator.ofInt(flowPreview, "colorFilter"/*list items here*/).apply {
-            duration = 4000
-            setEvaluator(ArgbEvaluator())
-            start()
-        }
+    }
 
-
-
+    override fun onDestroy() {
+        super.onDestroy()
+        previewHandler.removeCallbacksAndMessages(null)
     }
 }
