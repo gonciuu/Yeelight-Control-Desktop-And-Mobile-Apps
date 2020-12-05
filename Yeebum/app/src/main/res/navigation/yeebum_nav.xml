@@ -201,4 +201,9 @@
             app:popUpTo="@id/actionsFragment"
             app:popUpToInclusive="true"/>
     </fragment>
+    <fragment
+        android:id="@+id/flowDetachFragment"
+        android:name="com.example.yeebum.screens.other.FlowDetachFragment"
+        android:label="FlowDetachFragment"
+        tools:layout="@layout/fragment_flow_detach"/>
 </navigation>
