@@ -65,7 +65,9 @@ class EnterBulbDataFragment : Fragment(), SearchedBulbsInterface {
             super.handleMessage(msg)
             loadingDialog?.dismiss()
             searchThread.interrupt()
-            showDevicesDialog()
+            try {
+                showDevicesDialog()
+            }catch (ex:Exception){}
             isSearching = false
         }
     }
@@ -250,7 +252,9 @@ class EnterBulbDataFragment : Fragment(), SearchedBulbsInterface {
     // release the multicast lock
     override fun onDestroy() {
         super.onDestroy()
+        mHandler.removeCallbacksAndMessages(null)
         multicastLock.release()
+        loadingDialog?.dismiss()
     }
 
 
