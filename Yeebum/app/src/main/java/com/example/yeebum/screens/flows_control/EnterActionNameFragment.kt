@@ -1,15 +1,11 @@
 package com.example.yeebum.screens.flows_control
 
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.example.yeebum.R
 import com.example.yeebum.YeebumApplication
 import com.example.yeebum.databases.flows_database.FlowsViewModel
@@ -17,7 +13,6 @@ import com.example.yeebum.databases.flows_database.FlowsViewModelFactory
 import com.example.yeebum.hilt.DaggerFlowComponent
 import com.example.yeebum.models.Flow
 import com.example.yeebum.screens.components.Helpers
-import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_enter_action_name.*
 import javax.inject.Inject
@@ -45,14 +40,22 @@ class EnterActionNameFragment : Fragment() {
         enterNameBackButton.setOnClickListener {
             requireActivity().onBackPressed()
         }
-        saveFlow()
+
+
+        nameNextButton.setOnClickListener {
+            saveFlow()
+        }
+        val helpers = Helpers()
+        helpers.onSubmitKeyboard(flowNameInput) {
+            helpers.closeKeyboard(requireActivity())
+            saveFlow()
+        }
+
     }
 
     private fun saveFlow(){
-        nameNextButton.setOnClickListener {
             flow.name = flowNameInput.text.toString()
             flowsViewModel.insertFlow(flow)
             requireActivity().onBackPressed()
-        }
     }
 }

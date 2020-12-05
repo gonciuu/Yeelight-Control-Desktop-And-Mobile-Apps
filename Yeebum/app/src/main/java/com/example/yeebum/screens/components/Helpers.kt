@@ -4,8 +4,11 @@ import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.NumberPicker
 import android.widget.SeekBar
 import androidx.core.content.ContextCompat
@@ -34,6 +37,26 @@ class Helpers {
         if (actionText != null && action != null) snackBar.setAction(actionText) { action() }
         snackBar.setBackgroundTint(ContextCompat.getColor(view.context, R.color.colorPrimaryLight))
         snackBar.show()
+    }
+
+
+    fun onSubmitKeyboard(editText: EditText, action: () -> Unit) {
+        editText.setOnKeyListener { _, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                action()
+                true
+            } else
+                false
+        }
+    }
+
+    fun closeKeyboard(fragmentActivity: FragmentActivity) {
+        val view = fragmentActivity.currentFocus
+        view?.let { v ->
+            val imm =
+                fragmentActivity.applicationContext.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+            imm?.hideSoftInputFromWindow(v.windowToken, 0)
+        }
     }
 
 
@@ -231,7 +254,11 @@ class Helpers {
     //======================================================================================================================
 
     //-------------------------------| Show conform factory Settings Dialog |---------------------------------------
-    fun getConfirmFactorySettingsDialog(activity: FragmentActivity, context: Context, listener:SettingsInterface): AlertDialog {
+    fun getConfirmFactorySettingsDialog(
+        activity: FragmentActivity,
+        context: Context,
+        listener: SettingsInterface
+    ): AlertDialog {
         return activity.let {
             AlertDialog.Builder(context, R.style.DialogTheme).setTitle("Are you sure?")
                 .setMessage("Are you sure to back to factory settings?")
@@ -241,7 +268,7 @@ class Helpers {
                 }.setNegativeButton("Cancel") { dialog, _ ->
                     dialog.dismiss()
                 }.create()
-        }?: throw Exception("Activity must not be null!")
+        } ?: throw Exception("Activity must not be null!")
     }
     //===============================================================================================================
 

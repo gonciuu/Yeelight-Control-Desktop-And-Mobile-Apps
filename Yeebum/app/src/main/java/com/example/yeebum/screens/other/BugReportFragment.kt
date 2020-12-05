@@ -43,6 +43,7 @@ class BugReportFragment : Fragment() {
             firebaseDB.collection("bug_reports").add(bug)
                 .addOnSuccessListener {
                     dialog.dismiss()
+                    helpers.closeKeyboard(requireActivity())
                     helpers.showSnackBar(requireView(), "Bug report sent", null, null)
                     requireActivity().onBackPressed()
                 }.addOnFailureListener{

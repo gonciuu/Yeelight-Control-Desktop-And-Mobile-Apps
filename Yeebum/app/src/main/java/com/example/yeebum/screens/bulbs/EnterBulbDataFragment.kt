@@ -36,7 +36,7 @@ import java.net.DatagramSocket
 import java.net.InetAddress
 
 
-class EnterBulbDataFragment : Fragment() ,SearchedBulbsInterface{
+class EnterBulbDataFragment : Fragment(), SearchedBulbsInterface {
 
     //bulb message info to get the available bulbs
     companion object {
@@ -89,7 +89,8 @@ class EnterBulbDataFragment : Fragment() ,SearchedBulbsInterface{
         loadingDialog = LoadingDialog.getDialog(requireContext(), "Searching For Devices...")
 
         //turn on the multicast lock
-        val wm = requireActivity().applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        val wm =
+            requireActivity().applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
         multicastLock = wm.createMulticastLock("yeebum")
         multicastLock.acquire()
         setupStartData()
@@ -105,6 +106,10 @@ class EnterBulbDataFragment : Fragment() ,SearchedBulbsInterface{
             saveBulb()
         }
 
+        helpers.onSubmitKeyboard(bulbPortInput) {
+            helpers.closeKeyboard(requireActivity())
+            saveBulb()
+        }
 
     }
 
@@ -131,7 +136,9 @@ class EnterBulbDataFragment : Fragment() ,SearchedBulbsInterface{
 
     //-----------------------------| Save bulb into database |-----------------------------------
     private fun saveBulb() {
-        val name = if (bulbNameInput.text.isNullOrEmpty()) "My Yeelight" else bulbNameInput.text.toString().trim()
+        val name =
+            if (bulbNameInput.text.isNullOrEmpty()) "My Yeelight" else bulbNameInput.text.toString()
+                .trim()
         val ip = bulbIpInput.text.toString().trim()
         val port = try {
             bulbPortInput.text.toString().trim().toInt()
@@ -139,19 +146,19 @@ class EnterBulbDataFragment : Fragment() ,SearchedBulbsInterface{
             0
         }
 
-            if (ip.contains("192.168") && port > 10000) {
-                if(requireArguments().isEmpty){
-                    bulbsViewModel.insertBulb(Bulb(name, ip, port))
-                }else{
-                    val bulb = Gson().fromJson(requireArguments().getString("bulb"),Bulb::class.java)
-                    bulb.ip = ip
-                    bulb.port = port
-                    bulb.name = name
-                    bulbsViewModel.updateBulb(bulb)
-                }
-                requireActivity().onBackPressed()
-            } else
-                helpers.showSnackBar(requireView(), "Check your port and ip format", null, null)
+        if (ip.contains("192.168") && port > 10000) {
+            if (requireArguments().isEmpty) {
+                bulbsViewModel.insertBulb(Bulb(name, ip, port))
+            } else {
+                val bulb = Gson().fromJson(requireArguments().getString("bulb"), Bulb::class.java)
+                bulb.ip = ip
+                bulb.port = port
+                bulb.name = name
+                bulbsViewModel.updateBulb(bulb)
+            }
+            requireActivity().onBackPressed()
+        } else
+            helpers.showSnackBar(requireView(), "Check your port and ip format", null, null)
 
 
     }
@@ -159,11 +166,11 @@ class EnterBulbDataFragment : Fragment() ,SearchedBulbsInterface{
 
 
     //--------------------------------------------| Search for bulbs to pare |--------------------------------------
-    private fun searchForDevices(delay:Long) {
+    private fun searchForDevices(delay: Long) {
         loadingDialog?.show()
 
         searchThread = Thread {
-            try{
+            try {
                 val mDSocket = DatagramSocket()
                 val dpSend = DatagramPacket(
                     message.toByteArray(),
@@ -205,9 +212,9 @@ class EnterBulbDataFragment : Fragment() ,SearchedBulbsInterface{
                         listOfDevices.add(bulbInfoHashMap)
                     }
                 }
-            }catch (ex:Exception){
+            } catch (ex: Exception) {
                 requireActivity().runOnUiThread {
-                    helpers.showSnackBar(requireView(),ex.message.toString(),null,null)
+                    helpers.showSnackBar(requireView(), ex.message.toString(), null, null)
                     loadingDialog?.dismiss()
                     requireActivity().onBackPressed()
                 }
@@ -261,9 +268,9 @@ class EnterBulbDataFragment : Fragment() ,SearchedBulbsInterface{
 
 
     //--------------------------------setup start data in edittexts-----------------------
-    private fun setupStartData(){
-        if(!requireArguments().isEmpty){
-            val bulb = Gson().fromJson(requireArguments().getString("bulb"),Bulb::class.java)
+    private fun setupStartData() {
+        if (!requireArguments().isEmpty) {
+            val bulb = Gson().fromJson(requireArguments().getString("bulb"), Bulb::class.java)
             bulbNameInput.setText(bulb.name)
             bulbPortInput.setText(bulb.port.toString())
             bulbIpInput.setText(bulb.ip)
