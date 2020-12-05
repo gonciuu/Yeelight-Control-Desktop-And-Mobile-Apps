@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="03d51067-6f35-47d8-897a-3bc8ba2d4aa1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yeebum/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Yeebum/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yeebum/app/src/main/res/values/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Yeebum/app/src/main/res/values/themes.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

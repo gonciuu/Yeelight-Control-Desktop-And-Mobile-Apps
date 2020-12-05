@@ -17,3 +17,13 @@ A Few resources to get when you start write your first project in kotlin:
 ## Python Project :
 
 <img src="scr/python_view.png">
+
+### In that App you can set your own color and brightness, also you can apply the built in flow.
+#### Used libraries:
+
+- Tkinter Library [link](https://docs.python.org/3/library/tk.html) 
+- Yeelight Library [link](https://yeelight.readthedocs.io/en/latest/)
+
+## Kotlin Project :
+
+<img src="scr/kotlin_view.png">
