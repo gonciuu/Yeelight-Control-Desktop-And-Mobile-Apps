@@ -2,6 +2,14 @@
 
 #### Desktop Python Application and Android Kotlin application, which helps you control the yeelight bulb 💡
 
+
+:clapper: [Youtube App Showcase Video](https://www.youtube.com/watch?v=KVWWeSQzEXA) :clapper:
+<br>
+:shopping_cart: [App On Google Play Store](https://play.google.com/store/apps/details?id=com.yeebum.yeebumapp) :shopping_cart:
+
+
+
+
 A Few resources to get when you start write your first project in python:
 - [Tkinter Desktop UI Library Documentation](https://docs.python.org/3/library/tk.html)
 - [Python Documentation](https://docs.python.org/3/)
@@ -24,6 +32,11 @@ A Few resources to get when you start write your first project in kotlin:
 - Tkinter Library [link](https://docs.python.org/3/library/tk.html) 
 - Yeelight Library [link](https://yeelight.readthedocs.io/en/latest/)
 <br>
+
+
+
+<br>
+
 
 ## Kotlin Project :
 
